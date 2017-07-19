@@ -34,8 +34,26 @@
     <Filter Include="Header Files\Solvers">
       <UniqueIdentifier>{5441bbaf-53ce-488c-8dcc-abcf0f5ac6e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Dynamic">
+      <UniqueIdentifier>{dc048353-4021-4d40-b64e-fed6b4807ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Dynamic">
+      <UniqueIdentifier>{70dbf82b-374b-4d84-bcfa-11e4d6f30ca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Collisions">
+      <UniqueIdentifier>{7c9af838-978c-4bca-a756-398b637bca99}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Solvers">
       <UniqueIdentifier>{7d1f09af-3d0c-4250-a10a-068bc5fe06a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Core">
+      <UniqueIdentifier>{b1223e63-4f12-4797-b445-b6d1cbc2a16e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Scripts">
+      <UniqueIdentifier>{80c1002e-81b7-4f62-930c-0791e4869b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Scripts">
+      <UniqueIdentifier>{ca31a59f-6c65-49c5-b195-e1714a167290}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,9 +65,6 @@
     </ClCompile>
     <ClCompile Include="source\GameObject.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Renderer.cpp">
-      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="source\TestSpawner.cpp">
       <Filter>Source Files\Spawner</Filter>
@@ -63,17 +78,23 @@
     <ClCompile Include="source\CollisionEngine.cpp">
       <Filter>Source Files\Solvers</Filter>
     </ClCompile>
-    <ClCompile Include="source\Circle.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Box.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Polygon.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="source\Transform.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Box.cpp">
+      <Filter>Source Files\Components\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Circle.cpp">
+      <Filter>Source Files\Components\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Polygon.cpp">
+      <Filter>Source Files\Components\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Renderer.cpp">
+      <Filter>Source Files\Components\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Entity.cpp">
+      <Filter>Source Files\Components\Dynamic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,5 +146,14 @@
     <ClInclude Include="source\CollisionEngine.h">
       <Filter>Header Files\Solvers</Filter>
     </ClInclude>
+    <ClInclude Include="source\Entity.h">
+      <Filter>Header Files\Components\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Script.h">
+      <Filter>Header Files\Components\Scripts</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

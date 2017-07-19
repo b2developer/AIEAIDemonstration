@@ -148,6 +148,7 @@
     <ClCompile Include="source\Circle.cpp" />
     <ClCompile Include="source\CollisionEngine.cpp" />
     <ClCompile Include="source\Director.cpp" />
+    <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\FiniteStateMachine.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\main.cpp" />
@@ -163,16 +164,21 @@
     <ClInclude Include="source\CollisionEngine.h" />
     <ClInclude Include="source\Component.h" />
     <ClInclude Include="source\Director.h" />
+    <ClInclude Include="source\Entity.h" />
     <ClInclude Include="source\FiniteStateMachine.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\Graph.h" />
     <ClInclude Include="source\MathsLibrary.h" />
     <ClInclude Include="source\Polygon.h" />
     <ClInclude Include="source\Renderer.h" />
+    <ClInclude Include="source\Script.h" />
     <ClInclude Include="source\Shape.h" />
     <ClInclude Include="source\Spawner.h" />
     <ClInclude Include="source\TestSpawner.h" />
     <ClInclude Include="source\Transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
