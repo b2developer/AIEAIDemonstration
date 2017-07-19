@@ -56,4 +56,30 @@ public:
 	* @returns void
 	*/
 	virtual void update() override {};
+
+
+	/*
+	* project
+	* overrides Shape's project(Shape* other, Vector2 normal)
+	*
+	* returns the lowest and highest dot products
+	* from all points on the shape with the normal
+	*
+	* @param Vector2 normal - the normal to project on
+	* @returns Range - the lowest and highest dot products
+	*/
+	Range project(Vector2 normal) override;
+
+
+	/*
+	* getNormals
+	* overrides Shape's getNormals(Shape* other)
+	*
+	* gets normals from this to use in the projection phase
+	* of the seperation axis theorem
+	*
+	* @param Shape* other - the other shape being tested for collisions
+	* @returns std::vector<Vector2> - a list of the normals to be used in the projection
+	*/
+	std::vector<Vector2> getNormals(Shape* other);
 };

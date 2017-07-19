@@ -45,4 +45,15 @@ public:
 	* @returns void
 	*/
 	void update() override {};
+
+	
+	/*
+	* getMatrix
+	*
+	* generates a matrix that applies
+	* all the effects of this transform component
+	*
+	* @returns Matrix3 - the matrix that represents the same transformation as this transform component
+	*/
+	Matrix3 getMatrix();
 };

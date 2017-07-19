@@ -144,19 +144,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\Application2D.cpp" />
+    <ClCompile Include="source\Box.cpp" />
+    <ClCompile Include="source\Circle.cpp" />
+    <ClCompile Include="source\CollisionEngine.cpp" />
     <ClCompile Include="source\Director.cpp" />
+    <ClCompile Include="source\FiniteStateMachine.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Polygon.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\TestSpawner.cpp" />
+    <ClCompile Include="source\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Application2D.h" />
     <ClInclude Include="source\Box.h" />
     <ClInclude Include="source\Circle.h" />
+    <ClInclude Include="source\CollisionEngine.h" />
     <ClInclude Include="source\Component.h" />
     <ClInclude Include="source\Director.h" />
+    <ClInclude Include="source\FiniteStateMachine.h" />
     <ClInclude Include="source\GameObject.h" />
+    <ClInclude Include="source\Graph.h" />
     <ClInclude Include="source\MathsLibrary.h" />
     <ClInclude Include="source\Polygon.h" />
     <ClInclude Include="source\Renderer.h" />

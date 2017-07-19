@@ -7,7 +7,7 @@ void FiniteStateMachine::update(float deltaTime)
 	currentVertex->data->update(deltaTime);
 
 	//iterate through all edges in the current vertex
-	for (size_t i = 0; i < currentVertex->edges.size; i++)
+	for (size_t i = 0; i < currentVertex->edges.size(); i++)
 	{
 		//pointer to the edge iterated to
 		Edge<State*, Transition*>* edge = &currentVertex->edges[i];
