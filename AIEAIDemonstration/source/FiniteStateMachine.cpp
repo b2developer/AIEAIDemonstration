@@ -18,8 +18,14 @@ void FiniteStateMachine::update(float deltaTime)
 		//check what the transition's condition evaluates to
 		if (transition->checkCondition())
 		{
+			//exit the current state
+			currentVertex->data->onExit(deltaTime);
+
 			//navigate to the next state
 			currentVertex = edge->end;
+
+			//enter the next state
+			currentVertex->data->onEnter(deltaTime);
 			break;
 		}
 

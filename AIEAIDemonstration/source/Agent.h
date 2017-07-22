@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.h"
-#include "MathsLibrary.h"
 
 
 //forward declarations
@@ -8,15 +7,15 @@ class Transform;
 class Application2D;
 
 /*
-* class Entity
+* class Agent
 * child class of Component
 *
-* a component that stores velocity and 
-* uses it to affect the transform
+* a component that serves as an abstract interface
+* for a 
 *
 * author: Bradley Booth, Academy of Interactive Entertainment, 2017
 */
-class Entity : public Component
+class Agent : public Component
 {
 public:
 
@@ -26,25 +25,23 @@ public:
 	//pointer to the required transform component
 	Transform* transform = nullptr;
 
-	//movement speed per second
-	Vector2 velocity = Vector2(0, 0);
-
 	/*
-	* Entity()
+	* Agent()
 	* default constructor
 	*/
-	Entity() {}
+	Agent() {}
 
 
 	/*
-	* ~Entity()
+	* ~Agent()
 	* default destructor
 	*/
-	~Entity() {}
+	~Agent() {}
 
 
 	/*
 	* update
+	* abstract function
 	* overrides Component's update()
 	*
 	* gets called once per frame, updates
@@ -52,6 +49,6 @@ public:
 	*
 	* @returns void
 	*/
-	void update() override;
+	virtual void update() override = 0;
 
 };

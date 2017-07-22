@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Agent.cpp" />
     <ClCompile Include="source\Application2D.cpp" />
     <ClCompile Include="source\Box.cpp" />
     <ClCompile Include="source\Circle.cpp" />
@@ -158,23 +159,35 @@
     <ClCompile Include="source\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Agent.h" />
     <ClInclude Include="source\Application2D.h" />
+    <ClInclude Include="source\Blackboard.h" />
+    <ClInclude Include="source\BlackboardData.h" />
     <ClInclude Include="source\Box.h" />
     <ClInclude Include="source\Circle.h" />
     <ClInclude Include="source\CollisionEngine.h" />
     <ClInclude Include="source\Component.h" />
     <ClInclude Include="source\Director.h" />
+    <ClInclude Include="source\DroppedCondition.h" />
+    <ClInclude Include="source\DropState.h" />
     <ClInclude Include="source\Entity.h" />
     <ClInclude Include="source\FiniteStateMachine.h" />
     <ClInclude Include="source\GameObject.h" />
+    <ClInclude Include="source\GotoState.h" />
     <ClInclude Include="source\Graph.h" />
+    <ClInclude Include="source\BlackboardItem.h" />
     <ClInclude Include="source\MathsLibrary.h" />
+    <ClInclude Include="source\PickedUpCondition.h" />
+    <ClInclude Include="source\PickupState.h" />
     <ClInclude Include="source\Polygon.h" />
+    <ClInclude Include="source\RangeCondition.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Script.h" />
+    <ClInclude Include="source\SearchState.h" />
     <ClInclude Include="source\Shape.h" />
     <ClInclude Include="source\Spawner.h" />
     <ClInclude Include="source\TestSpawner.h" />
+    <ClInclude Include="source\TradingCondition.h" />
     <ClInclude Include="source\Transform.h" />
   </ItemGroup>
   <ItemGroup>

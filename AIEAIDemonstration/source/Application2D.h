@@ -10,6 +10,8 @@
 #include "Spawner.h"
 #include "TestSpawner.h"
 
+#include "Blackboard.h"
+
 #include "Input.h"
 #include "Renderer2D.h"
 #include "Texture.h"
@@ -36,6 +38,8 @@ public:
 
 	Director* director = nullptr; //creates gameobjects with modificiations from the employed spawner
 	TestSpawner* testSpawner = nullptr; //spawner for test objects
+
+	Blackboard* tradingBlackboard = nullptr; //central communication for trading agents
 
 	aie::Renderer2D* m_renderer2D; //responsible for draw calls
 

@@ -13,144 +13,219 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Components">
+    <Filter Include="Header Files\Systems">
+      <UniqueIdentifier>{df0a4d09-f2bf-452c-821c-ae0c1826ad65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Systems\Blackboard">
+      <UniqueIdentifier>{4ad03052-73ff-4998-8605-07f2b4d6b32d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Systems\FSM">
+      <UniqueIdentifier>{0d3118a7-0ec4-4fcf-b529-cb8113a24ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Systems\Components">
       <UniqueIdentifier>{f4131d49-5290-4038-8714-00629775389c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components\Collisions">
+    <Filter Include="Header Files\Systems\Components\Collisions">
       <UniqueIdentifier>{8d109b3b-0849-4d41-b896-86d7b4a77b33}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components\Core">
+    <Filter Include="Header Files\Systems\Components\Core">
       <UniqueIdentifier>{79ad597d-2f6a-427c-84a3-9f9a8d0992e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Spawner">
-      <UniqueIdentifier>{873c820d-07dc-4ef2-a1b3-772e9e682330}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components">
-      <UniqueIdentifier>{307147bd-0ecf-49cc-86b8-28574f861cef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Spawner">
-      <UniqueIdentifier>{97fe16d6-768f-415d-a1df-4acafb22e349}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Solvers">
-      <UniqueIdentifier>{5441bbaf-53ce-488c-8dcc-abcf0f5ac6e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Components\Dynamic">
+    <Filter Include="Header Files\Systems\Components\Dynamic">
       <UniqueIdentifier>{dc048353-4021-4d40-b64e-fed6b4807ffa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components\Dynamic">
-      <UniqueIdentifier>{70dbf82b-374b-4d84-bcfa-11e4d6f30ca9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\Collisions">
-      <UniqueIdentifier>{7c9af838-978c-4bca-a756-398b637bca99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Solvers">
-      <UniqueIdentifier>{7d1f09af-3d0c-4250-a10a-068bc5fe06a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\Core">
-      <UniqueIdentifier>{b1223e63-4f12-4797-b445-b6d1cbc2a16e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\Scripts">
-      <UniqueIdentifier>{80c1002e-81b7-4f62-930c-0791e4869b2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Components\Scripts">
+    <Filter Include="Header Files\Systems\Components\Scripts">
       <UniqueIdentifier>{ca31a59f-6c65-49c5-b195-e1714a167290}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\Components\AI">
+      <UniqueIdentifier>{cb4dabb1-288b-4d21-8681-f2aec1bf58d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Systems\Solvers">
+      <UniqueIdentifier>{5441bbaf-53ce-488c-8dcc-abcf0f5ac6e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Systems\Spawner">
+      <UniqueIdentifier>{873c820d-07dc-4ef2-a1b3-772e9e682330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Users">
+      <UniqueIdentifier>{3841e149-1bef-4649-823a-de63ac6fa9cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems">
+      <UniqueIdentifier>{68920949-b21b-4598-8754-2947c9a3cd9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Blackboard">
+      <UniqueIdentifier>{d6f544e3-4dc7-49ae-96c0-535dff4a8c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Components">
+      <UniqueIdentifier>{307147bd-0ecf-49cc-86b8-28574f861cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Components\Dynamic">
+      <UniqueIdentifier>{70dbf82b-374b-4d84-bcfa-11e4d6f30ca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Components\Collisions">
+      <UniqueIdentifier>{7c9af838-978c-4bca-a756-398b637bca99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Components\Core">
+      <UniqueIdentifier>{b1223e63-4f12-4797-b445-b6d1cbc2a16e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Components\Scripts">
+      <UniqueIdentifier>{80c1002e-81b7-4f62-930c-0791e4869b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Components\AI">
+      <UniqueIdentifier>{4a3e809f-def1-4074-8f90-82a3f76383db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\FSM">
+      <UniqueIdentifier>{777001c4-20b5-400c-954f-4a495023e23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Solvers">
+      <UniqueIdentifier>{7d1f09af-3d0c-4250-a10a-068bc5fe06a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Spawner">
+      <UniqueIdentifier>{97fe16d6-768f-415d-a1df-4acafb22e349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Users\TradingBot">
+      <UniqueIdentifier>{16a31e48-b4c5-4365-8735-583f96160102}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Users">
+      <UniqueIdentifier>{6ee94aaf-cebd-457f-bcb0-b31b2fe058d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Users\TradingBot">
+      <UniqueIdentifier>{77128e45-79ff-425a-9b78-5894d8456747}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Application2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\TestSpawner.cpp">
-      <Filter>Source Files\Spawner</Filter>
+      <Filter>Source Files\Systems\Spawner</Filter>
     </ClCompile>
     <ClCompile Include="source\Director.cpp">
-      <Filter>Source Files\Spawner</Filter>
-    </ClCompile>
-    <ClCompile Include="source\FiniteStateMachine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Systems\Spawner</Filter>
     </ClCompile>
     <ClCompile Include="source\CollisionEngine.cpp">
-      <Filter>Source Files\Solvers</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Transform.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Systems\Solvers</Filter>
     </ClCompile>
     <ClCompile Include="source\Box.cpp">
-      <Filter>Source Files\Components\Collisions</Filter>
+      <Filter>Source Files\Systems\Components\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="source\Circle.cpp">
-      <Filter>Source Files\Components\Collisions</Filter>
+      <Filter>Source Files\Systems\Components\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="source\Polygon.cpp">
-      <Filter>Source Files\Components\Collisions</Filter>
+      <Filter>Source Files\Systems\Components\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="source\Renderer.cpp">
-      <Filter>Source Files\Components\Core</Filter>
+      <Filter>Source Files\Systems\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="source\Entity.cpp">
-      <Filter>Source Files\Components\Dynamic</Filter>
+      <Filter>Source Files\Systems\Components\Dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FiniteStateMachine.cpp">
+      <Filter>Source Files\Systems\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Agent.cpp">
+      <Filter>Source Files\Systems\Components\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Application2D.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameObject.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Transform.cpp">
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Application2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\MathsLibrary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\Component.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Systems\Components</Filter>
     </ClInclude>
     <ClInclude Include="source\Transform.h">
-      <Filter>Header Files\Components\Core</Filter>
+      <Filter>Header Files\Systems\Components\Core</Filter>
     </ClInclude>
     <ClInclude Include="source\Renderer.h">
-      <Filter>Header Files\Components\Core</Filter>
+      <Filter>Header Files\Systems\Components\Core</Filter>
     </ClInclude>
     <ClInclude Include="source\Shape.h">
-      <Filter>Header Files\Components\Collisions</Filter>
+      <Filter>Header Files\Systems\Components\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="source\Box.h">
-      <Filter>Header Files\Components\Collisions</Filter>
+      <Filter>Header Files\Systems\Components\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="source\Spawner.h">
-      <Filter>Header Files\Spawner</Filter>
+      <Filter>Header Files\Systems\Spawner</Filter>
     </ClInclude>
     <ClInclude Include="source\TestSpawner.h">
-      <Filter>Header Files\Spawner</Filter>
+      <Filter>Header Files\Systems\Spawner</Filter>
     </ClInclude>
     <ClInclude Include="source\Director.h">
-      <Filter>Header Files\Spawner</Filter>
+      <Filter>Header Files\Systems\Spawner</Filter>
     </ClInclude>
     <ClInclude Include="source\Circle.h">
-      <Filter>Header Files\Components\Collisions</Filter>
+      <Filter>Header Files\Systems\Components\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="source\Polygon.h">
-      <Filter>Header Files\Components\Collisions</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Graph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\FiniteStateMachine.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Systems\Components\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="source\CollisionEngine.h">
-      <Filter>Header Files\Solvers</Filter>
+      <Filter>Header Files\Systems\Solvers</Filter>
     </ClInclude>
     <ClInclude Include="source\Entity.h">
-      <Filter>Header Files\Components\Dynamic</Filter>
+      <Filter>Header Files\Systems\Components\Dynamic</Filter>
     </ClInclude>
     <ClInclude Include="source\Script.h">
-      <Filter>Header Files\Components\Scripts</Filter>
+      <Filter>Header Files\Systems\Components\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="source\FiniteStateMachine.h">
+      <Filter>Header Files\Systems\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Agent.h">
+      <Filter>Header Files\Systems\Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Blackboard.h">
+      <Filter>Header Files\Systems\Blackboard</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BlackboardItem.h">
+      <Filter>Header Files\Systems\Blackboard</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BlackboardData.h">
+      <Filter>Header Files\Systems\Blackboard</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Application2D.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GameObject.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Graph.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MathsLibrary.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SearchState.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TradingCondition.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GotoState.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="source\RangeCondition.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="source\DropState.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="source\DroppedCondition.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PickupState.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PickedUpCondition.h">
+      <Filter>Header Files\Users</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

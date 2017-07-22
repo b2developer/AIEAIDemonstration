@@ -1,6 +1,10 @@
 #pragma once
 
 #include "Graph.h"
+#include "Agent.h"
+
+//forward declaration
+class FiniteStateMachine;
 
 #pragma region Transition
 /*
@@ -15,6 +19,9 @@ class Transition
 {
 
 public:
+
+	//link to the holder of this transition
+	FiniteStateMachine* FSM = nullptr;
 
 	/*
 	* Transition
@@ -61,6 +68,9 @@ class State
 
 public:
 
+	//link to the holder of this transition
+	FiniteStateMachine* FSM = nullptr;
+
 	/*
 	* State
 	* default constructor
@@ -89,6 +99,32 @@ public:
 	*/
 	virtual void update(float deltaTime) = 0;
 
+
+	/*
+	* onEnter
+	* abstract function
+	*
+	* gets called when the finite state machine
+	* transitions into this state
+	*
+	* @param float deltaTime - the amount of time passed since the last frame
+	* @returns void
+	*/
+	virtual void onEnter(float deltaTime) = 0;
+
+
+	/*
+	* onExit
+	* abstract function
+	*
+	* gets called when the finite state machine
+	* transitions out of this state
+	*
+	* @param float deltaTime - the amount of time passed since the last frame
+	* @returns void
+	*/
+	virtual void onExit(float deltaTime) = 0;
+
 };
 #pragma endregion
 
@@ -107,10 +143,10 @@ class FiniteStateMachine
 {
 
 public:
-
+	
+	Agent* agent = nullptr; //pointer to the agent who holds this state machine
 	Vertex<State*, Transition*>* currentVertex = nullptr; //pointer to the current state's vertex
 	Graph<State*, Transition*> data; //graph structure that contains the states and transition
-
 
 	/*
 	* FiniteStateMachine
@@ -137,6 +173,20 @@ public:
 	* @returns void
 	*/
 	void update(float deltaTime);
+
+	
+	/*
+	*
+	*
+	*
+	*
+	*
+	*
+	*
+	*
+	a
+	*/
+	void setLinks();
 
 };
 #pragma endregion
