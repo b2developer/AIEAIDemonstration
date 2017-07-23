@@ -3,6 +3,12 @@
 //gets called once per frame (if the FSM is active)
 void FiniteStateMachine::update(float deltaTime)
 {
+	//if the finite state machine doesn't have a current state, don't do anything
+	if (currentVertex == nullptr)
+	{
+		return;
+	}
+
 	//update the state
 	currentVertex->data->update(deltaTime);
 
@@ -27,6 +33,26 @@ void FiniteStateMachine::update(float deltaTime)
 			//enter the next state
 			currentVertex->data->onEnter(deltaTime);
 			break;
+		}
+
+	}
+}
+
+//links all states, transitions and conditions to the state machine
+void FiniteStateMachine::setLinks()
+{
+	//iterate through all vertices in the graph
+	for (size_t i = 0; i < data.vertices.size(); i++)
+	{
+		//link the vertex itself
+		Vertex<State*, Transition*>* vertex = data.vertices[i];
+
+		vertex->data->FSM = this;
+
+		//iterate through all edges, connecting them to the FSM
+		for (size_t j = 0; j < vertex->edges.size(); j++)
+		{
+			vertex->edges[j].value->FSM = this;
 		}
 
 	}

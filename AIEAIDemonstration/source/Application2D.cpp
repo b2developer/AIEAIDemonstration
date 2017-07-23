@@ -36,12 +36,17 @@ bool Application2D::startup()
 	//create the director and spawner/s
 	director = new Director();
 	testSpawner = new TestSpawner();
+	tradingBotSpawner = new TradingBotSpawner();
 
 	//link them to each other and the application
 	director->appPtr = this;
 	testSpawner->appPtr = this;
+	tradingBotSpawner->appPtr = this;
 
-	director->employee = testSpawner;
+	director->employee = tradingBotSpawner;
+
+	//create a blackboard that can hold 200 messages
+	tradingBlackboard = new Blackboard(200);
 
 	//spawn three game objects
 	gameObjects.push_back(director->createGameObject());
@@ -58,6 +63,8 @@ void Application2D::shutdown()
 	//delete the director and the spawner/s
 	delete director;
 	delete testSpawner;
+
+	delete tradingBlackboard;
 
 	//iterate through all gameobjects, deleting each one
 	for (size_t i = 0; i < gameObjects.size(); i++)

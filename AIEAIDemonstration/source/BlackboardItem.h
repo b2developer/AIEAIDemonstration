@@ -17,8 +17,8 @@ class BlackboardItem
 {
 public:
 
-	//name of the item
-	char entry[MAX_ENTRY]; 
+	//number that identifies the item
+	int id = 0;
 
 	//the amount of seconds remaining in this blackboard item's lifetime
 	float timeRemaining = 0.0f;
@@ -36,27 +36,5 @@ public:
 	* default destructor
 	*/
 	virtual ~BlackboardItem() {};
-
-
-	/*
-	* getData
-	* abstract function
-	*
-	* exposes the data held by this item
-	*
-	* @returns T* - pointer to the data held
-	*/
-	virtual void* getData() {};
-
-
-	/*
-	* getAnswers
-	* abstract function
-	*
-	* exposes all responses to the data
-	*
-	* @returns std::vector<void*> - a list of answer pointers
-	*/
-	virtual std::vector<void*> getAnswers() = 0;
 
 };

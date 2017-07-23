@@ -11,7 +11,7 @@ class Application2D;
 * child class of Component
 *
 * a component that serves as an abstract interface
-* for a 
+* for a system that can think
 *
 * author: Bradley Booth, Academy of Interactive Entertainment, 2017
 */
@@ -34,9 +34,10 @@ public:
 
 	/*
 	* ~Agent()
+	* virtual function
 	* default destructor
 	*/
-	~Agent() {}
+	virtual ~Agent() {}
 
 
 	/*
@@ -44,8 +45,8 @@ public:
 	* abstract function
 	* overrides Component's update()
 	*
-	* gets called once per frame, updates
-	* the game object's position using velocity
+	* gets called once per frame, does nothing
+	* exists to satisfy the abstract function it is overriding
 	*
 	* @returns void
 	*/

@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="source\Agent.cpp" />
     <ClCompile Include="source\Application2D.cpp" />
+    <ClCompile Include="source\Blackboard.cpp" />
     <ClCompile Include="source\Box.cpp" />
     <ClCompile Include="source\Circle.cpp" />
     <ClCompile Include="source\CollisionEngine.cpp" />
@@ -155,7 +156,10 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Polygon.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
+    <ClCompile Include="source\SearchState.cpp" />
     <ClCompile Include="source\TestSpawner.cpp" />
+    <ClCompile Include="source\TradingAgent.cpp" />
+    <ClCompile Include="source\TradingBotSpawner.cpp" />
     <ClCompile Include="source\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +172,7 @@
     <ClInclude Include="source\CollisionEngine.h" />
     <ClInclude Include="source\Component.h" />
     <ClInclude Include="source\Director.h" />
-    <ClInclude Include="source\DroppedCondition.h" />
+    <ClInclude Include="source\DroppedTransition.h" />
     <ClInclude Include="source\DropState.h" />
     <ClInclude Include="source\Entity.h" />
     <ClInclude Include="source\FiniteStateMachine.h" />
@@ -177,17 +181,19 @@
     <ClInclude Include="source\Graph.h" />
     <ClInclude Include="source\BlackboardItem.h" />
     <ClInclude Include="source\MathsLibrary.h" />
-    <ClInclude Include="source\PickedUpCondition.h" />
+    <ClInclude Include="source\PickedUpTransition.h" />
     <ClInclude Include="source\PickupState.h" />
     <ClInclude Include="source\Polygon.h" />
-    <ClInclude Include="source\RangeCondition.h" />
+    <ClInclude Include="source\RangeTransition.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Script.h" />
     <ClInclude Include="source\SearchState.h" />
     <ClInclude Include="source\Shape.h" />
     <ClInclude Include="source\Spawner.h" />
     <ClInclude Include="source\TestSpawner.h" />
-    <ClInclude Include="source\TradingCondition.h" />
+    <ClInclude Include="source\TradingAgent.h" />
+    <ClInclude Include="source\TradingBotSpawner.h" />
+    <ClInclude Include="source\TradingTransition.h" />
     <ClInclude Include="source\Transform.h" />
   </ItemGroup>
   <ItemGroup>

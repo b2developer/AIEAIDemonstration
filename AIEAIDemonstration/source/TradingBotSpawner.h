@@ -6,14 +6,14 @@
 class Application2D;
 
 /*
-* class TestSpawner
+* class TradingBotSpawner
 * child class of Spawner
 *
-* test spawner, creates miscellanous objects
+* test spawner, creates trading bot objects
 *
 * author: Bradley Booth, Academy of Interactive Entertainment, 2017
 */
-class TestSpawner : public Spawner
+class TradingBotSpawner : public Spawner
 {
 public:
 
@@ -21,17 +21,17 @@ public:
 	Application2D* appPtr = nullptr;
 
 	/*
-	* TestSpawner()
+	* TradingBotSpawner()
 	* default constructor
 	*/
-	TestSpawner() {}
+	TradingBotSpawner() {}
 
 
 	/*
-	* ~TestSpawner()
+	* ~TradingBotSpawner()
 	* default destructor
 	*/
-	~TestSpawner() {}
+	~TradingBotSpawner() {}
 
 
 	/*

@@ -107,6 +107,8 @@ class Graph
 {
 
 public:
+	
+	std::vector<Vertex<T, U>*> vertices;
 
 	/*
 	* Graph()
@@ -339,11 +341,6 @@ public:
 		vert1->edges.push_back(edge1);
 		vert2->edges.push_back(edge2);
 	}
-
-
-private:
-
-	std::vector<Vertex<T,U>*> vertices;
 
 };
 #pragma endregion

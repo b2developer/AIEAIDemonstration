@@ -24,14 +24,14 @@ public:
 	FiniteStateMachine* FSM = nullptr;
 
 	/*
-	* Transition
+	* Transition()
 	* default constructor
 	*/
 	Transition() {}
 
 
 	/*
-	* ~Transition
+	* ~Transition()
 	* virtual function
 	* default destructor
 	*/
@@ -68,18 +68,18 @@ class State
 
 public:
 
-	//link to the holder of this transition
+	//link to the holder of this state
 	FiniteStateMachine* FSM = nullptr;
 
 	/*
-	* State
+	* State()
 	* default constructor
 	*/
 	State() {}
 
 
 	/*
-	* ~State
+	* ~State()
 	* virtual function
 	* default destructor
 	*/
@@ -149,14 +149,14 @@ public:
 	Graph<State*, Transition*> data; //graph structure that contains the states and transition
 
 	/*
-	* FiniteStateMachine
+	* FiniteStateMachine()
 	* default constructor
 	*/
 	FiniteStateMachine() {}
 
 
 	/*
-	* ~FiniteStateMachine
+	* ~FiniteStateMachine()
 	* default destructor
 	*/
 	~FiniteStateMachine() {}
@@ -176,15 +176,12 @@ public:
 
 	
 	/*
+	* setLinks
 	*
+	* links all of the states, transitions and conditions
+	* contained back to their container
 	*
-	*
-	*
-	*
-	*
-	*
-	*
-	a
+	* @returns void
 	*/
 	void setLinks();
 

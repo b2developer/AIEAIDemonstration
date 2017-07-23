@@ -135,6 +135,18 @@
     <ClCompile Include="source\Transform.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="source\TradingAgent.cpp">
+      <Filter>Source Files\Systems\Components\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TradingBotSpawner.cpp">
+      <Filter>Source Files\Systems\Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Blackboard.cpp">
+      <Filter>Source Files\Systems\Blackboard</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SearchState.cpp">
+      <Filter>Source Files\Users\TradingBot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Component.h">
@@ -203,29 +215,35 @@
     <ClInclude Include="source\MathsLibrary.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="source\SearchState.h">
-      <Filter>Header Files\Users</Filter>
-    </ClInclude>
-    <ClInclude Include="source\TradingCondition.h">
-      <Filter>Header Files\Users</Filter>
+    <ClInclude Include="source\DropState.h">
+      <Filter>Header Files\Users\TradingBot</Filter>
     </ClInclude>
     <ClInclude Include="source\GotoState.h">
-      <Filter>Header Files\Users</Filter>
-    </ClInclude>
-    <ClInclude Include="source\RangeCondition.h">
-      <Filter>Header Files\Users</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DropState.h">
-      <Filter>Header Files\Users</Filter>
-    </ClInclude>
-    <ClInclude Include="source\DroppedCondition.h">
-      <Filter>Header Files\Users</Filter>
+      <Filter>Header Files\Users\TradingBot</Filter>
     </ClInclude>
     <ClInclude Include="source\PickupState.h">
-      <Filter>Header Files\Users</Filter>
+      <Filter>Header Files\Users\TradingBot</Filter>
     </ClInclude>
-    <ClInclude Include="source\PickedUpCondition.h">
-      <Filter>Header Files\Users</Filter>
+    <ClInclude Include="source\SearchState.h">
+      <Filter>Header Files\Users\TradingBot</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TradingAgent.h">
+      <Filter>Header Files\Systems\Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TradingBotSpawner.h">
+      <Filter>Header Files\Systems\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="source\DroppedTransition.h">
+      <Filter>Header Files\Users\TradingBot</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PickedUpTransition.h">
+      <Filter>Header Files\Users\TradingBot</Filter>
+    </ClInclude>
+    <ClInclude Include="source\RangeTransition.h">
+      <Filter>Header Files\Users\TradingBot</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TradingTransition.h">
+      <Filter>Header Files\Users\TradingBot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
