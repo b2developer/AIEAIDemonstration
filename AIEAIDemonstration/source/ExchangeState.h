@@ -4,31 +4,32 @@
 
 
 /*
-* class GotoState
+* class ExchangeState
 * child class of State
 *
-* a state for the trading bot makes the bot 
-* move towards a target until it is in range
+* a state for the trading bot that makes the bot
+* give all of it's items that it agreed to trade
+* to the other agent
 *
 * author: Bradley Booth, Academy of Interactive Entertainment, 2017
 */
-class GotoState : public State
+class ExchangeState : public State
 {
 
 public:
 
 	/*
-	* GotoState()
+	* ExchangeState()
 	* default constructor
 	*/
-	GotoState() {}
+	ExchangeState() {}
 
 
 	/*
-	* ~GotoState()
+	* ~ExchangeState()
 	* default destructor
 	*/
-	~GotoState() {}
+	~ExchangeState() {}
 
 
 	/*

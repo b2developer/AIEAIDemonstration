@@ -147,6 +147,21 @@
     <ClCompile Include="source\SearchState.cpp">
       <Filter>Source Files\Users\TradingBot</Filter>
     </ClCompile>
+    <ClCompile Include="source\TradingTransition.cpp">
+      <Filter>Source Files\Users\TradingBot</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GotoState.cpp">
+      <Filter>Source Files\Users\TradingBot</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RangeTransition.cpp">
+      <Filter>Source Files\Users\TradingBot</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ExchangeState.cpp">
+      <Filter>Source Files\Users\TradingBot</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ExchangedTransition.cpp">
+      <Filter>Source Files\Users\TradingBot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Component.h">
@@ -215,13 +230,7 @@
     <ClInclude Include="source\MathsLibrary.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="source\DropState.h">
-      <Filter>Header Files\Users\TradingBot</Filter>
-    </ClInclude>
     <ClInclude Include="source\GotoState.h">
-      <Filter>Header Files\Users\TradingBot</Filter>
-    </ClInclude>
-    <ClInclude Include="source\PickupState.h">
       <Filter>Header Files\Users\TradingBot</Filter>
     </ClInclude>
     <ClInclude Include="source\SearchState.h">
@@ -233,16 +242,16 @@
     <ClInclude Include="source\TradingBotSpawner.h">
       <Filter>Header Files\Systems\Spawner</Filter>
     </ClInclude>
-    <ClInclude Include="source\DroppedTransition.h">
-      <Filter>Header Files\Users\TradingBot</Filter>
-    </ClInclude>
-    <ClInclude Include="source\PickedUpTransition.h">
-      <Filter>Header Files\Users\TradingBot</Filter>
-    </ClInclude>
     <ClInclude Include="source\RangeTransition.h">
       <Filter>Header Files\Users\TradingBot</Filter>
     </ClInclude>
     <ClInclude Include="source\TradingTransition.h">
+      <Filter>Header Files\Users\TradingBot</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ExchangeState.h">
+      <Filter>Header Files\Users\TradingBot</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ExchangedTransition.h">
       <Filter>Header Files\Users\TradingBot</Filter>
     </ClInclude>
   </ItemGroup>

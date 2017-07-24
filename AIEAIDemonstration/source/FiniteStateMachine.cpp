@@ -32,7 +32,7 @@ void FiniteStateMachine::update(float deltaTime)
 
 			//enter the next state
 			currentVertex->data->onEnter(deltaTime);
-			break;
+
 		}
 
 	}

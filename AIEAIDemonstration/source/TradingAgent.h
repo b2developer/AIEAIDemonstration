@@ -3,6 +3,7 @@
 #include <vector>
 #include "FiniteStateMachine.h"
 #include "Blackboard.h"
+#include "MathsLibrary.h"
 
 //forward declaration
 class TradingAgent;
@@ -60,11 +61,53 @@ public:
 	//container for the objects that this trading agent has to offer
 	std::vector<ObjectType> inventory;
 
+	//the current trade being performed
+	BlackboardData<Trade, Trade>* currentData = nullptr;
+
+	//did this agent propose the trade?
+	bool initiator = false;
+
+	//SEARCH STATE VARIABLES
+	//----------------------------------------------------------
+	//maximum amount of trades the agent can propose at one time
+	int maxTrades = 5;
+
+	//the amount of items given/lost during trades
+	int itemsLostDuringTrades = 5;
+	int itemsGainedDuringTrades = 5;
+
 	//container for trades this agent proposed to the blackboard
-	std::vector<Trade*> proposedTrades;
+	std::vector<BlackboardData<Trade, Trade>*> proposedTrades;
 
 	//container for the corresponding numbers that the blackboard assigned to the trade
 	std::vector<int> proposedIds;
+	//----------------------------------------------------------
+
+
+
+	//GOTO STATE / RANGE TRANSITION VARIABLES
+	//----------------------------------------------------------
+	//how close two trading agents must be to trade
+	float targetRange = 20.0f;
+
+	//units moved per second
+	float movementSpeed = 2000.0f;
+
+	Vector2 origin = Vector2(0, 0);
+
+	//target vector (an agent or an origin)
+	Vector2* targetVector = nullptr;
+
+	//the trading agent to trade with
+	TradingAgent* target = nullptr;
+
+	//timer for the exchanges
+	float exchangeTimer = 0.0f;
+
+	//how long it takes to give one item to the other agent
+	float exchangeDuration = 0.0f;
+	//----------------------------------------------------------
+
 
 	/*
 	* TradingAgent()

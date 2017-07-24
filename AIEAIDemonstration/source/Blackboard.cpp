@@ -28,24 +28,25 @@ void Blackboard::update(float deltaTime)
 	{
 		BlackboardItem* item = items[i];
 
+		//this item is time locked, don't bother checking for expiry
+		if (item->timeLocked)
+		{
+			continue;
+		}
+
 		//deduct time from the timer
 		item->timeRemaining -= deltaTime;
 	
 		//delete the item if it has expired
 		if (item->timeRemaining <= 0)
 		{
-			//search through all ids, remove the id that matches the item
-			for (std::vector<int>::iterator j = availableIds.begin(); j != availableIds.end(); j++)
-			{
-				//if the id matches, remove it
-				if (*j == item->id)
-				{
-					availableIds.erase(j);
-					break;
-				}
-			}
+			//add the deleted item's id to the available id's
+			availableIds.push_back(item->id);
 
 			delete item;
+
+			//erase the item from the list
+			items.erase(items.begin() + i);
 		}
 	}
 }

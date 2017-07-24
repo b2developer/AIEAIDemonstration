@@ -69,13 +69,15 @@ public:
 		//give the time remaining to the item
 		item->timeRemaining = lifeTime;
 
-		//create the new object (the data)
-		T* data = new T();
-
-		item->data = data;
-		item->id = availableIds.end();
+		//get the last id and pop it from the list
+		item->id = *(availableIds.end() - 1);
 
 		availableIds.pop_back();
+
+		//add the item to the list
+		items.push_back(item);
+
+		return item->id;
 	}
 
 

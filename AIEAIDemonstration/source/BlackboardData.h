@@ -38,7 +38,7 @@ public:
 
 	/*
 	* ~BlackboardData()
-	* default destructor
+	* destructor constructor
 	*/
 	~BlackboardData() {};
 };

@@ -2,31 +2,31 @@
 #include "FiniteStateMachine.h"
 
 /*
-* class TradingTransition
+* class ExchangedTransition
 * child class of Transition
 *
 * a state for the trading bot that becomes active
-* when the agent accepts a trade with another trader
+* when the agent has exchanged all items in the current trade
 *
 * author: Bradley Booth, Academy of Interactive Entertainment, 2017
 */
-class TradingTransition : public Transition
+class ExchangedTransition : public Transition
 {
 
 public:
 
 	/*
-	* TradingTransition()
+	* ExchangedTransition()
 	* default constructor
 	*/
-	TradingTransition() {}
+	ExchangedTransition() {}
 
 
 	/*
-	* ~TradingTransition()
+	* ~ExchangedTransition()
 	* default destructor
 	*/
-	~TradingTransition() {}
+	~ExchangedTransition() {}
 
 
 	/*

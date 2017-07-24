@@ -23,6 +23,9 @@ public:
 	//the amount of seconds remaining in this blackboard item's lifetime
 	float timeRemaining = 0.0f;
 
+	//can the item be set to countdown
+	bool timeLocked = false;
+
 	/*
 	* BlackboardItem()
 	* default constructor

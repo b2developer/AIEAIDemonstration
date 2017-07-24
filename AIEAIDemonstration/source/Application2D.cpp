@@ -1,4 +1,5 @@
 #include "Application2D.h"
+#include <iostream>
 #include <Windows.h>
 
 //constructor
@@ -46,12 +47,14 @@ bool Application2D::startup()
 	director->employee = tradingBotSpawner;
 
 	//create a blackboard that can hold 200 messages
-	tradingBlackboard = new Blackboard(200);
+	tradingBlackboard = new Blackboard(300);
 
-	//spawn three game objects
-	gameObjects.push_back(director->createGameObject());
-	gameObjects.push_back(director->createGameObject());
-	gameObjects.push_back(director->createGameObject());
+	//spawn 50 game objects
+	for (int i = 0; i < 5; i++)
+	{
+		gameObjects.push_back(director->createGameObject());
+
+	}
 
 	return true;
 }
@@ -87,11 +90,15 @@ void Application2D::update(float deltaTime)
 		quit();
 	}
 
+	tradingBlackboard->update(deltaTime);
+
 	//iterate through all gameobjects, updating each one
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->update();
 	}
+
+	std::cout << "--------------------" << '\n';
 }
 
 

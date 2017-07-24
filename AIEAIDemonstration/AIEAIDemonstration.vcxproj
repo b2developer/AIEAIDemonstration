@@ -151,15 +151,20 @@
     <ClCompile Include="source\CollisionEngine.cpp" />
     <ClCompile Include="source\Director.cpp" />
     <ClCompile Include="source\Entity.cpp" />
+    <ClCompile Include="source\ExchangeState.cpp" />
+    <ClCompile Include="source\ExchangedTransition.cpp" />
     <ClCompile Include="source\FiniteStateMachine.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\GotoState.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Polygon.cpp" />
+    <ClCompile Include="source\RangeTransition.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\SearchState.cpp" />
     <ClCompile Include="source\TestSpawner.cpp" />
     <ClCompile Include="source\TradingAgent.cpp" />
     <ClCompile Include="source\TradingBotSpawner.cpp" />
+    <ClCompile Include="source\TradingTransition.cpp" />
     <ClCompile Include="source\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -172,8 +177,7 @@
     <ClInclude Include="source\CollisionEngine.h" />
     <ClInclude Include="source\Component.h" />
     <ClInclude Include="source\Director.h" />
-    <ClInclude Include="source\DroppedTransition.h" />
-    <ClInclude Include="source\DropState.h" />
+    <ClInclude Include="source\ExchangeState.h" />
     <ClInclude Include="source\Entity.h" />
     <ClInclude Include="source\FiniteStateMachine.h" />
     <ClInclude Include="source\GameObject.h" />
@@ -181,8 +185,7 @@
     <ClInclude Include="source\Graph.h" />
     <ClInclude Include="source\BlackboardItem.h" />
     <ClInclude Include="source\MathsLibrary.h" />
-    <ClInclude Include="source\PickedUpTransition.h" />
-    <ClInclude Include="source\PickupState.h" />
+    <ClInclude Include="source\ExchangedTransition.h" />
     <ClInclude Include="source\Polygon.h" />
     <ClInclude Include="source\RangeTransition.h" />
     <ClInclude Include="source\Renderer.h" />
