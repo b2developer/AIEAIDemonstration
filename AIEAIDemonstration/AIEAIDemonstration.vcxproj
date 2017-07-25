@@ -158,6 +158,7 @@
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\GotoState.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Pathfinder.cpp" />
     <ClCompile Include="source\Polygon.cpp" />
     <ClCompile Include="source\RangeTransition.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
@@ -189,6 +190,8 @@
     <ClInclude Include="source\BlackboardItem.h" />
     <ClInclude Include="source\MathsLibrary.h" />
     <ClInclude Include="source\ExchangedTransition.h" />
+    <ClInclude Include="source\Pathfinder.h" />
+    <ClInclude Include="source\PathStructure.h" />
     <ClInclude Include="source\Polygon.h" />
     <ClInclude Include="source\RangeTransition.h" />
     <ClInclude Include="source\Renderer.h" />

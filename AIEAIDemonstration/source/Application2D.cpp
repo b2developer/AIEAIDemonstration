@@ -49,11 +49,10 @@ bool Application2D::startup()
 	//create a blackboard that can hold 500 messages
 	tradingBlackboard = new Blackboard(500);
 
-	//spawn 8 game objects
+	//spawn 8 trading bots
 	for (int i = 0; i < 8; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
-
 	}
 
 	return true;

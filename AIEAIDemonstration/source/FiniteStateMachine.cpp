@@ -1,5 +1,27 @@
 #include "FiniteStateMachine.h"
 
+//destructor, deletes all states and transitions
+FiniteStateMachine::~FiniteStateMachine()
+{
+	//iterate through all vertices
+	for (size_t i = 0; i < data.vertices.size(); i++)
+	{
+		Vertex<State*, Transition*>* vertex = data.vertices[i];
+
+		//iterate through all edges in the vertex
+		for (size_t j = 0; j < vertex->edges.size(); j++)
+		{
+			Edge<State*, Transition*> edge = vertex->edges[j];
+
+			//delete the transition
+			delete edge.value;
+		}
+
+		//delete the state
+		delete vertex->data;
+	}
+}
+
 //gets called once per frame (if the FSM is active)
 void FiniteStateMachine::update(float deltaTime)
 {

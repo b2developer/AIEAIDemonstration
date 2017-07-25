@@ -4,6 +4,7 @@
 //destructor, deletes the contained FSM
 TradingAgent::~TradingAgent()
 {
+	delete FSM;
 }
 
 //called once per frame, updates the FSM

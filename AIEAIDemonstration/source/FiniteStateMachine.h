@@ -144,9 +144,14 @@ class FiniteStateMachine
 
 public:
 	
-	Agent* agent = nullptr; //pointer to the agent who holds this state machine
-	Vertex<State*, Transition*>* currentVertex = nullptr; //pointer to the current state's vertex
-	Graph<State*, Transition*> data; //graph structure that contains the states and transition
+	//pointer to the agent who holds this state machine
+	Agent* agent = nullptr; 
+
+	//pointer to the current state's vertex
+	Vertex<State*, Transition*>* currentVertex = nullptr; 
+
+	//graph structure that contains the states and transition
+	Graph<State*, Transition*> data;
 
 	/*
 	* FiniteStateMachine()
@@ -157,9 +162,9 @@ public:
 
 	/*
 	* ~FiniteStateMachine()
-	* default destructor
+	* destructor, deletes all states and transitions
 	*/
-	~FiniteStateMachine() {}
+	~FiniteStateMachine();
 
 
 	/*
