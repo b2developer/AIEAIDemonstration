@@ -1,6 +1,7 @@
 #pragma once
 #include "BlackboardItem.h"
 #include "BlackboardData.h"
+#include "BlackboardReference.h"
 
 #define TEMPLATE template<typename T>
 
@@ -50,19 +51,21 @@ public:
 	*/
 	void update(float deltaTime);
 
-	
+
 	/*
 	* registerItem
 	* template function with two types
 	*
-	* adds an item of type T and returns
-	* the id of the item in the blackboard
+	* adds an item of type T and returns the
+	* raw item data, this is used when the other
+	* system wants to set the data but wont be using
+	* the pointer for more than one frame
 	*
 	* @param float lifeTime - how long in seconds the item remains active
-	* @returns int - the id of the item
+	* @returns BlackboardData<T, U>* - pointer to the item
 	*/
 	TEMPLATE2
-	int registerItem(float lifeTime)
+	BlackboardData<T, U>* registerItem(float lifeTime)
 	{
 		BlackboardData<T, U>* item = new BlackboardData<T, U>();
 
@@ -77,7 +80,46 @@ public:
 		//add the item to the list
 		items.push_back(item);
 
-		return item->id;
+		return item;
+	}
+
+	
+	/*
+	* registerItemWithReference
+	* template function with two types
+	*
+	* adds an item of type T and returns
+	* a blackboard reference to the item
+	*
+	* @param float lifeTime - how long in seconds the item remains active
+	* @returns BlackboardReference* - an item that other systems can use to access the data safely
+	*/
+	TEMPLATE2
+	BlackboardReference* registerItemWithReference(float lifeTime)
+	{
+		BlackboardData<T, U>* item = new BlackboardData<T, U>();
+
+		//give the time remaining to the item
+		item->timeRemaining = lifeTime;
+
+		//get the last id and pop it from the list
+		item->id = *(availableIds.end() - 1);
+
+		availableIds.pop_back();
+
+		//add the item to the list
+		items.push_back(item);
+
+		//set-up the new blackboard reference
+		BlackboardReference* bref = new BlackboardReference();
+
+		bref->item = item;
+		bref->exists = true;
+
+		//add the blackboard reference to the item
+		item->references.push_back(bref);
+
+		return bref;
 	}
 
 
@@ -90,11 +132,11 @@ public:
 	* returns nullptr if it wasn't
 	*
 	* @param int id - the id to search for
-	* @returns BlackboardData<T, U>* - pointer to the item or nullptr
+	* @returns BlackboardReference* - pointer to the item or nullptr
 	a
 	*/
 	TEMPLATE2
-	BlackboardData<T, U>* searchFor(int id)
+	BlackboardReference* searchFor(int id)
 	{
 		//iterate through all items, comparing their ids
 		for (size_t i = 0; i < items.size(); i++)
@@ -104,8 +146,13 @@ public:
 			//if the item's id matches, return it
 			if (id == item->id)
 			{
-				//downcast the item
-				return (BlackboardData<T, U>*)item;
+				//set-up the new blackboard reference
+				BlackboardReference* bref = new BlackboardReference();
+
+				bref->item = item;
+				bref->exists = true;
+
+				return bref;
 			}
 		}
 

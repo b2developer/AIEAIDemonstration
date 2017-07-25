@@ -9,6 +9,7 @@ bool ExchangedTransition::checkCondition()
 	//cast the base agent to it's true type
 	TradingAgent* tradingAgent = (TradingAgent*)(FSM->agent);
 
-
-	return false;
+	return tradingAgent->trade == nullptr
+		|| ((BlackboardData<Trade, Trade>*)tradingAgent->trade->item)->data.give.size() == 0
+		&& ((BlackboardData<Trade, Trade>*)tradingAgent->trade->item)->data.recieve.size() == 0;
 }

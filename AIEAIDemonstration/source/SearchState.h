@@ -3,9 +3,6 @@
 #include "TradingAgent.h"
 
 
-//how long trades take to expire on the blackboard
-const float TRADE_LIFETIME = 5.0f;
-
 /*
 * class SearchState
 * child class of State
@@ -86,18 +83,5 @@ public:
 	* @returns void
 	*/
 	void postRandomTrade(unsigned int itemsLost, unsigned int itemsGained);
-
-	
-	/*
-	* compatibleTrade
-	*
-	* analyses a trade and determines
-	* if the agent has the necessary items
-	* to complete it
-	*
-	* @param Trade* trade - pointer to the trade being analysed
-	* @returns void
-	*/
-	bool compatibleTrade(Trade* trade);
 
 };

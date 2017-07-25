@@ -17,7 +17,7 @@ enum ObjectType
 	APPLE = 0,
 	BANANA = 1,
 	CHERRY = 2,
-	GRAPE = 3,
+	ORANGE = 3,
 };
 
 
@@ -62,7 +62,10 @@ public:
 	std::vector<ObjectType> inventory;
 
 	//the current trade being performed
-	BlackboardData<Trade, Trade>* currentData = nullptr;
+	BlackboardReference* trade = nullptr;
+
+	//the trading agent to trade with
+	TradingAgent* other = nullptr;
 
 	//did this agent propose the trade?
 	bool initiator = false;
@@ -70,17 +73,17 @@ public:
 	//SEARCH STATE VARIABLES
 	//----------------------------------------------------------
 	//maximum amount of trades the agent can propose at one time
-	int maxTrades = 5;
+	int maxTrades = 3;
 
 	//the amount of items given/lost during trades
-	int itemsLostDuringTrades = 5;
-	int itemsGainedDuringTrades = 5;
+	int itemsLostDuringTrades = 4;
+	int itemsGainedDuringTrades = 4;
+
+	//amount of seconds the trade request lasts
+	float tradeExpiryTime = 5.0f;
 
 	//container for trades this agent proposed to the blackboard
-	std::vector<BlackboardData<Trade, Trade>*> proposedTrades;
-
-	//container for the corresponding numbers that the blackboard assigned to the trade
-	std::vector<int> proposedIds;
+	std::vector<BlackboardReference*> tradeRefs;
 	//----------------------------------------------------------
 
 
@@ -88,24 +91,26 @@ public:
 	//GOTO STATE / RANGE TRANSITION VARIABLES
 	//----------------------------------------------------------
 	//how close two trading agents must be to trade
-	float targetRange = 20.0f;
+	float targetRange = 120.0f;
 
 	//units moved per second
-	float movementSpeed = 2000.0f;
+	float movementSpeed = 80.0f;
 
 	Vector2 origin = Vector2(0, 0);
 
 	//target vector (an agent or an origin)
 	Vector2* targetVector = nullptr;
+	//----------------------------------------------------------
 
-	//the trading agent to trade with
-	TradingAgent* target = nullptr;
 
+
+	//EXCHANGE STATE / EXCHANGED TRANSITION VARIABLES
+	//----------------------------------------------------------
 	//timer for the exchanges
 	float exchangeTimer = 0.0f;
 
 	//how long it takes to give one item to the other agent
-	float exchangeDuration = 0.0f;
+	float exchangeDuration = 1.0f;
 	//----------------------------------------------------------
 
 
@@ -134,5 +139,17 @@ public:
 	* @returns void
 	*/
 	void update() override;
+
+	/*
+	* compatibleTrade
+	*
+	* analyses a trade and determines
+	* if the agent has the necessary items
+	* to complete it
+	*
+	* @param Trade* trade - pointer to the trade being analysed
+	* @returns void
+	*/
+	bool compatibleTrade(Trade* trade);
 
 };

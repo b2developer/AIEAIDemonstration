@@ -46,11 +46,11 @@ bool Application2D::startup()
 
 	director->employee = tradingBotSpawner;
 
-	//create a blackboard that can hold 200 messages
-	tradingBlackboard = new Blackboard(300);
+	//create a blackboard that can hold 500 messages
+	tradingBlackboard = new Blackboard(500);
 
-	//spawn 50 game objects
-	for (int i = 0; i < 5; i++)
+	//spawn 8 game objects
+	for (int i = 0; i < 8; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 
@@ -97,8 +97,6 @@ void Application2D::update(float deltaTime)
 	{
 		gameObjects[i]->update();
 	}
-
-	std::cout << "--------------------" << '\n';
 }
 
 

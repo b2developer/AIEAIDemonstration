@@ -3,7 +3,8 @@
 
 #define TEMPLATE template<typename T>
 
-const int MAX_ENTRY = 100;
+//forward declaration
+class BlackboardReference;
 
 /*
 * class BlackboardItem
@@ -26,18 +27,22 @@ public:
 	//can the item be set to countdown
 	bool timeLocked = false;
 
+	//list of references to this item
+	std::vector<BlackboardReference*> references;
+
 	/*
 	* BlackboardItem()
 	* default constructor
 	*/
-	BlackboardItem() {};
+	BlackboardItem() {}
 
 
 	/*
 	* ~BlackboardItem()
 	* virtual function
-	* default destructor
+	* destructor, tells all references that the item no longer exists
 	*/
-	virtual ~BlackboardItem() {};
+	virtual ~BlackboardItem();
+
 
 };

@@ -40,7 +40,7 @@ public:
 	* ~Renderer()
 	* destructor, removes the texture from memory (if one has been allocated)
 	*/
-	~Renderer();
+	virtual ~Renderer();
 
 
 	/*
@@ -52,11 +52,12 @@ public:
 	* @param char fileName[FILENAME_MAX] - c-string of the file path
 	* @returns void
 	*/
-	void load(char fileName[FILENAME_MAX]);
+	virtual void load(char fileName[FILENAME_MAX]);
 
 
 	/*
 	* update
+	* virtual function
 	* overrides Component's update()
 	*
 	* gets called once per frame when the
@@ -64,5 +65,5 @@ public:
 	*
 	* @returns void
 	*/
-	void update() override;
+	virtual void update() override;
 };

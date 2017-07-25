@@ -162,6 +162,12 @@
     <ClCompile Include="source\ExchangedTransition.cpp">
       <Filter>Source Files\Users\TradingBot</Filter>
     </ClCompile>
+    <ClCompile Include="source\BlackboardItem.cpp">
+      <Filter>Source Files\Systems\Blackboard</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TradingRenderer.cpp">
+      <Filter>Source Files\Systems\Components\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Component.h">
@@ -253,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="source\ExchangedTransition.h">
       <Filter>Header Files\Users\TradingBot</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BlackboardReference.h">
+      <Filter>Header Files\Systems\Blackboard</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TradingRenderer.h">
+      <Filter>Header Files\Systems\Components\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

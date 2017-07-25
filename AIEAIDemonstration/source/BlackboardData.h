@@ -33,12 +33,12 @@ public:
 	* BlackboardData()
 	* default constructor
 	*/
-	BlackboardData() {};
+	BlackboardData() {}
 
 
 	/*
 	* ~BlackboardData()
-	* destructor constructor
+	* default destructor
 	*/
-	~BlackboardData() {};
+	~BlackboardData() {}
 };

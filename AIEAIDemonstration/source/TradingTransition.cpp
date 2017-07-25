@@ -11,5 +11,5 @@ bool TradingTransition::checkCondition()
 	TradingAgent* tradingAgent = (TradingAgent*)(FSM->agent);
 
 	//if current trade has been assigned
-	return false;
+	return tradingAgent->other != nullptr && tradingAgent->trade != nullptr;
 }

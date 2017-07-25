@@ -3,7 +3,7 @@
 
 #include "Transform.h"
 #include "Box.h"
-#include "Renderer.h"
+#include "TradingRenderer.h"
 #include "TradingAgent.h"
 
 #include "SearchState.h"
@@ -14,7 +14,7 @@
 #include "ExchangedTransition.h"
 
 
-const int STARTING_INVENTORY_SIZE = 10;
+const int STARTING_INVENTORY_SIZE = 4;
 
 //adds the necessary components for a test object
 void TradingBotSpawner::addComponents(GameObject * creation)
@@ -22,11 +22,12 @@ void TradingBotSpawner::addComponents(GameObject * creation)
 	//add all components
 	Transform* transform = new Transform();
 	Box* box = new Box();
-	Renderer* renderer = new Renderer();
+	Box* itemBox = new Box();
+	TradingRenderer* renderer = new TradingRenderer();
 	Agent* tradingAgent = new TradingAgent();
 
-	transform->translation.x = rand() % 500;
-	transform->translation.y = rand() % 500;
+	transform->translation.x = (float)(rand() % 1000);
+	transform->translation.y = (float)(rand() % 1000);
 
 	//random position to travel back to after a trade
 	((TradingAgent*)tradingAgent)->origin = transform->translation;
@@ -38,13 +39,66 @@ void TradingBotSpawner::addComponents(GameObject * creation)
 	box->min = Vector2(-25.0f, -25.0f);
 	box->max = Vector2(25.0f, 25.0f);
 
+	itemBox->min = Vector2(-15.0f, -15.0f);
+	itemBox->max = Vector2(15.0f, 15.0f);
+
 	char texturePath[FILENAME_MAX];
 
-	//create the file path to the texture
+	//load the blink animation for the bot
 	strcpy_s(texturePath, appPtr->resourceFolder);
 	strcat_s(texturePath, "bot.png");
-
 	renderer->load(texturePath);
+	renderer->blinkAnimation.push_back(renderer->texture);
+	renderer->texture = nullptr;
+
+	//blink1.png
+	strcpy_s(texturePath, appPtr->resourceFolder);
+	strcat_s(texturePath, "bot_blink1.png");
+	renderer->load(texturePath);
+	renderer->blinkAnimation.push_back(renderer->texture);
+	renderer->texture = nullptr;
+
+	//blink2.png
+	strcpy_s(texturePath, appPtr->resourceFolder);
+	strcat_s(texturePath, "bot_blink2.png");
+	renderer->load(texturePath);
+	renderer->blinkAnimation.push_back(renderer->texture);
+	renderer->texture = nullptr;
+
+	//the rest of the animation is loaded textures
+	renderer->blinkAnimation.push_back(renderer->blinkAnimation[2]);
+	renderer->blinkAnimation.push_back(renderer->blinkAnimation[1]);
+
+	//apple.png
+	strcpy_s(texturePath, appPtr->resourceFolder);
+	strcat_s(texturePath, "apple.png");
+	renderer->load(texturePath);
+	renderer->itemTextures.push_back(renderer->texture);
+	renderer->texture = nullptr;
+
+	//banana.png
+	strcpy_s(texturePath, appPtr->resourceFolder);
+	strcat_s(texturePath, "banana.png");
+	renderer->load(texturePath);
+	renderer->itemTextures.push_back(renderer->texture);
+	renderer->texture = nullptr;
+
+	//cherry.png
+	strcpy_s(texturePath, appPtr->resourceFolder);
+	strcat_s(texturePath, "cherry.png");
+	renderer->load(texturePath);
+	renderer->itemTextures.push_back(renderer->texture);
+	renderer->texture = nullptr;
+
+	//orange.png
+	strcpy_s(texturePath, appPtr->resourceFolder);
+	strcat_s(texturePath, "orange.png");
+	renderer->load(texturePath);
+	renderer->itemTextures.push_back(renderer->texture);
+	renderer->texture = nullptr;
+
+	renderer->tradingAgent = ((TradingAgent*)tradingAgent);
+	renderer->itemBox = itemBox;
 
 	//give the trading agent it's FSM and Blackboard
 	((TradingAgent*)tradingAgent)->FSM = new FiniteStateMachine();
@@ -57,7 +111,6 @@ void TradingBotSpawner::addComponents(GameObject * creation)
 		//add a random item to the inventory
 		((TradingAgent*)tradingAgent)->inventory.push_back((ObjectType)(rand() % OBJECT_SIZE));
 	}
-
 
 	FiniteStateMachine* FSM = ((TradingAgent*)tradingAgent)->FSM;
 
@@ -97,6 +150,7 @@ void TradingBotSpawner::addComponents(GameObject * creation)
 
 	//linking the components together
 	renderer->box = box;
+	renderer->itemBox = itemBox;
 	renderer->appPtr = appPtr;
 	box->transform = transform;
 	transform->container = creation;
@@ -108,12 +162,14 @@ void TradingBotSpawner::addComponents(GameObject * creation)
 	//link the components to the game object
 	transform->container = creation;
 	box->container = creation;
+	itemBox->container = creation;
 	renderer->container = creation;
 	tradingAgent->container = creation;
 
 	//add the components to the list
 	creation->components.push_back(transform);
 	creation->components.push_back(box);
+	creation->components.push_back(itemBox);
 	creation->components.push_back(renderer);
 	creation->components.push_back(tradingAgent);
 

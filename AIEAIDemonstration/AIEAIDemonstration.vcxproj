@@ -146,6 +146,7 @@
     <ClCompile Include="source\Agent.cpp" />
     <ClCompile Include="source\Application2D.cpp" />
     <ClCompile Include="source\Blackboard.cpp" />
+    <ClCompile Include="source\BlackboardItem.cpp" />
     <ClCompile Include="source\Box.cpp" />
     <ClCompile Include="source\Circle.cpp" />
     <ClCompile Include="source\CollisionEngine.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="source\TestSpawner.cpp" />
     <ClCompile Include="source\TradingAgent.cpp" />
     <ClCompile Include="source\TradingBotSpawner.cpp" />
+    <ClCompile Include="source\TradingRenderer.cpp" />
     <ClCompile Include="source\TradingTransition.cpp" />
     <ClCompile Include="source\Transform.cpp" />
   </ItemGroup>
@@ -172,6 +174,7 @@
     <ClInclude Include="source\Application2D.h" />
     <ClInclude Include="source\Blackboard.h" />
     <ClInclude Include="source\BlackboardData.h" />
+    <ClInclude Include="source\BlackboardReference.h" />
     <ClInclude Include="source\Box.h" />
     <ClInclude Include="source\Circle.h" />
     <ClInclude Include="source\CollisionEngine.h" />
@@ -196,6 +199,7 @@
     <ClInclude Include="source\TestSpawner.h" />
     <ClInclude Include="source\TradingAgent.h" />
     <ClInclude Include="source\TradingBotSpawner.h" />
+    <ClInclude Include="source\TradingRenderer.h" />
     <ClInclude Include="source\TradingTransition.h" />
     <ClInclude Include="source\Transform.h" />
   </ItemGroup>

@@ -5,7 +5,7 @@
 //destructor
 Renderer::~Renderer()
 {
-	//properly deallocate stored textures before overwriting it with a new texture
+	//properly deallocate stored textures
 	if (texture != nullptr)
 	{
 		delete texture;
