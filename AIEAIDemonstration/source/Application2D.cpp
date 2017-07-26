@@ -47,7 +47,34 @@ bool Application2D::startup()
 	director->employee = tradingBotSpawner;
 
 	//create a blackboard that can hold 500 messages
-	tradingBlackboard = new Blackboard(500);
+	tradingBlackboard = new Blackboard(1500);
+
+	//create the navmesh
+	navMesh = new NavMesh();
+	
+	//link the pathfinder to the game
+	navMesh->appPtr = this;
+
+	navMesh->heursticFunction = &EuclideanDistance;
+
+	//generate a grid graph for pathfinding
+	navMesh->createGrid(120, 60, Vector2(50.0f, 50.0f), Vector2(15.0f, 15.0f));
+
+	
+	int nodesToRemove = 3900;
+
+	//remove random nodes from the map
+	for (int i = 0; i < nodesToRemove; i++)
+	{
+		//select a random node to remove
+		int randNum = rand() % navMesh->data.vertices.size();
+
+		NavNode* navNode = navMesh->data.vertices[randNum]->data;
+		delete navNode;
+
+		//remove the node
+		navMesh->data.removeVertex(navMesh->data.vertices[randNum]);
+	}
 
 	//spawn 8 trading bots
 	for (int i = 0; i < 8; i++)
@@ -67,6 +94,7 @@ void Application2D::shutdown()
 	delete testSpawner;
 
 	delete tradingBlackboard;
+	delete navMesh;
 
 	//iterate through all gameobjects, deleting each one
 	for (size_t i = 0; i < gameObjects.size(); i++)
@@ -75,6 +103,12 @@ void Application2D::shutdown()
 	}
 }
 
+//temp timers
+float calculationTimer = 0.0f;
+float calculationDuration = 0.0f;
+
+int startNode = 0;
+int endNode = 0;
 
 //the game loop
 void Application2D::update(float deltaTime)
@@ -96,6 +130,17 @@ void Application2D::update(float deltaTime)
 	{
 		gameObjects[i]->update();
 	}
+
+	calculationTimer -= deltaTime;
+
+	//reset the timer if it expires
+	if (calculationTimer < 0.0f)
+	{
+		calculationTimer = calculationDuration;
+
+		startNode = rand() % navMesh->data.vertices.size();
+		endNode = rand() % navMesh->data.vertices.size();
+	}
 }
 
 
@@ -111,6 +156,31 @@ void Application2D::draw()
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->draw();
+	}
+
+	navMesh->drawMesh(5.0f, 2.0f, 1.0f, 0.0f, 0.0f);
+	
+	std::vector<Vector2> path = navMesh->calculateAStarPath(navMesh->data.vertices[startNode], navMesh->data.vertices[endNode]);
+
+	m_renderer2D->drawCircle(navMesh->data.vertices[startNode]->data->position.x, navMesh->data.vertices[startNode]->data->position.y, 5.0f);
+	m_renderer2D->drawCircle(navMesh->data.vertices[endNode]->data->position.x, navMesh->data.vertices[endNode]->data->position.y, 5.0f);
+
+	m_renderer2D->setRenderColour(0, 1, 0);
+
+	//iterate through the list of points, drawing it as a path
+	for (size_t i = 0; i < path.size() - 1; i++)
+	{
+		if (path.size() == 0)
+		{
+			break;
+		}
+
+		if (i > 0)
+		{
+			m_renderer2D->drawCircle(path[i].x, path[i].y, 5.0f);
+		}
+
+		m_renderer2D->drawLine(path[i].x, path[i].y, path[i + 1].x, path[i + 1].y, 3.0f);
 	}
 
 	m_renderer2D->end();

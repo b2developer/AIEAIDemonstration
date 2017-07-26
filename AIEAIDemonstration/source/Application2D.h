@@ -12,6 +12,7 @@
 #include "TradingBotSpawner.h"
 
 #include "Blackboard.h"
+#include "NavMesh.h"
 
 #include "Input.h"
 #include "Renderer2D.h"
@@ -42,6 +43,7 @@ public:
 	TradingBotSpawner* tradingBotSpawner = nullptr; //spawner for trading bot objects
 
 	Blackboard* tradingBlackboard = nullptr; //central communication for trading agents
+	NavMesh* navMesh = nullptr; //navigational mesh for calculating paths
 
 	aie::Renderer2D* m_renderer2D; //responsible for draw calls
 

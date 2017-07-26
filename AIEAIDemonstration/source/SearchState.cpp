@@ -109,7 +109,7 @@ void SearchState::update(float deltaTime)
 	}
 
 	//post one trade if there is room for one
-	if (tradingAgent->tradeRefs.size() < tradingAgent->maxTrades)
+	if (tradingAgent->tradeRefs.size() < (unsigned int)tradingAgent->maxTrades)
 	{
 		postRandomTrade(tradingAgent->itemsLostDuringTrades, tradingAgent->itemsGainedDuringTrades);
 	}

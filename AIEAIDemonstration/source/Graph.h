@@ -263,35 +263,48 @@ public:
 	{
 		Vertex<T,U>* search = nullptr;
 
+		//index of the item to delete
+		size_t deleteI = 0;
+
 		//iterate through all of the vertices, searching for the node to erase
 		for (size_t i = 0; i < vertices.size(); i++)
 		{
 			//has the vertex been found
 			if (search == nullptr)
 			{
-				//remember the vertex
-				if (search == vertices[i])
+				//if the vertex was just found
+				if (target == vertices[i])
 				{
+					//remember the vertex
 					search = vertices[i];
+
+					deleteI = i;
+
+					//reset the indexer, the loop is now searching for associated nodes
+					i = -1;
 				}
 			}
 			else
 			{
 				Vertex<T,U>* current = vertices[i];
 
-				std::vector<Edge<T, U>>::iterator edgeIter = current->edges.begin();
-
 				//iterate through all edges in the vertices, looking 
-				for (; edgeIter != current->edges.end(); edgeIter++)
+				for (size_t j = 0; j < current->edges.size(); j++)
 				{
 					//if the connection ends at the vertex that is being deleted, delete it
-					if (target == edgeIter.end)
+					if (target == current->edges[j].end)
 					{
-						current->edges.remove(edgeIter);
+						current->edges.erase(current->edges.begin() + j);
 					}
 				}
 			}
 		}
+
+		//remove the contents of the vertex
+		delete vertices[deleteI];
+
+		//remove the empty vertex pointer from the list
+		vertices.erase(vertices.begin() + deleteI);
 	}
 
 

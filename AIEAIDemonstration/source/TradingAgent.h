@@ -70,6 +70,8 @@ public:
 	//did this agent propose the trade?
 	bool initiator = false;
 
+
+
 	//SEARCH STATE VARIABLES
 	//----------------------------------------------------------
 	//maximum amount of trades the agent can propose at one time

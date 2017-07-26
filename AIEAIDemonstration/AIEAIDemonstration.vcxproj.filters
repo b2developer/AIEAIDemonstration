@@ -174,7 +174,10 @@
     <ClCompile Include="source\TradingRenderer.cpp">
       <Filter>Source Files\Systems\Components\Core</Filter>
     </ClCompile>
-    <ClCompile Include="source\Pathfinder.cpp">
+    <ClCompile Include="source\Heuristics.cpp">
+      <Filter>Source Files\Systems\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="source\NavMesh.cpp">
       <Filter>Source Files\Systems\Pathfinding</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,10 +278,13 @@
     <ClInclude Include="source\TradingRenderer.h">
       <Filter>Header Files\Systems\Components\Core</Filter>
     </ClInclude>
-    <ClInclude Include="source\Pathfinder.h">
+    <ClInclude Include="source\Heuristics.h">
       <Filter>Header Files\Systems\Pathfinding</Filter>
     </ClInclude>
-    <ClInclude Include="source\PathStructure.h">
+    <ClInclude Include="source\NavMesh.h">
+      <Filter>Header Files\Systems\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\NavMeshStructures.h">
       <Filter>Header Files\Systems\Pathfinding</Filter>
     </ClInclude>
   </ItemGroup>
