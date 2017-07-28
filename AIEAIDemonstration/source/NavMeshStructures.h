@@ -22,6 +22,9 @@ public:
 	//cost to travel to this node from the starting node
 	float gScore = INFINITY;
 
+	//index of the node in the mesh
+	size_t vertexIndex = 0;
+
 	//previous node along the optimal path from the start to here
 	NavNode* previous = nullptr;
 
@@ -30,8 +33,6 @@ public:
 
 	//flag indicating if A* has visited this node already
 	bool visited = false;
-
-
 
 	/*
 	* NavNode()
@@ -67,6 +68,9 @@ public:
 
 	//cost to travel to travel accross this connection
 	float cost = 0.0f;
+
+	//flag indicating that the connection is owned by multiple triangles
+	bool sharing = false;
 
 	/*
 	* NavConnection()

@@ -1,4 +1,5 @@
 #include "Application2D.h"
+
 #include <iostream>
 #include <Windows.h>
 
@@ -57,11 +58,11 @@ bool Application2D::startup()
 
 	navMesh->heursticFunction = &EuclideanDistance;
 
+	/*
 	//generate a grid graph for pathfinding
-	navMesh->createGrid(120, 60, Vector2(50.0f, 50.0f), Vector2(15.0f, 15.0f));
+	navMesh->createGrid(80, 60, Vector2(50.0f, 50.0f), Vector2(15.0f, 15.0f));
 
-	
-	int nodesToRemove = 3900;
+	int nodesToRemove = 0;
 
 	//remove random nodes from the map
 	for (int i = 0; i < nodesToRemove; i++)
@@ -75,9 +76,18 @@ bool Application2D::startup()
 		//remove the node
 		navMesh->data.removeVertex(navMesh->data.vertices[randNum]);
 	}
+	*/
+	
+	//load the nav mesh from file
+	char navMeshPath[FILENAME_MAX];
+
+	strcpy_s(navMeshPath, resourceFolder);
+	strcat_s(navMeshPath, "meshes\\mesh1.txt");
+
+	navMesh->load(navMeshPath);
 
 	//spawn 8 trading bots
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 0; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
@@ -105,7 +115,7 @@ void Application2D::shutdown()
 
 //temp timers
 float calculationTimer = 0.0f;
-float calculationDuration = 0.0f;
+float calculationDuration = 1.0f;
 
 int startNode = 0;
 int endNode = 0;
@@ -140,6 +150,7 @@ void Application2D::update(float deltaTime)
 
 		startNode = rand() % navMesh->data.vertices.size();
 		endNode = rand() % navMesh->data.vertices.size();
+
 	}
 }
 
@@ -158,11 +169,16 @@ void Application2D::draw()
 		gameObjects[i]->draw();
 	}
 
+	
 	navMesh->drawMesh(5.0f, 2.0f, 1.0f, 0.0f, 0.0f);
 	
-	std::vector<Vector2> path = navMesh->calculateAStarPath(navMesh->data.vertices[startNode], navMesh->data.vertices[endNode]);
+	std::vector<Vector2> path = navMesh->findRawPath(navMesh->data.vertices[startNode], navMesh->data.vertices[endNode]);
+	path = navMesh->optimisePath(path);
 
 	m_renderer2D->drawCircle(navMesh->data.vertices[startNode]->data->position.x, navMesh->data.vertices[startNode]->data->position.y, 5.0f);
+
+	m_renderer2D->setRenderColour(0, 1, 0);
+
 	m_renderer2D->drawCircle(navMesh->data.vertices[endNode]->data->position.x, navMesh->data.vertices[endNode]->data->position.y, 5.0f);
 
 	m_renderer2D->setRenderColour(0, 1, 0);
@@ -182,6 +198,7 @@ void Application2D::draw()
 
 		m_renderer2D->drawLine(path[i].x, path[i].y, path[i + 1].x, path[i + 1].y, 3.0f);
 	}
+	
 
 	m_renderer2D->end();
 }

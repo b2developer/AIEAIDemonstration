@@ -234,6 +234,58 @@ void Renderer2D::drawCircle(float xPos, float yPos, float radius, float depth) {
 	}
 }
 
+void Renderer2D::drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float depth)
+{
+
+	unsigned int textureID = pushTexture(m_nullTexture);
+
+	int index = m_currentVertex;
+
+	//first vertex
+	m_vertices[m_currentVertex].pos[0] = x1;
+	m_vertices[m_currentVertex].pos[1] = y1;
+	m_vertices[m_currentVertex].pos[2] = depth;
+	m_vertices[m_currentVertex].pos[3] = (float)textureID;
+	m_vertices[m_currentVertex].color[0] = m_r;
+	m_vertices[m_currentVertex].color[1] = m_g;
+	m_vertices[m_currentVertex].color[2] = m_b;
+	m_vertices[m_currentVertex].color[3] = m_a;
+	m_currentVertex++;
+	
+	if (shouldFlush())
+		flushBatch();
+
+	//second vertex
+	m_vertices[m_currentVertex].pos[0] = x2;
+	m_vertices[m_currentVertex].pos[1] = y2;
+	m_vertices[m_currentVertex].pos[2] = depth;
+	m_vertices[m_currentVertex].pos[3] = (float)textureID;
+	m_vertices[m_currentVertex].color[0] = m_r;
+	m_vertices[m_currentVertex].color[1] = m_g;
+	m_vertices[m_currentVertex].color[2] = m_b;
+	m_vertices[m_currentVertex].color[3] = m_a;
+	m_currentVertex++;
+
+	if (shouldFlush())
+		flushBatch();
+
+	//third vertex
+	m_vertices[m_currentVertex].pos[0] = x3;
+	m_vertices[m_currentVertex].pos[1] = y3;
+	m_vertices[m_currentVertex].pos[2] = depth;
+	m_vertices[m_currentVertex].pos[3] = (float)textureID;
+	m_vertices[m_currentVertex].color[0] = m_r;
+	m_vertices[m_currentVertex].color[1] = m_g;
+	m_vertices[m_currentVertex].color[2] = m_b;
+	m_vertices[m_currentVertex].color[3] = m_a;
+	m_currentVertex++;
+
+	//triangle formation
+	m_indices[m_currentIndex++] = (index + 0);
+	m_indices[m_currentIndex++] = (index + 1);
+	m_indices[m_currentIndex++] = (index + 2);
+}
+
 void Renderer2D::drawSprite(Texture * texture,
 							 float xPos, float yPos, 
 							 float width, float height, 

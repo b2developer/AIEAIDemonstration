@@ -139,3 +139,94 @@ AdvancedCollision CollisionEngine::advancedCollisionCheck(Shape * A, Shape * B)
 
 	return AdvancedCollision();
 }
+
+//calculates which side of a line formed by A and B P is on
+int CollisionEngine::calculateSide(Vector2 A, Vector2 B, Vector2 P)
+{
+	//make A the origin
+	Vector2 OB = B - A;
+	Vector2 OP = P - A;
+
+	//get the direction of the line
+	Vector2 BA = OB.normalised();
+
+	//get the normal of the line
+	Vector2 BAn = BA.normal();
+
+	//project the point onto the line
+	Vector2 proj = BA * BA.dot(OP);
+
+	Vector2 Pn = (OP - proj).normalised();
+
+	//get the relative direction
+	float dot = BAn.dot(Pn);
+
+	//if the normals point in the same direction
+	if (dot > 0.5f)
+	{
+		return 1;
+	}
+	//if the normals point in the opposite direction
+	else if (dot < -0.5f)
+	{
+		return -1;
+	}
+	
+	//the dot is too small, indicating that one of the vectors is null
+	return 0;
+}
+
+//checks for a collision between two line segments
+bool CollisionEngine::lineCollisionCheck(Vector2 A, Vector2 B, Vector2 C, Vector2 D, float tolerance)
+{
+	//list to store normals for a seperating axis test
+	std::vector<Vector2> normals;
+
+	//get the directional vectors of both lines
+	Vector2 BA = (B - A).normalised();
+	Vector2 DC = (D - C).normalised();
+
+	//add the directional vectors and their normals to the list of vectors to project
+	normals.push_back(BA);
+	normals.push_back(DC);
+	normals.push_back(BA.normal());
+	normals.push_back(DC.normal());
+
+	//iterate through all normals
+	for (size_t i = 0; i < normals.size(); i++)
+	{
+		//store in a temp variable for performance and readability
+		Vector2 normal = normals[i];
+
+		//project all of the points
+		float min1 = normal.dot(A);
+		float max1 = normal.dot(B);
+		float min2 = normal.dot(C);
+		float max2 = normal.dot(D);
+
+		//check that the min dots are smaller than the max dots, otherwise swap them
+		if (min1 > max1)
+		{
+			float temp = min1;
+			min1 = max1;
+			max1 = temp;
+		}
+
+		if (min2 > max2)
+		{
+			float temp = min2;
+			min2 = max2;
+			max2 = temp;
+		}
+
+		//no-overlap test
+		if (max1 <= min2 + 0.01f || min1 + 0.01f >= max2)
+		{
+			return false;
+		}
+
+	}
+
+	//no seperating axis was found, the lines are intersecting
+	return true;
+}

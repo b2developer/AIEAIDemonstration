@@ -46,21 +46,21 @@ void TradingBotSpawner::addComponents(GameObject * creation)
 
 	//load the blink animation for the bot
 	strcpy_s(texturePath, appPtr->resourceFolder);
-	strcat_s(texturePath, "bot.png");
+	strcat_s(texturePath, "textures\\bot.png");
 	renderer->load(texturePath);
 	renderer->blinkAnimation.push_back(renderer->texture);
 	renderer->texture = nullptr;
 
 	//blink1.png
 	strcpy_s(texturePath, appPtr->resourceFolder);
-	strcat_s(texturePath, "bot_blink1.png");
+	strcat_s(texturePath, "textures\\bot_blink1.png");
 	renderer->load(texturePath);
 	renderer->blinkAnimation.push_back(renderer->texture);
 	renderer->texture = nullptr;
 
 	//blink2.png
 	strcpy_s(texturePath, appPtr->resourceFolder);
-	strcat_s(texturePath, "bot_blink2.png");
+	strcat_s(texturePath, "textures\\bot_blink2.png");
 	renderer->load(texturePath);
 	renderer->blinkAnimation.push_back(renderer->texture);
 	renderer->texture = nullptr;
@@ -71,28 +71,28 @@ void TradingBotSpawner::addComponents(GameObject * creation)
 
 	//apple.png
 	strcpy_s(texturePath, appPtr->resourceFolder);
-	strcat_s(texturePath, "apple.png");
+	strcat_s(texturePath, "textures\\apple.png");
 	renderer->load(texturePath);
 	renderer->itemTextures.push_back(renderer->texture);
 	renderer->texture = nullptr;
 
 	//banana.png
 	strcpy_s(texturePath, appPtr->resourceFolder);
-	strcat_s(texturePath, "banana.png");
+	strcat_s(texturePath, "textures\\banana.png");
 	renderer->load(texturePath);
 	renderer->itemTextures.push_back(renderer->texture);
 	renderer->texture = nullptr;
 
 	//cherry.png
 	strcpy_s(texturePath, appPtr->resourceFolder);
-	strcat_s(texturePath, "cherry.png");
+	strcat_s(texturePath, "textures\\cherry.png");
 	renderer->load(texturePath);
 	renderer->itemTextures.push_back(renderer->texture);
 	renderer->texture = nullptr;
 
 	//orange.png
 	strcpy_s(texturePath, appPtr->resourceFolder);
-	strcat_s(texturePath, "orange.png");
+	strcat_s(texturePath, "textures\\orange.png");
 	renderer->load(texturePath);
 	renderer->itemTextures.push_back(renderer->texture);
 	renderer->texture = nullptr;

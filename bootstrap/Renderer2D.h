@@ -20,6 +20,21 @@ public:
 	virtual void drawBox(float xPos, float yPos, float width, float height, float rotation = 0.0f, float depth = 0.0f);
 	virtual void drawCircle(float xPos, float yPos, float radius, float depth = 0.0f);
 
+	/*
+	* drawTriangle
+	*
+	* draws a triangle to the screen
+	* 
+	* @param float x1 - x coordinate of the first point in the triangle
+	* @param float y1 - y coordinate of the first point in the triangle
+	* @param float x2 - x coordinate of the second point in the triangle
+	* @param float y2 - y coordinate of the second point in the triangle
+	* @param float x3 - x coordinate of the third point in the triangle
+	* @param float y3 - y coordinate of the third point in the triangle
+	* @returns void
+	*/
+	virtual void drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float depth = 0.0f);
+
 	// if texture is nullptr then it renders a coloured sprite
 	// depth is in the range [0,100] with lower being closer to the viewer
 	virtual void drawSprite(Texture* texture, float xPos, float yPos, float width = 0.0f, float height = 0.0f, float rotation = 0.0f, float depth = 0.0f, float xOrigin = 0.5f, float yOrigin = 0.5f);

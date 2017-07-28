@@ -38,6 +38,9 @@ public:
 	//the graph structure to transverse with A*
 	Graph<NavNode*, NavConnection*> data;
 
+	//list of vertices, every three vertices form a triangle
+	std::vector<Vertex<NavNode*, NavConnection*>*> triangleData;
+
 	/*
 	* NavMesh()
 	* default constructor 
@@ -68,6 +71,44 @@ public:
 
 
 	/*
+	* createMesh
+	*
+	* generates a mesh from a list of vertices
+	* and a list of triangles
+	*
+	* @param std::vector<Vector2> vertices - the location of all vertices
+	* @param std::vector<int> triangles - a list of numbers, every three numbers are vertex indices that form a triangle
+	* @returns void
+	*/
+	void createMesh(std::vector<Vector2> vertices, std::vector<int> triangles);
+
+
+	/*
+	* calculateSharedEdges
+	* 
+	* examines all triangles and determines
+	* all edges in the entire mesh that are shared
+	* by more than one triangle
+	*
+	* also removes duplicate edges from the mesh
+	*
+	* @returns void;
+	*/
+	void calculateSharedEdges();
+
+
+	/*
+	* load
+	*
+	* loads a navmesh from a .txt file path
+	*
+	* @param filename[FILENAME_MAX] - c-string of the file path
+	* @returns void
+	*/
+	void load(char fileName[FILENAME_MAX]);
+
+
+	/*
 	* resetSearchedNodes
 	*
 	* resets all nodes that were manipulated by the A* search
@@ -81,7 +122,7 @@ public:
 
 
 	/*
-	* calculateAStarPath
+	* findRawPath
 	*
 	* runs the A* pathfinding algorithm on the graph
 	* to find the shortest path between the start and end nodes
@@ -95,7 +136,19 @@ public:
 	* @param float E = 1.0f - heurstic multiplier, has varying effects on performance and the correctness of paths calculated
 	* @returns std::vector<Vector2> - a list of vectors that make up the path
 	*/
-	std::vector<Vector2> calculateAStarPath(Vertex<NavNode*, NavConnection*>* start, Vertex<NavNode*, NavConnection*>* end, float E = 1.0f);
+	std::vector<Vector2> findRawPath(Vertex<NavNode*, NavConnection*>* start, Vertex<NavNode*, NavConnection*>* end, float E = 1.0f);
+
+	
+	/*
+	* optimisePath
+	*
+	* prunes a raw list of points returned from an A* search
+	* by testing the LOS between various points on the path with the NavMesh
+	*
+	* @param std::vector<Vector2> rawPath - the list of points in the original path
+	* @returns std::vector<Vector2> - a list of points with the unneccessary points pruned
+	*/
+	std::vector<Vector2> optimisePath(std::vector<Vector2> rawPath);
 
 
 	/*
