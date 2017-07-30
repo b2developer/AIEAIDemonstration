@@ -10,6 +10,7 @@
 #include "Spawner.h"
 #include "TestSpawner.h"
 #include "TradingBotSpawner.h"
+#include "NavigationBotSpawner.h"
 
 #include "Blackboard.h"
 #include "NavMesh.h"
@@ -41,6 +42,7 @@ public:
 	Director* director = nullptr; //creates gameobjects with modificiations from the employed spawner
 	TestSpawner* testSpawner = nullptr; //spawner for test objects
 	TradingBotSpawner* tradingBotSpawner = nullptr; //spawner for trading bot objects
+	NavigationBotSpawner* navigationBotSpawner = nullptr; //spawner for navigation bot objects
 
 	Blackboard* tradingBlackboard = nullptr; //central communication for trading agents
 	NavMesh* navMesh = nullptr; //navigational mesh for calculating paths

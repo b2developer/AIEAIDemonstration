@@ -16,7 +16,7 @@
 
 const int STARTING_INVENTORY_SIZE = 4;
 
-//adds the necessary components for a test object
+//adds the necessary components for a trading bot object
 void TradingBotSpawner::addComponents(GameObject * creation)
 {
 	//add all components
@@ -153,7 +153,6 @@ void TradingBotSpawner::addComponents(GameObject * creation)
 	renderer->itemBox = itemBox;
 	renderer->appPtr = appPtr;
 	box->transform = transform;
-	transform->container = creation;
 	tradingAgent->appPtr = appPtr;
 	tradingAgent->transform = transform;
 

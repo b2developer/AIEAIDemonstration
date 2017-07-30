@@ -140,7 +140,7 @@ public:
 
 	
 	/*
-	* optimisePath
+	* smoothPath
 	*
 	* prunes a raw list of points returned from an A* search
 	* by testing the LOS between various points on the path with the NavMesh
@@ -148,7 +148,7 @@ public:
 	* @param std::vector<Vector2> rawPath - the list of points in the original path
 	* @returns std::vector<Vector2> - a list of points with the unneccessary points pruned
 	*/
-	std::vector<Vector2> optimisePath(std::vector<Vector2> rawPath);
+	std::vector<Vector2> smoothPath(std::vector<Vector2> rawPath);
 
 
 	/*
@@ -159,12 +159,13 @@ public:
 	*
 	* @param float nodeRadius - the radius of circles that represent nodes
 	* @param float connectionThickness - the thickness of lines that represent connections
-	* @param float r - the portion of red to draw the graph with
-	* @param float g - the portion of green to draw the graph with
-	* @param float b - the portion of blue to draw the graph with
+	* @param float r = 1.0f - the portion of red to draw the graph with
+	* @param float g = 1.0f - the portion of green to draw the graph with
+	* @param float b = 1.0f - the portion of blue to draw the graph with
+	* @param float depth = 0.0f - the z coordinate, determines the order that the mesh is drawn in relation to other textures
 	* @returns void
 	a
 	*/
-	void drawMesh(float nodeRadius, float connectionThickness, float r = 1.0f, float g = 1.0f, float b = 1.0f);
+	void drawMesh(float nodeRadius, float connectionThickness, float r = 1.0f, float g = 1.0f, float b = 1.0f, float depth = 0.0f);
 
 };

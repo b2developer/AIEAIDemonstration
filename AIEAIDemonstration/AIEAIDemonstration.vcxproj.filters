@@ -180,6 +180,12 @@
     <ClCompile Include="source\NavMesh.cpp">
       <Filter>Source Files\Systems\Pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="source\Navigator.cpp">
+      <Filter>Source Files\Systems\Components\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\NavigationBotSpawner.cpp">
+      <Filter>Source Files\Systems\Spawner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Component.h">
@@ -281,10 +287,16 @@
     <ClInclude Include="source\Heuristics.h">
       <Filter>Header Files\Systems\Pathfinding</Filter>
     </ClInclude>
-    <ClInclude Include="source\NavMesh.h">
+    <ClInclude Include="source\NavMeshStructures.h">
       <Filter>Header Files\Systems\Pathfinding</Filter>
     </ClInclude>
-    <ClInclude Include="source\NavMeshStructures.h">
+    <ClInclude Include="source\Navigator.h">
+      <Filter>Header Files\Systems\Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\NavigationBotSpawner.h">
+      <Filter>Header Files\Systems\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="source\NavMesh.h">
       <Filter>Header Files\Systems\Pathfinding</Filter>
     </ClInclude>
   </ItemGroup>

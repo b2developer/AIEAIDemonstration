@@ -9,7 +9,7 @@ class Application2D;
 * class TradingBotSpawner
 * child class of Spawner
 *
-* test spawner, creates trading bot objects
+* creates trading bot objects
 *
 * author: Bradley Booth, Academy of Interactive Entertainment, 2017
 */

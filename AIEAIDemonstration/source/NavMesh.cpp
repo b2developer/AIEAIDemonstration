@@ -565,7 +565,7 @@ std::vector<Vector2> NavMesh::findRawPath(Vertex<NavNode*, NavConnection*>* star
 
 
 //prunes all unneccessary nodes with LOS checks
-std::vector<Vector2> NavMesh::optimisePath(std::vector<Vector2> rawPath)
+std::vector<Vector2> NavMesh::smoothPath(std::vector<Vector2> rawPath)
 {
 	//don't attempt to smooth a path without points
 	if (rawPath.size() == 0)
@@ -639,7 +639,7 @@ std::vector<Vector2> NavMesh::optimisePath(std::vector<Vector2> rawPath)
 
 
 //draws the graph structure
-void NavMesh::drawMesh(float nodeRadius, float connectionThickness, float r, float g, float b)
+void NavMesh::drawMesh(float nodeRadius, float connectionThickness, float r, float g, float b, float depth)
 {
 	//set the desired colour to draw the graph with
 	appPtr->m_renderer2D->setRenderColour(r, g, b);
@@ -673,7 +673,7 @@ void NavMesh::drawMesh(float nodeRadius, float connectionThickness, float r, flo
 		Vector2 va3 = A + A3 * ratio;
 
 		//draw the triangle
-		appPtr->m_renderer2D->drawTriangle(va1.x, va1.y, va2.x, va2.y, va3.x, va3.y);
+		appPtr->m_renderer2D->drawTriangle(va1.x, va1.y, va2.x, va2.y, va3.x, va3.y, depth);
 	}
 
 	//iterate through all vertices, drawing a circle for each one
@@ -686,24 +686,13 @@ void NavMesh::drawMesh(float nodeRadius, float connectionThickness, float r, flo
 		{
 			Edge<NavNode*, NavConnection*> edge = vertex->edges[j];
 
-			float a = 1.0f;
-
-			if (edge.value->sharing)
-			{
-				appPtr->m_renderer2D->setRenderColour(0, 0, 1, 0.5f);
-			}
-			else
-			{
-				appPtr->m_renderer2D->setRenderColour(r, g, b);
-			}
-
 			//draw the edge
-			appPtr->m_renderer2D->drawLine(edge.start->data->position.x, edge.start->data->position.y, edge.end->data->position.x, edge.end->data->position.y, connectionThickness * a);			
+			appPtr->m_renderer2D->drawLine(edge.start->data->position.x, edge.start->data->position.y, edge.end->data->position.x, edge.end->data->position.y, connectionThickness, depth);
 			
 		}
 
 		//draw the node
-		appPtr->m_renderer2D->drawCircle(vertex->data->position.x, vertex->data->position.y, nodeRadius);
+		appPtr->m_renderer2D->drawCircle(vertex->data->position.x, vertex->data->position.y, nodeRadius, depth);
 	}
 
 	//reset the colour

@@ -1,89 +1,114 @@
 #pragma once
 #include "MathsLibrary.h"
 
-#pragma region NavNode
+
+//forward declarations for the triangle class to utilise
+class NavMeshVertex;
+class NavMeshEdge;
+
 /*
-* class NavNode
+* class NavMeshTriangle
 *
-* describes a possible destination in a NavMesh,
-* tracks the score it takes to travel to this path node from
-* the starting node, track's it's connection to the starting node
+* a triangle that belongs to a navmesh, holds
+* three NavMeshVertices and the edges connecting
+* them
 *
 * author: Bradley Booth, Academy of Interactive Entertainment, 2017
 */
-class NavNode
+class NavMeshTriangle
 {
-
 public:
 
-	//position of the node
-	Vector2 position = Vector2(0.0f, 0.0f);
-	
-	//cost to travel to this node from the starting node
+	//flag indicating if A* has already addressed this node in the current search
+	bool open = false;
+
+	//current cost to move to this triangle from the starting triangle, determined by A*
 	float gScore = INFINITY;
 
-	//index of the node in the mesh
-	size_t vertexIndex = 0;
-
-	//previous node along the optimal path from the start to here
-	NavNode* previous = nullptr;
-
-	//flag indicating if A* has placed this node in the open list
-	bool inOpen = false;
-
-	//flag indicating if A* has visited this node already
-	bool visited = false;
+	//the three vertices involved in the triangle
+	std::vector<NavMeshVertex*> vertices;
 
 	/*
-	* NavNode()
+	* NavMeshTriangle()
 	* default constructor
 	*/
-	NavNode() {}
+	NavMeshTriangle() {}
 
 
 	/*
-	* ~NavNode()
+	* ~NavMeshTriangle()
 	* default destructor
 	*/
-	~NavNode() {}
+	~NavMeshTriangle() {}
 
 };
-#pragma endregion
 
 
 
-#pragma region NavConnection
+
 /*
-* class NavConnection
+* class NavMeshVertex
 *
-* describes a possible connection between two path nodes in a NavMesh,
-* tracks the score added if transversed down this connection
+* a vertex that belongs to a navmesh
 *
 * author: Bradley Booth, Academy of Interactive Entertainment, 2017
 */
-class NavConnection
+class NavMeshVertex
 {
-
 public:
 
-	//cost to travel to travel accross this connection
-	float cost = 0.0f;
-
-	//flag indicating that the connection is owned by multiple triangles
-	bool sharing = false;
+	//coordinates of the vertex
+	Vector2 position;
 
 	/*
-	* NavConnection()
+	* NavMeshVertex()
 	* default constructor
 	*/
-	NavConnection() {}
+	NavMeshVertex() {}
 
 
 	/*
-	* ~NavConnection()
+	* ~NavMeshVertex()
 	* default destructor
 	*/
-	~NavConnection() {}
+	~NavMeshVertex() {}
 
 };
-#pragma endregion
+
+
+
+/*
+* class NavMeshEdge
+*
+* stores the connection between two triangles
+* holds a cost, which the A* algorithm uses
+* to determine the shortest path
+*
+* author: Bradley Booth, Academy of Interactive Entertainment, 2017
+*/
+class NavMeshEdge
+{
+public:
+
+	//container for triangles
+	NavMeshTriangle* start = nullptr;
+	NavMeshTriangle* end = nullptr;
+
+	//g-score added if this edge is used
+	float cost = 0.0f;
+
+	/*
+	* NavMeshEdge()
+	* default constructor
+	*/
+	NavMeshEdge() {}
+
+
+	/*
+	* ~NavMeshEdge()
+	* default destructor
+	*/
+	~NavMeshEdge() {}
+
+};
+

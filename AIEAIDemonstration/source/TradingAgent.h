@@ -96,7 +96,7 @@ public:
 	float targetRange = 120.0f;
 
 	//units moved per second
-	float movementSpeed = 2000.0f;
+	float movementSpeed = 100.0f;
 
 	Vector2 origin = Vector2(0, 0);
 
@@ -112,7 +112,7 @@ public:
 	float exchangeTimer = 0.0f;
 
 	//how long it takes to give one item to the other agent
-	float exchangeDuration = 0.0f;
+	float exchangeDuration = 1.0f;
 	//----------------------------------------------------------
 
 
