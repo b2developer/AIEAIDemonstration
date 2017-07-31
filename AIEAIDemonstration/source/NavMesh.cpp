@@ -476,9 +476,6 @@ std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, 
 	//get the portals (edges that are involved in the path)
 	std::vector<NavMeshTriangleEdge*> portals;
 
-	//list of boolean values indicating if the corresponding portal is alligned
-	std::vector<bool> allignments;
-
 	/*
 	* if a path is found, consecutive triangles in the path must have at exactly one common edge
 	* otherwise the NavMesh has loaded a mesh that technically isn't a mesh
@@ -486,11 +483,11 @@ std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, 
 	*/
 
 	//iterate through all triangles in the path, searching for portals
-	for (size_t i = 1; i < rawPath.size(); i++)
+	for (size_t i = 0; i < rawPath.size() - 1; i++)
 	{
 		//store consecutive triangles in temp variables
-		NavMeshTriangle* tri1 = rawPath[i - 1];
-		NavMeshTriangle* tri2 = rawPath[i];
+		NavMeshTriangle* tri1 = rawPath[i];
+		NavMeshTriangle* tri2 = rawPath[i+1];
 
 		//store the shared edge in a variable after it is found
 		NavMeshTriangleEdge* sharedEdge = nullptr;
@@ -519,18 +516,113 @@ std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, 
 			}
 		}
 
-		//directional vector from this previous node to this node
-		Vector2 relative = (tri2->position - tri1->position).normalised();
-
-		//directional vector from the previous node to the first vertice in the shared edge
-		Vector2 first = (sharedEdge->vert1->position - tri1->position).normalised();
-
-		//2D cross product
-		float cross = relative.x * first.y - first.x * relative.y;
-
 		portals.push_back(sharedEdge);
-		allignments.push_back(cross > 0);
 	}
+
+
+	//sorted containers for the portal points
+	std::vector<Vector2> leftPoints;
+    std::vector<Vector2> rightPoints;
+
+	//iterate through all the portals and triangles, sorting the vertices in each portal into the side they belong on relative to the triangles
+	for (size_t i = 0; i < portals.size(); i++)
+	{
+		//store in temporary variables for readability and performance
+		NavMeshTriangle* tri1 = rawPath[i];
+		NavMeshTriangle* tri2 = rawPath[i + 1];
+		NavMeshTriangleEdge* edge = portals[i];
+		
+		//position of the two triangles
+		Vector2 t1 = tri1->position;
+		Vector2 t2 = tri2->position;
+
+		//both vertices involved in the portal
+		NavMeshVertex* vert1 = edge->vert1;
+		NavMeshVertex* vert2 = edge->vert2;
+
+		//the first vert is on the left
+		if (COLL_ENGINE->calculateSide(t2, t1, vert1->position) == 1)
+		{
+			leftPoints.push_back(vert1->position);
+			rightPoints.push_back(vert2->position);
+		}
+		//the first vert is on the right
+		else
+		{
+			leftPoints.push_back(vert2->position);
+			rightPoints.push_back(vert1->position);
+		}
+
+	}
+
+	//the vector that the funnel stems from
+	Vector2 pivot = start;
+
+	//double iteration
+	size_t l_i = 1;
+	size_t r_i = 1;
+
+	//true indicates that l_i should be incremented, false indicates r_i
+	bool turn = true;
+
+	//0 means that the funnel was not breached, 1 indicates that the right points breached it, -1 indicates left
+	int locked = 0;
+
+	//the previous points in the funnel
+	Vector2 currentLeft = leftPoints[0]; //(calculateSide == -1)
+	Vector2 currentRight = rightPoints[0]; //(calculateSide == 1)
+
+	//while there are still portal points to check
+	while (l_i < leftPoints.size() - 1 || r_i < rightPoints.size() - 1)
+	{
+		//DO STUFF
+		Vector2 futurePoint;
+
+		//get the next point to check against the funnel
+		if (turn)
+		{
+			//if the left list has run out of points, use the right list instead
+			if (l_i < leftPoints.size() - 1)
+			{
+				futurePoint = leftPoints[l_i];
+			}
+			else
+			{
+				futurePoint = rightPoints[r_i];
+			}
+		}
+		else
+		{
+			//if the right list has run out of points, use the left list instead
+			if (l_i < rightPoints.size() - 1)
+			{
+				futurePoint = rightPoints[r_i];
+			}
+			else
+			{
+				futurePoint = leftPoints[l_i];
+			}
+		}
+
+
+		//remember the points from the previous funnel
+		currentLeft = leftPoints[l_i];
+		currentRight = rightPoints[r_i];
+
+		//determine which iterator to increment
+		if (turn)
+		{
+			l_i++;
+		}
+		else
+		{
+			r_i++;
+		}
+
+		turn = !turn;
+	}
+
+	
 
 	
 
@@ -543,6 +635,8 @@ std::vector<Vector2> NavMesh::findPath(Vector2 start, Vector2 end)
 {
 	return std::vector<Vector2>();
 }
+
+
 
 //draws the graph structure
 void NavMesh::drawMesh(float nodeRadius, float connectionThickness, float r, float g, float b, float depth)
