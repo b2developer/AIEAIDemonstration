@@ -39,46 +39,26 @@ bool Application2D::startup()
 	director = new Director();
 	testSpawner = new TestSpawner();
 	tradingBotSpawner = new TradingBotSpawner();
-	navigationBotSpawner = new NavigationBotSpawner();
+	//navigationBotSpawner = new NavigationBotSpawner();
 
 	//link them to each other and the application
 	director->appPtr = this;
 	testSpawner->appPtr = this;
 	tradingBotSpawner->appPtr = this;
-	navigationBotSpawner->appPtr = this;
+	//navigationBotSpawner->appPtr = this;
 
 	//create a blackboard that can hold 500 messages
-	tradingBlackboard = new Blackboard(1500);
+	tradingBlackboard = new Blackboard(500);
 
 	//create the navmesh
 	navMesh = new NavMesh();
 
 	//link the navigation bot spawner to the navmesh
-	navigationBotSpawner->navMesh = navMesh;
+	//navigationBotSpawner->navMesh = navMesh;
 	
 	//link the pathfinder to the game
 	navMesh->appPtr = this;
 	navMesh->heursticFunction = &EuclideanDistance;
-
-	/*
-	//generate a grid graph for pathfinding
-	navMesh->createGrid(80, 60, Vector2(50.0f, 50.0f), Vector2(15.0f, 15.0f));
-
-	int nodesToRemove = 0;
-
-	//remove random nodes from the map
-	for (int i = 0; i < nodesToRemove; i++)
-	{
-		//select a random node to remove
-		int randNum = rand() % navMesh->data.vertices.size();
-
-		NavNode* navNode = navMesh->data.vertices[randNum]->data;
-		delete navNode;
-
-		//remove the node
-		navMesh->data.removeVertex(navMesh->data.vertices[randNum]);
-	}
-	*/
 	
 	//load the nav mesh from file
 	char navMeshPath[FILENAME_MAX];
@@ -90,20 +70,11 @@ bool Application2D::startup()
 
 	director->employee = tradingBotSpawner;
 
-	//spawn 8 trading bots
-	for (int i = 0; i < 8; i++)
+	//spawn 18 trading bots
+	for (int i = 0; i < 0; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
-
-	director->employee = navigationBotSpawner;
-
-	//spawn 8 navigation bots
-	for (int i = 0; i < 8; i++)
-	{
-		gameObjects.push_back(director->createGameObject());
-	}
-
 
 	return true;
 }
@@ -126,6 +97,11 @@ void Application2D::shutdown()
 	}
 }
 
+float decayTimer = 0.0f;
+float decayDuration = 5.0f;
+
+int startNode = 0;
+int endNode = 0;
 
 //the game loop
 void Application2D::update(float deltaTime)
@@ -147,6 +123,19 @@ void Application2D::update(float deltaTime)
 	{
 		gameObjects[i]->update();
 	}
+
+	decayTimer -= deltaTime;
+
+	if (decayTimer <= 0.0f)
+	{
+		decayTimer = decayDuration;
+
+
+		/*
+		startNode = rand() % navMesh->data.vertices.size();
+		endNode = rand() % navMesh->data.vertices.size();
+		*/
+	}
 }
 
 
@@ -154,16 +143,26 @@ void Application2D::update(float deltaTime)
 void Application2D::draw()
 {
 	clearScreen();
-	m_renderer2D->setRenderColour(1, 1, 1);
 
 	m_renderer2D->begin();
 
-	navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+	m_renderer2D->setRenderColour(1, 1, 1);
 
 	//iterate through all gameobjects, drawing each one
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->draw();
+	}
+
+	navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+
+	std::vector<Vector2> path = navMesh->findPath(Vector2(0,0), Vector2(0,0));
+
+	m_renderer2D->setRenderColour(0, 1, 0);
+
+	for (int i = 0; i < (int)path.size() - 1; i++)
+	{
+		m_renderer2D->drawLine(path[i].x, path[i].y, path[i + 1].x, path[i + 1].y, 5.0f, 0.0f);
 	}
 
 	m_renderer2D->end();

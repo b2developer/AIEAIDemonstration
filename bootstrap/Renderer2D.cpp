@@ -237,6 +237,9 @@ void Renderer2D::drawCircle(float xPos, float yPos, float radius, float depth) {
 void Renderer2D::drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float depth)
 {
 
+	if (shouldFlush())
+		flushBatch();
+
 	unsigned int textureID = pushTexture(m_nullTexture);
 
 	int index = m_currentVertex;
@@ -251,7 +254,7 @@ void Renderer2D::drawTriangle(float x1, float y1, float x2, float y2, float x3, 
 	m_vertices[m_currentVertex].color[2] = m_b;
 	m_vertices[m_currentVertex].color[3] = m_a;
 	m_currentVertex++;
-	
+
 	if (shouldFlush())
 		flushBatch();
 
@@ -279,6 +282,9 @@ void Renderer2D::drawTriangle(float x1, float y1, float x2, float y2, float x3, 
 	m_vertices[m_currentVertex].color[2] = m_b;
 	m_vertices[m_currentVertex].color[3] = m_a;
 	m_currentVertex++;
+
+	if (shouldFlush())
+		flushBatch();
 
 	//triangle formation
 	m_indices[m_currentIndex++] = (index + 0);

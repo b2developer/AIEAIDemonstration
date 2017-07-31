@@ -159,9 +159,8 @@
     <ClCompile Include="source\GotoState.cpp" />
     <ClCompile Include="source\Heuristics.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\NavigationBotSpawner.cpp" />
-    <ClCompile Include="source\Navigator.cpp" />
     <ClCompile Include="source\NavMesh.cpp" />
+    <ClCompile Include="source\NavMeshStructures.cpp" />
     <ClCompile Include="source\Polygon.cpp" />
     <ClCompile Include="source\RangeTransition.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
@@ -194,8 +193,6 @@
     <ClInclude Include="source\Heuristics.h" />
     <ClInclude Include="source\MathsLibrary.h" />
     <ClInclude Include="source\ExchangedTransition.h" />
-    <ClInclude Include="source\NavigationBotSpawner.h" />
-    <ClInclude Include="source\Navigator.h" />
     <ClInclude Include="source\NavMesh.h" />
     <ClInclude Include="source\NavMeshStructures.h" />
     <ClInclude Include="source\Polygon.h" />

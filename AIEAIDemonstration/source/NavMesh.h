@@ -36,10 +36,13 @@ public:
 	float(*heursticFunction)(Vector2 current, Vector2 end);
 
 	//the graph structure to transverse with A*
-	Graph<NavNode*, NavConnection*> data;
+	Graph<NavMeshTriangle*, NavMeshEdge*> data;
 
-	//list of vertices, every three vertices form a triangle
-	std::vector<Vertex<NavNode*, NavConnection*>*> triangleData;
+	//vertices in the emsh
+	std::vector<NavMeshVertex*> triangleVerts;
+
+	//edges in the mesh
+	std::vector<NavMeshTriangleEdge*> triangleEdges;
 
 	/*
 	* NavMesh()
@@ -50,24 +53,9 @@ public:
 
 	/*
 	* ~NavMesh()
-	* destructor, deletes all path nodes and path connections
+	* destructor, deletes all vertices, edges and triangle data
 	*/
 	~NavMesh();
-
-
-	/*
-	* createGrid
-	*
-	* generates a graph that resembles 2D grid
-	* to specific dimensions and spacing
-	*
-	* @param unsigned int sizeX - the amount of nodes in a row
-	* @param unsigned int sizeY - the amount of nodes in a column
-	* @param Vector2 origin - the position of the bottom left most node
-	* @param Vector2 spacing - the horizontal and vertical gaps between nodes
-	* @returns void
-	*/
-	void createGrid(unsigned int sizeX, unsigned int sizeY, Vector2 origin, Vector2 spacing);
 
 
 	/*
@@ -114,11 +102,11 @@ public:
 	* resets all nodes that were manipulated by the A* search
 	* back to their default values to be used again
 	*
-	* @param std::vector<Vertex<NavNode*, NavConnection*>*> open - list of nodes that were open when the A* search terminated
-	* @param std::vector<Vertex<NavNode*, NavConnection*>*> closed - list of nodes that were closed when the A* search terminated
+	* @param std::vector<Vertex<NavMeshTriangle*, NavMeshEdge*>*> open - list of nodes that were open when the A* search terminated
+	* @param std::vector<Vertex<NavMeshTriangle*, NavMeshEdge*>*> closed - list of nodes that were closed when the A* search terminated
 	* @returns void
 	*/
-	void resetSearchedNodes(std::vector<Vertex<NavNode*, NavConnection*>*> open, std::vector<Vertex<NavNode*, NavConnection*>*> closed);
+	void resetSearchedNodes(std::vector<Vertex<NavMeshTriangle*, NavMeshEdge*>*> open, std::vector<Vertex<NavMeshTriangle*, NavMeshEdge*>*> closed);
 
 
 	/*
@@ -128,27 +116,42 @@ public:
 	* to find the shortest path between the start and end nodes
 	*
 	* the path returned is raw data off the graph, optimisations
-	* could be made to the path to reduce the amount of vectors in it
+	* could be made to the path to reduce the amount of nodes in it
 	* or make it smoother
 	*
-	* @param Vertex<NavNode*, NavConnection*>* start - the starting node
-	* @param Vertex<NavNode*, NavConnection*>* end - the target node
+	* @param Vertex<NavMeshTriangle*, NavMeshEdge*>* start - the starting node
+	* @param Vertex<NavMeshTriangle*, NavMeshEdge*>* end - the target node
 	* @param float E = 1.0f - heurstic multiplier, has varying effects on performance and the correctness of paths calculated
-	* @returns std::vector<Vector2> - a list of vectors that make up the path
+	* @returns std::vector<NavMeshTriangle*> - a list of triangle nodes that make up the path
 	*/
-	std::vector<Vector2> findRawPath(Vertex<NavNode*, NavConnection*>* start, Vertex<NavNode*, NavConnection*>* end, float E = 1.0f);
+	std::vector<NavMeshTriangle*> findRawPath(Vertex<NavMeshTriangle*, NavMeshEdge*>* start, Vertex<NavMeshTriangle*, NavMeshEdge*>* end, float E = 1.0f);
 
 	
 	/*
-	* smoothPath
+	* funnelPath
 	*
 	* prunes a raw list of points returned from an A* search
-	* by testing the LOS between various points on the path with the NavMesh
+	* using the funnelling algorithm
 	*
-	* @param std::vector<Vector2> rawPath - the list of points in the original path
+	* @param std::vector<NavMeshTriangle*> rawPath - the list of points in the original path
 	* @returns std::vector<Vector2> - a list of points with the unneccessary points pruned
 	*/
-	std::vector<Vector2> smoothPath(std::vector<Vector2> rawPath);
+	std::vector<Vector2> funnelPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end);
+
+
+	/*
+	* findPath
+	*
+	* uses A* and the funneling algorithm to find
+	* the shortest path between two points in the NavMesh
+	* returns an empty list if the points do not belong
+	* to the NavMesh
+	*
+	* @param Vector2 start - the desired beginning of the path
+	* @param Vector2 end - the desired target of the path
+	* @returns std::vector<Vector2> - a list of vectors that make up the path when followed in order
+	*/
+	std::vector<Vector2> findPath(Vector2 start, Vector2 end);
 
 
 	/*
@@ -164,7 +167,6 @@ public:
 	* @param float b = 1.0f - the portion of blue to draw the graph with
 	* @param float depth = 0.0f - the z coordinate, determines the order that the mesh is drawn in relation to other textures
 	* @returns void
-	a
 	*/
 	void drawMesh(float nodeRadius, float connectionThickness, float r = 1.0f, float g = 1.0f, float b = 1.0f, float depth = 0.0f);
 
