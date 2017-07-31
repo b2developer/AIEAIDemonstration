@@ -1,0 +1,23 @@
+get the portals (lines that connect the triangles)
+
+List<left points>
+List<right points>
+
+edge normal = triangle[i+1]->position - triangle[i]->position
+
+
+each portal has two points
+  add the portal on the left of the edge normal to the left points
+  add the portal on the right of the edge normal to the right points
+  
+routine
+
+STEP 1 -> keep incrementing the blue and orange points until one breaches the funnel
+	  the breach point is one part of the funnel
+
+	  the breach point is a neccessary point in the path
+
+STEP 2 -> iterate through the other set until it crosses the other (old) funnel edge
+	  this point is the second new funnel point
+
+repeat steps until both sets reach the end point
