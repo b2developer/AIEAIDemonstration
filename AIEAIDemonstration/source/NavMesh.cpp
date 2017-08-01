@@ -471,8 +471,14 @@ std::vector<NavMeshTriangle*> NavMesh::findRawPath(Vertex<NavMeshTriangle*, NavM
 
 
 //prunes all unneccessary nodes with the funneling algorithm
-std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end)
+std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end, std::vector<Vector2> path)
 {
+	//return an empty list if the path is empty
+	if (rawPath.size() == 0)
+	{
+		return std::vector<Vector2>();
+	}
+	
 	//get the portals (edges that are involved in the path)
 	std::vector<NavMeshTriangleEdge*> portals;
 
@@ -524,9 +530,14 @@ std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, 
 	std::vector<Vector2> leftPoints;
     std::vector<Vector2> rightPoints;
 
+	//remember the previously added vertex so that the same position isn't added more than once
+	NavMeshVertex* lastLeftVert = nullptr;
+	NavMeshVertex* lastRightVert = nullptr;
+
 	//iterate through all the portals and triangles, sorting the vertices in each portal into the side they belong on relative to the triangles
 	for (size_t i = 0; i < portals.size(); i++)
 	{
+
 		//store in temporary variables for readability and performance
 		NavMeshTriangle* tri1 = rawPath[i];
 		NavMeshTriangle* tri2 = rawPath[i + 1];
@@ -541,99 +552,71 @@ std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, 
 		NavMeshVertex* vert2 = edge->vert2;
 
 		//the first vert is on the left
-		if (COLL_ENGINE->calculateSide(t2, t1, vert1->position) == 1)
+		if (COLL_ENGINE->calculateSide(t1, t2, vert1->position) == 1)
 		{
-			leftPoints.push_back(vert1->position);
-			rightPoints.push_back(vert2->position);
+			
+			if (vert1 != lastLeftVert)
+			{
+				leftPoints.push_back(vert1->position);
+			}
+
+			if (vert2 != lastRightVert)
+			{
+				rightPoints.push_back(vert2->position);
+			}
+
+			lastLeftVert = vert1;
+			lastRightVert = vert2;
 		}
 		//the first vert is on the right
 		else
 		{
-			leftPoints.push_back(vert2->position);
-			rightPoints.push_back(vert1->position);
+		
+			if (vert2 != lastLeftVert)
+			{
+				leftPoints.push_back(vert2->position);
+			}
+
+			if (vert1 != lastRightVert)
+			{
+				rightPoints.push_back(vert1->position);
+			}
+
+			lastLeftVert = vert2;
+			lastRightVert = vert1;
 		}
 
 	}
 
-	//the vector that the funnel stems from
-	Vector2 pivot = start;
+	//add the end points to the sorted lists
+	leftPoints.push_back(end);
+	rightPoints.push_back(end);
 
-	//double iteration
-	size_t l_i = 1;
-	size_t r_i = 1;
+	//std::vector<Vector2> path;
 
-	//true indicates that l_i should be incremented, false indicates r_i
-	bool turn = true;
+	//add the starting position to the path list
+	path.push_back(start);
 
-	//0 means that the funnel was not breached, 1 indicates that the right points breached it, -1 indicates left
-	int locked = 0;
+	//add the destination to the path list
+	path.push_back(end);
 
-	//the previous points in the funnel
-	Vector2 currentLeft = leftPoints[0]; //(calculateSide == -1)
-	Vector2 currentRight = rightPoints[0]; //(calculateSide == 1)
-
-	//while there are still portal points to check
-	while (l_i < leftPoints.size() - 1 || r_i < rightPoints.size() - 1)
-	{
-		//DO STUFF
-		Vector2 futurePoint;
-
-		//get the next point to check against the funnel
-		if (turn)
-		{
-			//if the left list has run out of points, use the right list instead
-			if (l_i < leftPoints.size() - 1)
-			{
-				futurePoint = leftPoints[l_i];
-			}
-			else
-			{
-				futurePoint = rightPoints[r_i];
-			}
-		}
-		else
-		{
-			//if the right list has run out of points, use the left list instead
-			if (l_i < rightPoints.size() - 1)
-			{
-				futurePoint = rightPoints[r_i];
-			}
-			else
-			{
-				futurePoint = leftPoints[l_i];
-			}
-		}
-
-
-		//remember the points from the previous funnel
-		currentLeft = leftPoints[l_i];
-		currentRight = rightPoints[r_i];
-
-		//determine which iterator to increment
-		if (turn)
-		{
-			l_i++;
-		}
-		else
-		{
-			r_i++;
-		}
-
-		turn = !turn;
-	}
-
-	
-
-	
-
-	return std::vector<Vector2>();
+	return path;
 }
 
 
 
 std::vector<Vector2> NavMesh::findPath(Vector2 start, Vector2 end)
 {
-	return std::vector<Vector2>();
+	size_t r1 = 2;
+	size_t r2 = 24;
+
+	r1 = rand() % data.vertices.size();
+    r2 = rand() % data.vertices.size();
+
+	std::vector<NavMeshTriangle*> list = findRawPath(data.vertices[r1], data.vertices[r2]);
+	std::vector<Vector2> path = funnelPath(list, data.vertices[r1]->data->position, data.vertices[r2]->data->position, std::vector<Vector2>());
+
+	return path;
 }
 
 

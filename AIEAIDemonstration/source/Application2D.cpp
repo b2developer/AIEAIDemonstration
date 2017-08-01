@@ -64,7 +64,7 @@ bool Application2D::startup()
 	char navMeshPath[FILENAME_MAX];
 
 	strcpy_s(navMeshPath, resourceFolder);
-	strcat_s(navMeshPath, "meshes\\mesh1.txt");
+	strcat_s(navMeshPath, "meshes\\mesh2.txt");
 
 	navMesh->load(navMeshPath);
 
@@ -98,8 +98,9 @@ void Application2D::shutdown()
 }
 
 float decayTimer = 0.0f;
-float decayDuration = 5.0f;
+float decayDuration = 2.0f;
 
+std::vector<Vector2> path;
 int startNode = 0;
 int endNode = 0;
 
@@ -130,7 +131,7 @@ void Application2D::update(float deltaTime)
 	{
 		decayTimer = decayDuration;
 
-
+		path = navMesh->findPath(Vector2(0, 0), Vector2(0, 0));
 		/*
 		startNode = rand() % navMesh->data.vertices.size();
 		endNode = rand() % navMesh->data.vertices.size();
@@ -156,13 +157,11 @@ void Application2D::draw()
 
 	navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 1.0f);
 
-	std::vector<Vector2> path = navMesh->findPath(Vector2(0,0), Vector2(0,0));
-
 	m_renderer2D->setRenderColour(0, 1, 0);
 
 	for (int i = 0; i < (int)path.size() - 1; i++)
 	{
-		m_renderer2D->drawLine(path[i].x, path[i].y, path[i + 1].x, path[i + 1].y, 5.0f, 0.0f);
+		m_renderer2D->drawLine(path[i].x, path[i].y, path[i + 1].x, path[i + 1].y, 2.0f, 0.0f);
 	}
 
 	m_renderer2D->end();

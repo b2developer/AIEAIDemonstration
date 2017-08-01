@@ -136,7 +136,7 @@ public:
 	* @param std::vector<NavMeshTriangle*> rawPath - the list of points in the original path
 	* @returns std::vector<Vector2> - a list of points with the unneccessary points pruned
 	*/
-	std::vector<Vector2> funnelPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end);
+	std::vector<Vector2> funnelPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end, std::vector<Vector2> path);
 
 
 	/*

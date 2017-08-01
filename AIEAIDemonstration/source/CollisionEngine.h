@@ -40,7 +40,7 @@ class CollisionEngine
 public:
 
 	//lee-way for binary tests (==, <=, >)
-	float epsilon = 0.01f;
+	float epsilon = 0.0f;
 
 	/*
 	* getInstance
