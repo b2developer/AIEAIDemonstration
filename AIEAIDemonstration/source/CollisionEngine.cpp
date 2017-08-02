@@ -220,7 +220,7 @@ bool CollisionEngine::lineCollisionCheck(Vector2 A, Vector2 B, Vector2 C, Vector
 		}
 
 		//no-overlap test
-		if (max1 <= min2 + epsilon || min1 + epsilon >= max2)
+		if (max1 <= min2 + tolerance || min1 + tolerance >= max2)
 		{
 			return false;
 		}

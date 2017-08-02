@@ -98,11 +98,11 @@ void Application2D::shutdown()
 }
 
 float decayTimer = 0.0f;
-float decayDuration = 2.0f;
+float decayDuration = 0.0f;
 
 std::vector<Vector2> path;
-int startNode = 0;
-int endNode = 0;
+Vector2 start = Vector2(0, 0);
+Vector2 end = Vector2(0, 0);
 
 //the game loop
 void Application2D::update(float deltaTime)
@@ -125,17 +125,24 @@ void Application2D::update(float deltaTime)
 		gameObjects[i]->update();
 	}
 
+	if (input->isMouseButtonDown(0))
+	{
+		start = Vector2(input->getMouseX(), input->getMouseY());
+	}
+
+	if (input->isMouseButtonDown(1))
+	{
+		end = Vector2(input->getMouseX(), input->getMouseY());
+	}
+
+
 	decayTimer -= deltaTime;
 
 	if (decayTimer <= 0.0f)
 	{
 		decayTimer = decayDuration;
 
-		path = navMesh->findPath(Vector2(0, 0), Vector2(0, 0));
-		/*
-		startNode = rand() % navMesh->data.vertices.size();
-		endNode = rand() % navMesh->data.vertices.size();
-		*/
+		path = navMesh->findPath(start, end);
 	}
 }
 

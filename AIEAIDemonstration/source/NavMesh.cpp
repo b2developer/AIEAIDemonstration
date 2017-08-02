@@ -3,6 +3,7 @@
 
 //collision math
 #include "CollisionEngine.h"
+#include "Polygon.h"
 
 //headers for file I/O
 #include <iostream>
@@ -470,8 +471,8 @@ std::vector<NavMeshTriangle*> NavMesh::findRawPath(Vertex<NavMeshTriangle*, NavM
 
 
 
-//prunes all unneccessary nodes with the funneling algorithm
-std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end, std::vector<Vector2> path)
+//prunes all unneccessary nodes with LOS checks
+std::vector<Vector2> NavMesh::smoothPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end)
 {
 	//return an empty list if the path is empty
 	if (rawPath.size() == 0)
@@ -479,14 +480,17 @@ std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, 
 		return std::vector<Vector2>();
 	}
 	
-	//get the portals (edges that are involved in the path)
+	//get the portals and their midpoints (portals are edges that are involved in the path)
 	std::vector<NavMeshTriangleEdge*> portals;
+	std::vector<Vector2> midpoints;
 
 	/*
 	* if a path is found, consecutive triangles in the path must have at exactly one common edge
 	* otherwise the NavMesh has loaded a mesh that technically isn't a mesh
 	* the code below assumes that a mesh with the correct topology was loaded
 	*/
+
+	midpoints.push_back(start);
 
 	//iterate through all triangles in the path, searching for portals
 	for (size_t i = 0; i < rawPath.size() - 1; i++)
@@ -523,79 +527,129 @@ std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, 
 		}
 
 		portals.push_back(sharedEdge);
+		midpoints.push_back((sharedEdge->vert1->position + sharedEdge->vert2->position) / 2.0f);
 	}
 
+	midpoints.push_back(end);
 
-	//sorted containers for the portal points
-	std::vector<Vector2> leftPoints;
-    std::vector<Vector2> rightPoints;
-
-	//remember the previously added vertex so that the same position isn't added more than once
-	NavMeshVertex* lastLeftVert = nullptr;
-	NavMeshVertex* lastRightVert = nullptr;
-
-	//iterate through all the portals and triangles, sorting the vertices in each portal into the side they belong on relative to the triangles
-	for (size_t i = 0; i < portals.size(); i++)
-	{
-
-		//store in temporary variables for readability and performance
-		NavMeshTriangle* tri1 = rawPath[i];
-		NavMeshTriangle* tri2 = rawPath[i + 1];
-		NavMeshTriangleEdge* edge = portals[i];
-		
-		//position of the two triangles
-		Vector2 t1 = tri1->position;
-		Vector2 t2 = tri2->position;
-
-		//both vertices involved in the portal
-		NavMeshVertex* vert1 = edge->vert1;
-		NavMeshVertex* vert2 = edge->vert2;
-
-		//the first vert is on the left
-		if (COLL_ENGINE->calculateSide(t1, t2, vert1->position) == 1)
-		{
-			
-			if (vert1 != lastLeftVert)
-			{
-				leftPoints.push_back(vert1->position);
-			}
-
-			if (vert2 != lastRightVert)
-			{
-				rightPoints.push_back(vert2->position);
-			}
-
-			lastLeftVert = vert1;
-			lastRightVert = vert2;
-		}
-		//the first vert is on the right
-		else
-		{
-		
-			if (vert2 != lastLeftVert)
-			{
-				leftPoints.push_back(vert2->position);
-			}
-
-			if (vert1 != lastRightVert)
-			{
-				rightPoints.push_back(vert1->position);
-			}
-
-			lastLeftVert = vert2;
-			lastRightVert = vert1;
-		}
-
-	}
-
-	//add the end points to the sorted lists
-	leftPoints.push_back(end);
-	rightPoints.push_back(end);
-
-	//std::vector<Vector2> path;
+	std::vector<Vector2> path;
 
 	//add the starting position to the path list
 	path.push_back(start);
+	
+	bool finishReached = false; //flag indicating that the finish was iterated over
+	bool finishReachable = false; //flag indicating a direct LOS to the finish
+
+	//iterate through all the points in the path
+	while (!finishReached || !finishReachable)
+	{
+		Vector2 lineStart = midpoints[0];
+
+		finishReached = false;
+		finishReachable = true;
+
+		//early exit if there isn't enough data for LOS tests
+		if (portals.size() < 1 || midpoints.size() <= 1)
+		{
+			finishReached = true;
+			finishReachable = true;
+			break;
+		}
+
+
+		//iterate through all the portals in front 
+		for (size_t j = 2; j < midpoints.size(); j++)
+		{
+			Vector2 lineEnd = midpoints[j];
+
+			bool failed = false;
+
+			//early exit if there isn't enough data for LOS tests
+			if (portals.size() < 1 || midpoints.size() <= 1)
+			{
+				finishReached = true;
+				finishReachable = true;
+				failed = true;
+				break;
+			}
+
+			//has the finish been iterated through
+			if (j >= midpoints.size() - 1)
+			{
+				finishReached = true;
+				finishReachable = true;
+			}
+
+			//iterate through all portals in-between the midpoints
+			for (size_t k = 0; k < j - 1 && k < portals.size(); k++)
+			{
+				//store in a temporary value for performance and readability
+				NavMeshTriangleEdge* testPortal = portals[k];
+
+				Vector2 portalStart = testPortal->vert1->position;
+				Vector2 portalEnd = testPortal->vert2->position;
+
+				//don't do anything if the line still intersects
+				if (COLL_ENGINE->lineCollisionCheck(lineStart, lineEnd, portalStart, portalEnd, 0.0f))
+				{
+					continue;
+				}
+
+				finishReachable = false;
+
+				int jm = 0;
+
+				//edge case handling
+				if (finishReached)
+				{
+					jm = -1;
+				}
+
+				//get the two portals that the bend contains
+				NavMeshTriangleEdge* portal = portals[j-1 + jm];
+
+				Vector2 bendPosition;
+				
+				//get the last midpoint that was successful in the LOS tests
+				path.push_back(midpoints[j-1]);
+				bendPosition = midpoints[j-1];
+
+				//remove all midpoints from the start of the test to the last successful test
+				midpoints.erase(midpoints.begin(), midpoints.begin() + j);
+
+				//edge case handling for removing portals
+				if (portals.size() > 1)
+				{
+					if (finishReached)
+					{
+						portals.erase(portals.begin(), portals.begin() + portals.size() - 1);	
+					}
+					else
+					{
+						portals.erase(portals.begin(), portals.begin() + j);
+					}
+				}
+				else
+				{
+					//erase() can't remove one node, clear() can
+					portals.clear();
+				}
+	
+				//get the next point to test
+				midpoints[0] = bendPosition;
+
+				failed = true;
+
+				break;
+
+			}
+
+			if (failed)
+			{
+				break;
+			}
+		}
+	}
 
 	//add the destination to the path list
 	path.push_back(end);
@@ -605,16 +659,127 @@ std::vector<Vector2> NavMesh::funnelPath(std::vector<NavMeshTriangle*> rawPath, 
 
 
 
+//combines pieces of the pathfinding and path-smoothing algorithms above to generate a smooth path through the nav mesh
 std::vector<Vector2> NavMesh::findPath(Vector2 start, Vector2 end)
 {
-	size_t r1 = 2;
-	size_t r2 = 24;
+	
+	//the polygon component is temporarily used here to check for containment of the points inside triangles
 
-	r1 = rand() % data.vertices.size();
-    r2 = rand() % data.vertices.size();
+	bool found = false;
 
-	std::vector<NavMeshTriangle*> list = findRawPath(data.vertices[r1], data.vertices[r2]);
-	std::vector<Vector2> path = funnelPath(list, data.vertices[r1]->data->position, data.vertices[r2]->data->position, std::vector<Vector2>());
+	size_t si = 0;
+	size_t fi = 0;
+
+	//iterate through all the triangles, testing for containment of the starting point
+	for (size_t i = 0; i < data.vertices.size(); i++)
+	{
+		NavMeshTriangle* triangle = data.vertices[i]->data;
+
+		Transform* null1 = new Transform();
+		Transform* null2 = new Transform();
+
+		Shape* trianglePoly = new Polygon();
+
+		//add the three points of the triangle to the polygon (triangle poly)
+		((Polygon*)trianglePoly)->points.push_back(triangle->vertices[0]->position);
+		((Polygon*)trianglePoly)->points.push_back(triangle->vertices[1]->position);
+		((Polygon*)trianglePoly)->points.push_back(triangle->vertices[2]->position);
+
+		trianglePoly->transform = null1;
+
+		Shape* pointPoly = new Polygon();
+
+		//add the starting point to the polygon (point poly)
+		((Polygon*)pointPoly)->points.push_back(start);
+
+		pointPoly->transform = null2;
+
+		//test for a collision
+		if (COLL_ENGINE->simpleCollisionCheck(trianglePoly, pointPoly))
+		{
+			found = true;
+
+			si = i;
+
+			//remove the polygons after use
+			delete trianglePoly;
+			delete pointPoly;
+			delete null1;
+			delete null2;
+
+			break;
+		}
+
+		//remove the polygons after use
+		delete trianglePoly;
+		delete pointPoly;
+		delete null1;
+		delete null2;
+	}
+
+	//the starting point isn't in the NavMesh, return an empty list
+	if (!found)
+	{
+		return std::vector<Vector2>();
+	}
+
+	found = false;
+
+	//iterate through all the triangles, testing for containment of the ending point
+	for (size_t i = 0; i < data.vertices.size(); i++)
+	{
+		NavMeshTriangle* triangle = data.vertices[i]->data;
+
+		Transform* null1 = new Transform();
+		Transform* null2 = new Transform();
+
+		Shape* trianglePoly = new Polygon();
+
+		//add the three points of the triangle to the polygon (triangle poly)
+		((Polygon*)trianglePoly)->points.push_back(triangle->vertices[0]->position);
+		((Polygon*)trianglePoly)->points.push_back(triangle->vertices[1]->position);
+		((Polygon*)trianglePoly)->points.push_back(triangle->vertices[2]->position);
+
+		trianglePoly->transform = null1;
+
+		Shape* pointPoly = new Polygon();
+
+		//add the ending point to the polygon (point poly)
+		((Polygon*)pointPoly)->points.push_back(end);
+
+		pointPoly->transform = null2;
+
+		//test for a collision
+		if (COLL_ENGINE->simpleCollisionCheck(trianglePoly, pointPoly))
+		{
+			found = true;
+
+			fi = i;
+
+			//remove the polygons after use
+			delete trianglePoly;
+			delete pointPoly;
+			delete null1;
+			delete null2;
+
+			break;
+		}
+
+		//remove the polygons after use
+		delete trianglePoly;
+		delete pointPoly;
+		delete null1;
+		delete null2;
+	}
+	
+	//the end point isn't in the NavMesh, return an empty list
+	if (!found)
+	{
+		return std::vector<Vector2>();
+	}
+
+	std::vector<NavMeshTriangle*> list = findRawPath(data.vertices[si], data.vertices[fi]);
+	std::vector<Vector2> path = smoothPath(list, start, end);
 
 	return path;
 }

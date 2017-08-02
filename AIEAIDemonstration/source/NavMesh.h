@@ -128,21 +128,23 @@ public:
 
 	
 	/*
-	* funnelPath
+	* smoothPath
 	*
 	* prunes a raw list of points returned from an A* search
-	* using the funnelling algorithm
+	* using the Line-of-Sight checks (LOS)
 	*
 	* @param std::vector<NavMeshTriangle*> rawPath - the list of points in the original path
+	* @param Vector2 start - the true starting point of the path
+	* @param Vector2 end - the true ending point of the path
 	* @returns std::vector<Vector2> - a list of points with the unneccessary points pruned
 	*/
-	std::vector<Vector2> funnelPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end, std::vector<Vector2> path);
+	std::vector<Vector2> smoothPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end);
 
 
 	/*
 	* findPath
 	*
-	* uses A* and the funneling algorithm to find
+	* uses A* and the LOS check algorithm to find
 	* the shortest path between two points in the NavMesh
 	* returns an empty list if the points do not belong
 	* to the NavMesh

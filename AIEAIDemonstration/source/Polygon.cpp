@@ -72,7 +72,7 @@ std::vector<Vector2> Polygon::getNormals(Shape * other)
 	for (size_t i = 0; i < transformedPoints.size(); i++)
 	{
 		//get the normalised vector from this point to the next (the next point for the last point in the points array is the first point)
-		Vector2 size = transformedPoints[i + 1 % transformedPoints.size()] - transformedPoints[i];
+		Vector2 size = transformedPoints[(i + 1) % transformedPoints.size()] - transformedPoints[i];
 		size.normalise();
 
 		//get the normal of the side vector
