@@ -246,6 +246,36 @@ void NavMesh::calculateSharedEdges()
 
 
 
+//calculates the maximum shoulder width for each triangle in the mesh
+void NavMesh::calculateInCircles()
+{
+	//iterate through all triangles in the mesh, calculating the area, perimeter and inCircle radius of each
+	for (size_t i = 0; i < data.vertices.size(); i++)
+	{
+		//store in a temporary value for performance and readability
+		NavMeshTriangle* triangle = data.vertices[i]->data;
+
+		//get all side lengthss
+		float a = (triangle->edges[0]->vert2->position - triangle->edges[0]->vert1->position).magnitude();
+		float b = (triangle->edges[1]->vert2->position - triangle->edges[1]->vert1->position).magnitude();
+		float c = (triangle->edges[2]->vert2->position - triangle->edges[2]->vert1->position).magnitude();
+
+		//calculate total length (perimieter)
+		float p = a + b + c;
+
+		//area using heron's formula
+		float area = sqrt(p * (p - a) * (p - b) * (p - c));
+
+		//get radius using perimeter and area
+		triangle->inCircleRadius = (2 * area) / p;
+
+		int e = 0;
+
+	}
+}
+
+
+
 //loads navmesh data from a file
 void NavMesh::load(char fileName[FILENAME_MAX])
 {
@@ -304,6 +334,9 @@ void NavMesh::load(char fileName[FILENAME_MAX])
 
 		//calculate edges that are shared accross the mesh
 		calculateSharedEdges();
+
+		//calculate the maximum shoulder width of an agent crossing each triangle
+		calculateInCircles();
 	}
 
 	//close the file so that other programs can access it safely
@@ -343,7 +376,7 @@ void NavMesh::resetSearchedNodes(std::vector<Vertex<NavMeshTriangle*, NavMeshEdg
 }
 
 //calculates the shortest path from the starting node to the ending node using the A* pathfinding algorithm
-std::vector<NavMeshTriangle*> NavMesh::findRawPath(Vertex<NavMeshTriangle*, NavMeshEdge*>* start, Vertex<NavMeshTriangle*, NavMeshEdge*>* end, float E)
+std::vector<NavMeshTriangle*> NavMesh::findRawPath(Vertex<NavMeshTriangle*, NavMeshEdge*>* start, Vertex<NavMeshTriangle*, NavMeshEdge*>* end, float E, float shoulderWidth)
 {
 	//the open list
 	std::vector<Vertex<NavMeshTriangle*, NavMeshEdge*>*> open;
@@ -428,6 +461,12 @@ std::vector<NavMeshTriangle*> NavMesh::findRawPath(Vertex<NavMeshTriangle*, NavM
 			//store in a temp variable, saves performance and increases readability
 			Edge<NavMeshTriangle*, NavMeshEdge*> edge = best->edges[i];
 
+			//check that the triangle can contain the shoulder radius
+			if (edge.end->data->inCircleRadius <= shoulderWidth)
+			{
+				continue;
+			}
+
 			//don't add the node at the end of the connection if it has already been visited
 			if (edge.end->data->visited)
 			{
@@ -472,7 +511,7 @@ std::vector<NavMeshTriangle*> NavMesh::findRawPath(Vertex<NavMeshTriangle*, NavM
 
 
 //prunes all unneccessary nodes with LOS checks
-std::vector<Vector2> NavMesh::smoothPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end)
+std::vector<Vector2> NavMesh::smoothPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end, float shoulderWidth)
 {
 	//return an empty list if the path is empty
 	if (rawPath.size() == 0)
@@ -660,7 +699,7 @@ std::vector<Vector2> NavMesh::smoothPath(std::vector<NavMeshTriangle*> rawPath, 
 
 
 //combines pieces of the pathfinding and path-smoothing algorithms above to generate a smooth path through the nav mesh
-std::vector<Vector2> NavMesh::findPath(Vector2 start, Vector2 end)
+std::vector<Vector2> NavMesh::findPath(Vector2 start, Vector2 end, float shoulderWidth)
 {
 	
 	//the polygon component is temporarily used here to check for containment of the points inside triangles
@@ -778,8 +817,8 @@ std::vector<Vector2> NavMesh::findPath(Vector2 start, Vector2 end)
 		return std::vector<Vector2>();
 	}
 
-	std::vector<NavMeshTriangle*> list = findRawPath(data.vertices[si], data.vertices[fi]);
-	std::vector<Vector2> path = smoothPath(list, start, end);
+	std::vector<NavMeshTriangle*> list = findRawPath(data.vertices[si], data.vertices[fi], 1.0f, shoulderWidth);
+	std::vector<Vector2> path = smoothPath(list, start, end, shoulderWidth);
 
 	return path;
 }
@@ -815,7 +854,7 @@ void NavMesh::drawMesh(float nodeRadius, float connectionThickness, float r, flo
 		Vector2 A2 = v2 - A;
 		Vector2 A3 = v3 - A;
 
-		float ratio = 0.95f;
+		float ratio = 1.0f;
 
 		//travelling partially back from the average vector to the original vertex position
 		Vector2 va1 = A + A1 * ratio;

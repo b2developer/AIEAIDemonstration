@@ -80,9 +80,22 @@ public:
 	*
 	* also removes duplicate edges from the mesh
 	*
-	* @returns void;
+	* @returns void
 	*/
 	void calculateSharedEdges();
+
+	
+	/*
+	* calculateInCircles
+	*
+	* calculates the biggest circle that could fit into all
+	* triangles in the mesh, this is used to determine
+	* the maximum shoulder width that an agent can have 
+	* when travelling between triangles
+	*
+	* @returns void
+	*/
+	void calculateInCircles();
 
 
 	/*
@@ -121,10 +134,11 @@ public:
 	*
 	* @param Vertex<NavMeshTriangle*, NavMeshEdge*>* start - the starting node
 	* @param Vertex<NavMeshTriangle*, NavMeshEdge*>* end - the target node
-	* @param float E = 1.0f - heurstic multiplier, has varying effects on performance and the correctness of paths calculated
+	* @param float E = 1.0f - bounded relaxation (heurstic multiplier), has varying effects on performance and the correctness of paths calculated
+	* @param float shoulderWidth = 0.0f - minimum span required for an area (triangle) to be considered walkable
 	* @returns std::vector<NavMeshTriangle*> - a list of triangle nodes that make up the path
 	*/
-	std::vector<NavMeshTriangle*> findRawPath(Vertex<NavMeshTriangle*, NavMeshEdge*>* start, Vertex<NavMeshTriangle*, NavMeshEdge*>* end, float E = 1.0f);
+	std::vector<NavMeshTriangle*> findRawPath(Vertex<NavMeshTriangle*, NavMeshEdge*>* start, Vertex<NavMeshTriangle*, NavMeshEdge*>* end, float E = 1.0f, float shoulderWidth = 0.0f);
 
 	
 	/*
@@ -136,9 +150,10 @@ public:
 	* @param std::vector<NavMeshTriangle*> rawPath - the list of points in the original path
 	* @param Vector2 start - the true starting point of the path
 	* @param Vector2 end - the true ending point of the path
+	* @param float shoulderWidth = 0.0f - minimum span required for an area (triangle) to be considered walkable
 	* @returns std::vector<Vector2> - a list of points with the unneccessary points pruned
 	*/
-	std::vector<Vector2> smoothPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end);
+	std::vector<Vector2> smoothPath(std::vector<NavMeshTriangle*> rawPath, Vector2 start, Vector2 end, float shoulderWidth = 0.0f);
 
 
 	/*
@@ -151,9 +166,10 @@ public:
 	*
 	* @param Vector2 start - the desired beginning of the path
 	* @param Vector2 end - the desired target of the path
+	* @param float shoulderWidth = 0.0f - minimum span required for an area (triangle) to be considered walkable
 	* @returns std::vector<Vector2> - a list of vectors that make up the path when followed in order
 	*/
-	std::vector<Vector2> findPath(Vector2 start, Vector2 end);
+	std::vector<Vector2> findPath(Vector2 start, Vector2 end, float shoulderWidth = 0.0f);
 
 
 	/*

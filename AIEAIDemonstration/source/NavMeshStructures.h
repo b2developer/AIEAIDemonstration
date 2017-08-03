@@ -34,6 +34,9 @@ public:
 	//current cost to move to this triangle from the starting triangle, determined by A*
 	float gScore = INFINITY;
 
+	//radius of the biggest circle that will fit inside the triangle
+	float inCircleRadius = 0.0f;
+
 	//the triangle that A* came from to get to this triangle
 	NavMeshTriangle* previous = nullptr;
 

@@ -135,14 +135,13 @@ void Application2D::update(float deltaTime)
 		end = Vector2(input->getMouseX(), input->getMouseY());
 	}
 
-
 	decayTimer -= deltaTime;
 
 	if (decayTimer <= 0.0f)
 	{
 		decayTimer = decayDuration;
 
-		path = navMesh->findPath(start, end);
+		path = navMesh->findPath(start, end, 300.0f);
 	}
 }
 
