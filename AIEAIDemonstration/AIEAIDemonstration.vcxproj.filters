@@ -97,6 +97,12 @@
     <Filter Include="Source Files\Systems\Pathfinding">
       <UniqueIdentifier>{fcd13376-b724-489d-aa0d-c651f48b8b97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\SteeringBehaviours">
+      <UniqueIdentifier>{0496fd3f-c1b4-4f7a-b8ed-5241bcd5d32a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\SteeringBehaviours">
+      <UniqueIdentifier>{7e110e41-2e15-4dfb-9cdc-bbbee7c2fe5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\TestSpawner.cpp">
@@ -182,6 +188,39 @@
     </ClCompile>
     <ClCompile Include="source\NavMeshStructures.cpp">
       <Filter>Source Files\Systems\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PathfindingAgent.cpp">
+      <Filter>Source Files\Systems\Components\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PathfindingBotSpawner.cpp">
+      <Filter>Source Files\Systems\Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SeekBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SteeringBehaviourManager.cpp">
+      <Filter>Source Files\Systems\Components\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BoidSpawner.cpp">
+      <Filter>Source Files\Systems\Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FleeBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WanderBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PursueBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\EvadeBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ArrivalBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ObstacleSpawner.cpp">
+      <Filter>Source Files\Systems\Spawner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +328,42 @@
     </ClInclude>
     <ClInclude Include="source\NavMesh.h">
       <Filter>Header Files\Systems\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PathfindingAgent.h">
+      <Filter>Header Files\Systems\Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PathfindingBotSpawner.h">
+      <Filter>Header Files\Systems\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SteeringBehaviourManager.h">
+      <Filter>Header Files\Systems\Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SteeringBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SeekBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BoidSpawner.h">
+      <Filter>Header Files\Systems\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="source\FleeBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\WanderBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PursueBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EvadeBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ArrivalBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ObstacleSpawner.h">
+      <Filter>Header Files\Systems\Spawner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

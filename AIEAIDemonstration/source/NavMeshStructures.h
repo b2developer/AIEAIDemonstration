@@ -110,9 +110,13 @@ public:
 	//pointer to the vertex that this edge belongs to
 	Vertex<NavMeshTriangle*, NavMeshEdge*>* triangle = nullptr;
 
-	//container for triangles
+	//container for vertices
 	NavMeshVertex* vert1 = nullptr;
 	NavMeshVertex* vert2 = nullptr;
+
+	//calculated based on the shoulder width
+	Vector2 shrunkEdge1 = Vector2(0, 0);
+	Vector2 shrunkEdge2 = Vector2(0, 0);
 
 	bool shared = false;
 

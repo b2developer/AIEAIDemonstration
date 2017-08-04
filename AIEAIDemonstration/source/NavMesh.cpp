@@ -263,8 +263,10 @@ void NavMesh::calculateInCircles()
 		//calculate total length (perimieter)
 		float p = a + b + c;
 
+		float s = p / 2;
+
 		//area using heron's formula
-		float area = sqrt(p * (p - a) * (p - b) * (p - c));
+		float area = sqrt(s * (s - a) * (s - b) * (s - c));
 
 		//get radius using perimeter and area
 		triangle->inCircleRadius = (2 * area) / p;
@@ -566,9 +568,21 @@ std::vector<Vector2> NavMesh::smoothPath(std::vector<NavMeshTriangle*> rawPath, 
 		}
 
 		portals.push_back(sharedEdge);
-		midpoints.push_back((sharedEdge->vert1->position + sharedEdge->vert2->position) / 2.0f);
-	}
 
+		//average point between edges
+		Vector2 A = (sharedEdge->vert1->position + sharedEdge->vert2->position) / 2.0f;
+
+		midpoints.push_back(A);
+
+		//relative vectors from the vertices to the midpoint of the edge
+		Vector2 EA1 = (A - sharedEdge->vert1->position).normalised();
+		Vector2 EA2 = (A - sharedEdge->vert2->position).normalised();
+
+		//move the edges in, this means that an agent with a shoulder radius will never be outside of the mesh after path smoothing
+		sharedEdge->shrunkEdge1 = sharedEdge->vert1->position + EA1 * shoulderWidth;
+		sharedEdge->shrunkEdge2 = sharedEdge->vert2->position + EA2 * shoulderWidth;
+	}
+	
 	midpoints.push_back(end);
 
 	std::vector<Vector2> path;
@@ -625,8 +639,8 @@ std::vector<Vector2> NavMesh::smoothPath(std::vector<NavMeshTriangle*> rawPath, 
 				//store in a temporary value for performance and readability
 				NavMeshTriangleEdge* testPortal = portals[k];
 
-				Vector2 portalStart = testPortal->vert1->position;
-				Vector2 portalEnd = testPortal->vert2->position;
+				Vector2 portalStart = testPortal->shrunkEdge1;
+				Vector2 portalEnd = testPortal->shrunkEdge2;
 
 				//don't do anything if the line still intersects
 				if (COLL_ENGINE->lineCollisionCheck(lineStart, lineEnd, portalStart, portalEnd, 0.0f))
@@ -645,27 +659,34 @@ std::vector<Vector2> NavMesh::smoothPath(std::vector<NavMeshTriangle*> rawPath, 
 				}
 
 				//get the two portals that the bend contains
-				NavMeshTriangleEdge* portal = portals[j-1 + jm];
+				NavMeshTriangleEdge* portal = portals[j - 1 + jm];
 
 				Vector2 bendPosition;
-				
+
 				//get the last midpoint that was successful in the LOS tests
-				path.push_back(midpoints[j-1]);
-				bendPosition = midpoints[j-1];
+				path.push_back(midpoints[j - 1]);
+				bendPosition = midpoints[j - 1];
 
 				//remove all midpoints from the start of the test to the last successful test
-				midpoints.erase(midpoints.begin(), midpoints.begin() + j);
+				if (finishReached)
+				{
+					midpoints.erase(midpoints.begin(), midpoints.begin() + j);
+				}
+				else
+				{
+					midpoints.erase(midpoints.begin(), midpoints.begin() + j - 1);
+				}
 
 				//edge case handling for removing portals
 				if (portals.size() > 1)
 				{
 					if (finishReached)
 					{
-						portals.erase(portals.begin(), portals.begin() + portals.size() - 1);	
+						portals.erase(portals.begin(), portals.begin() + portals.size() - 2);	
 					}
 					else
 					{
-						portals.erase(portals.begin(), portals.begin() + j);
+						portals.erase(portals.begin(), portals.begin() + j - 1);
 					}
 				}
 				else
@@ -854,7 +875,7 @@ void NavMesh::drawMesh(float nodeRadius, float connectionThickness, float r, flo
 		Vector2 A2 = v2 - A;
 		Vector2 A3 = v3 - A;
 
-		float ratio = 1.0f;
+		float ratio = 0.97f;
 
 		//travelling partially back from the average vector to the original vertex position
 		Vector2 va1 = A + A1 * ratio;

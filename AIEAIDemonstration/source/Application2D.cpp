@@ -39,22 +39,27 @@ bool Application2D::startup()
 	director = new Director();
 	testSpawner = new TestSpawner();
 	tradingBotSpawner = new TradingBotSpawner();
-	//navigationBotSpawner = new NavigationBotSpawner();
+	pathfindingBotSpawner = new PathfindingBotSpawner();
+	boidSpawner = new BoidSpawner();
 
 	//link them to each other and the application
 	director->appPtr = this;
 	testSpawner->appPtr = this;
 	tradingBotSpawner->appPtr = this;
-	//navigationBotSpawner->appPtr = this;
+	pathfindingBotSpawner->appPtr = this;
+	boidSpawner->appPtr = this;
 
 	//create a blackboard that can hold 500 messages
 	tradingBlackboard = new Blackboard(500);
+
+	//create a blackboard that can hold 1000 messages
+	boidBlackboard = new Blackboard(1000);
 
 	//create the navmesh
 	navMesh = new NavMesh();
 
 	//link the navigation bot spawner to the navmesh
-	//navigationBotSpawner->navMesh = navMesh;
+	pathfindingBotSpawner->navMesh = navMesh;
 	
 	//link the pathfinder to the game
 	navMesh->appPtr = this;
@@ -70,11 +75,29 @@ bool Application2D::startup()
 
 	director->employee = tradingBotSpawner;
 
-	//spawn 18 trading bots
+	//spawn 0 trading bots
 	for (int i = 0; i < 0; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
+
+	director->employee = pathfindingBotSpawner;
+
+	//spawn 0 pathfinding bots
+	for (int i = 0; i < 0; i++)
+	{
+		gameObjects.push_back(director->createGameObject());
+	}
+
+	director->employee = boidSpawner;
+	boidSpawner->mode = BoidMode::MOUSE_FOLLOWER;
+	gameObjects.push_back(director->createGameObject());
+
+	boidSpawner->mode = BoidMode::PURSUER;
+	gameObjects.push_back(director->createGameObject());
+
+	boidSpawner->mode = BoidMode::AVOID_BUT_FOLLOW;
+	gameObjects.push_back(director->createGameObject());
 
 	return true;
 }
@@ -125,14 +148,16 @@ void Application2D::update(float deltaTime)
 		gameObjects[i]->update();
 	}
 
+	mousePos = Vector2((float)input->getMouseX(), (float)input->getMouseY());
+
 	if (input->isMouseButtonDown(0))
 	{
-		start = Vector2(input->getMouseX(), input->getMouseY());
+		start = Vector2((float)input->getMouseX(), (float)input->getMouseY());
 	}
 
 	if (input->isMouseButtonDown(1))
 	{
-		end = Vector2(input->getMouseX(), input->getMouseY());
+		end = Vector2((float)input->getMouseX(), (float)input->getMouseY());
 	}
 
 	decayTimer -= deltaTime;
@@ -141,7 +166,7 @@ void Application2D::update(float deltaTime)
 	{
 		decayTimer = decayDuration;
 
-		path = navMesh->findPath(start, end, 300.0f);
+		//path = navMesh->findPath(start, end, 32.0f);
 	}
 }
 
@@ -161,7 +186,7 @@ void Application2D::draw()
 		gameObjects[i]->draw();
 	}
 
-	navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+	//navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 5.0f);
 
 	m_renderer2D->setRenderColour(0, 1, 0);
 

@@ -142,6 +142,7 @@ public:
 	*/
 	void update() override;
 
+
 	/*
 	* compatibleTrade
 	*
