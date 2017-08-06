@@ -11,6 +11,19 @@ GameObject::~GameObject()
 	}
 }
 
+//called when the object gets created
+void GameObject::initialise()
+{
+	//iterate through all components, initialising them
+	for (size_t i = 0; i < components.size(); i++)
+	{
+		//store the component temporarily to avoid performance loss
+		Component* component = components[i];
+
+		component->initialise();
+	}
+}
+
 //called once per frame, updates all components (except renderers)
 void GameObject::update()
 {

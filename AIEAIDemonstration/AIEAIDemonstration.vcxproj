@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\Agent.cpp" />
+    <ClCompile Include="source\AlignmentBehaviour.cpp" />
     <ClCompile Include="source\Application2D.cpp" />
     <ClCompile Include="source\ArrivalBehaviour.cpp" />
     <ClCompile Include="source\Blackboard.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="source\BoidSpawner.cpp" />
     <ClCompile Include="source\Box.cpp" />
     <ClCompile Include="source\Circle.cpp" />
+    <ClCompile Include="source\CohesionBehaviour.cpp" />
     <ClCompile Include="source\CollisionEngine.cpp" />
     <ClCompile Include="source\Director.cpp" />
     <ClCompile Include="source\Entity.cpp" />
@@ -165,15 +167,18 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\NavMesh.cpp" />
     <ClCompile Include="source\NavMeshStructures.cpp" />
+    <ClCompile Include="source\ObstacleAvoidanceBehaviour.cpp" />
     <ClCompile Include="source\ObstacleSpawner.cpp" />
     <ClCompile Include="source\PathfindingAgent.cpp" />
     <ClCompile Include="source\PathfindingBotSpawner.cpp" />
     <ClCompile Include="source\Polygon.cpp" />
+    <ClCompile Include="source\PrimitiveRenderer.cpp" />
     <ClCompile Include="source\PursueBehaviour.cpp" />
     <ClCompile Include="source\RangeTransition.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\SearchState.cpp" />
     <ClCompile Include="source\SeekBehaviour.cpp" />
+    <ClCompile Include="source\SeparationBehaviour.cpp" />
     <ClCompile Include="source\SteeringBehaviourManager.cpp" />
     <ClCompile Include="source\TestSpawner.cpp" />
     <ClCompile Include="source\TradingAgent.cpp" />
@@ -185,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Agent.h" />
+    <ClInclude Include="source\AlignmentBehaviour.h" />
     <ClInclude Include="source\Application2D.h" />
     <ClInclude Include="source\ArrivalBehaviour.h" />
     <ClInclude Include="source\Blackboard.h" />
@@ -193,6 +199,7 @@
     <ClInclude Include="source\BoidSpawner.h" />
     <ClInclude Include="source\Box.h" />
     <ClInclude Include="source\Circle.h" />
+    <ClInclude Include="source\CohesionBehaviour.h" />
     <ClInclude Include="source\CollisionEngine.h" />
     <ClInclude Include="source\Component.h" />
     <ClInclude Include="source\Director.h" />
@@ -210,16 +217,19 @@
     <ClInclude Include="source\ExchangedTransition.h" />
     <ClInclude Include="source\NavMesh.h" />
     <ClInclude Include="source\NavMeshStructures.h" />
+    <ClInclude Include="source\ObstacleAvoidanceBehaviour.h" />
     <ClInclude Include="source\ObstacleSpawner.h" />
     <ClInclude Include="source\PathfindingAgent.h" />
     <ClInclude Include="source\PathfindingBotSpawner.h" />
     <ClInclude Include="source\Polygon.h" />
+    <ClInclude Include="source\PrimitiveRenderer.h" />
     <ClInclude Include="source\PursueBehaviour.h" />
     <ClInclude Include="source\RangeTransition.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Script.h" />
     <ClInclude Include="source\SearchState.h" />
     <ClInclude Include="source\SeekBehaviour.h" />
+    <ClInclude Include="source\SeparationBehaviour.h" />
     <ClInclude Include="source\Shape.h" />
     <ClInclude Include="source\Spawner.h" />
     <ClInclude Include="source\SteeringBehaviour.h" />

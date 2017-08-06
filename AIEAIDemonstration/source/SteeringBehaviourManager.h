@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Entity.h"
+#include "Blackboard.h"
 #include <vector>
 
 
@@ -8,6 +9,8 @@
 class Transform;
 class Application2D;
 class SteeringBehaviour;
+struct Boid;
+struct Obstacle;
 
 /*
 * class SteeringBehaviourManager
@@ -41,6 +44,13 @@ public:
 	float maxVelocity = 0.0f;
 	float maxAcceleration = 0.0f;
 
+	//pointer to the boid enviroment blackboard
+	Blackboard* enviroment = nullptr;
+
+	//live container for other boids in the game
+	std::vector<Boid> otherBoids;
+	std::vector<Obstacle> obstacles;
+
 	/*
 	* SteeringBehaviourManager()
 	* default constructor
@@ -56,7 +66,7 @@ public:
 
 
 	/*
-	* update/
+	* update
 	* overrides Component's update()
 	*
 	* gets called once per frame, calls upon

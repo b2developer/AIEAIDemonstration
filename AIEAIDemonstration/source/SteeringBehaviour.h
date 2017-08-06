@@ -1,5 +1,6 @@
 #pragma once
 #include "MathsLibrary.h"
+#include "Blackboard.h"
 
 
 //forward declaration
@@ -48,5 +49,17 @@ public:
 	* @returns Vector2 - the vector to add to the overall velocity
 	*/
 	virtual Vector2 update() = 0;
+
+
+	/*
+	* initialise
+	* virtual function
+	*
+	* runs when the steering behaviour is created
+	*
+	* @param Blackboard* blackboard - the blackboard that is used to pull information
+	* @returns void
+	*/
+	virtual void initialise(Blackboard* blackboard) {};
 
 };

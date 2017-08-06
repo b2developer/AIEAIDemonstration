@@ -11,6 +11,7 @@
 #include "TestSpawner.h"
 #include "TradingBotSpawner.h"
 #include "PathfindingBotSpawner.h"
+#include "ObstacleSpawner.h"
 #include "BoidSpawner.h"
 
 #include "Blackboard.h"
@@ -44,6 +45,7 @@ public:
 	TestSpawner* testSpawner = nullptr; //spawner for test objects
 	TradingBotSpawner* tradingBotSpawner = nullptr; //spawner for trading bot objects
 	PathfindingBotSpawner* pathfindingBotSpawner = nullptr; //spawner for pathfinding bot objects
+	ObstacleSpawner* obstacleSpawner = nullptr; //spawner for obstacle objects
 	BoidSpawner* boidSpawner = nullptr; //spawner for boid objects
 
 	Blackboard* tradingBlackboard = nullptr; //central communication for trading agents
@@ -52,7 +54,7 @@ public:
 
 	aie::Renderer2D* m_renderer2D; //responsible for draw calls
 
-	Vector2 mousePos;
+	Vector2 mousePos = Vector2(0,0);
 
 	/*
 	* Application2D()

@@ -32,6 +32,16 @@ public:
 
 
 	/*
+	* initialse
+	*
+	* called when the game-object gets created 
+	*
+	* @returns void
+	*/
+	void initialise();
+
+
+	/*
 	* update
 	*
 	* called once per frame while the gameobject is active

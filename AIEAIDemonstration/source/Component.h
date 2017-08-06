@@ -35,6 +35,17 @@ public:
 
 
 	/*
+	* initialise
+	* virtual function
+	*
+	* gets called once when the game-object is initialised
+	*
+	* @returns void
+	*/
+	virtual void initialise() {};
+
+
+	/*
 	* update
 	* abstract function
 	*

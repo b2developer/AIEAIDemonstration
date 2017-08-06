@@ -22,7 +22,7 @@ Range Polygon::project(Vector2 normal)
 	//iterate through all transformed points, getting the dot product with the normal of each one
 	for (size_t i = 0; i < transformedPoints.size(); i++)
 	{
-		dots.push_back(normal.dot(points[i]));
+		dots.push_back(normal.dot(transformedPoints[i]));
 	}
 
 	//the minimum and maximum dot products
@@ -67,6 +67,12 @@ std::vector<Vector2> Polygon::getNormals(Shape * other)
 
 	//storage for the normals
 	std::vector<Vector2> normals = std::vector<Vector2>();
+
+	//early exit, there are no normals to check against
+	if (transformedPoints.size() <= 1)
+	{
+		return normals;
+	}
 
 	//iterate through all transformed points, get the normal from each
 	for (size_t i = 0; i < transformedPoints.size(); i++)

@@ -14,7 +14,10 @@
 #include "PursueBehaviour.h"
 #include "EvadeBehaviour.h"
 #include "ArrivalBehaviour.h"
-
+#include "ObstacleAvoidanceBehaviour.h"
+#include "SeparationBehaviour.h"
+#include "CohesionBehaviour.h"
+#include "AlignmentBehaviour.h"
 
 //adds the necessary components for a trading bot object
 void BoidSpawner::addComponents(GameObject * creation)
@@ -26,7 +29,7 @@ void BoidSpawner::addComponents(GameObject * creation)
 	Entity* entity = new Entity();
 	SteeringBehaviourManager* sbm = new SteeringBehaviourManager();
 
-	transform->translation = Vector2(200.0f, 200.0f);
+	transform->translation = Vector2((float)(rand() % 500), (float)(rand() % 500));
 	transform->scale = Vector2(1.0f, 1.0f);
 	transform->rotation = 0.0f;
 
@@ -48,9 +51,9 @@ void BoidSpawner::addComponents(GameObject * creation)
 	if (mode == BoidMode::MOUSE_FOLLOWER)
 	{
 		//give the steering behaviour manager all of it's behaviours
-		FleeBehaviour* flee = new FleeBehaviour();
-		((FleeBehaviour*)flee)->target = &appPtr->mousePos;
-		flee->sbm = sbm;
+		SteeringBehaviour* seek = new SeekBehaviour();
+		((SeekBehaviour*)seek)->target = &appPtr->mousePos;
+		seek->sbm = sbm;
 
 		WanderBehaviour* wander = new WanderBehaviour();
 		((WanderBehaviour*)wander)->wanderRadius = 15.0f;
@@ -63,13 +66,38 @@ void BoidSpawner::addComponents(GameObject * creation)
 		((ArrivalBehaviour*)arrival)->target = &appPtr->mousePos;
 		arrival->sbm = sbm;
 
-		flee->weight = 0.0f;
-		wander->weight = 0.0f;
-		arrival->weight = 3.0f;
+		ObstacleAvoidanceBehaviour* avoidance = new ObstacleAvoidanceBehaviour();
+		((ObstacleAvoidanceBehaviour*)avoidance)->aheadDistance = 200.0f;
+		avoidance->sbm = sbm;
 
-		sbm->behaviours.push_back(flee);
+		SeparationBehaviour* separation = new SeparationBehaviour();
+		((SeparationBehaviour*)separation)->neighbourhoodRadius = 80.0f;
+		separation->sbm = sbm;
+
+		CohesionBehaviour* cohesion = new CohesionBehaviour();
+		((CohesionBehaviour*)cohesion)->neighbourhoodRadius = 100.0f;
+		cohesion->sbm = sbm;
+
+		AlignmentBehaviour* align = new AlignmentBehaviour();
+		((AlignmentBehaviour*)align)->neighbourhoodRadius = 200.0f;
+		((AlignmentBehaviour*)align)->neighbourhoodForwardDistance = 50.0f;
+		align->sbm = sbm;
+
+		seek->weight = 1.0f;
+		wander->weight = 0.2f;
+		arrival->weight = 0.0f;
+		separation->weight = 1.0f;
+		cohesion->weight = 0.1f;
+		align->weight = 0.01f;
+		avoidance->weight = 3.0f;
+
+		sbm->behaviours.push_back(seek);
 		sbm->behaviours.push_back(wander);
 		sbm->behaviours.push_back(arrival);
+		sbm->behaviours.push_back(separation);
+		sbm->behaviours.push_back(cohesion);
+		sbm->behaviours.push_back(align);
+		sbm->behaviours.push_back(avoidance);
 	}
 
 	if (mode == BoidMode::PURSUER)
@@ -102,9 +130,11 @@ void BoidSpawner::addComponents(GameObject * creation)
 		sbm->behaviours.push_back(evade);
 	}
 
+	sbm->maxVelocity = 1300.0f;
+	sbm->maxAcceleration = 1200.0f;
 
-	sbm->maxVelocity = 300.0f;
-	sbm->maxAcceleration = 600.0f;
+	//give the steering behaviour manager a blackboard to communicate with others
+	sbm->enviroment = boidBlackboard;
 
 	//linking the components together
 	renderer->box = box;
@@ -129,6 +159,11 @@ void BoidSpawner::addComponents(GameObject * creation)
 	creation->components.push_back(renderer);
 	creation->components.push_back(entity);
 	creation->components.push_back(sbm);
+
+	//register the obstacle on the blackboard
+	BlackboardReference* bref = boidBlackboard->registerItemWithReference<Boid, Boid>(0.0f);
+	((BlackboardData<Boid, Boid>*)bref->item)->timeLocked = true;
+	((BlackboardData<Boid, Boid>*)bref->item)->data.sbm = sbm;
 
 	previousBoid = sbm;
 

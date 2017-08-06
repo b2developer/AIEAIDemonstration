@@ -40,7 +40,7 @@ Vector3T<T>::operator Vector2T<T>()
 TEMPLATE
 Vector3T<T>::operator Vector4T<T>()
 {
-	return Vector4T<T>{x, y, z, 0.0f};
+	return Vector4T<T>{x, y, z, 1.0f};
 }
 
 //addition operator

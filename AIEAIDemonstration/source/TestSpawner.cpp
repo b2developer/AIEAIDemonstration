@@ -17,7 +17,7 @@ void TestSpawner::addComponents(GameObject * creation)
 
 	transform->translation.x = 300.0f;
 	transform->translation.y = 300.0f;
-	transform->scale = Vector2(1.5f, 1.0f);
+	transform->scale = Vector2(1.0f, 1.0f);
 	transform->rotation = 1.0f;
 
 	//give the box some dimensions

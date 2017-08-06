@@ -103,6 +103,12 @@
     <Filter Include="Source Files\Systems\SteeringBehaviours">
       <UniqueIdentifier>{7e110e41-2e15-4dfb-9cdc-bbbee7c2fe5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\SteeringBehaviours\Flocking">
+      <UniqueIdentifier>{aedc90af-6770-4bb1-af84-dcfd09171d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\SteeringBehaviours\Flocking">
+      <UniqueIdentifier>{69c888b8-d63e-4a7c-b4ec-c2be726cc603}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\TestSpawner.cpp">
@@ -186,9 +192,6 @@
     <ClCompile Include="source\NavMesh.cpp">
       <Filter>Source Files\Systems\Pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="source\NavMeshStructures.cpp">
-      <Filter>Source Files\Systems\Pathfinding</Filter>
-    </ClCompile>
     <ClCompile Include="source\PathfindingAgent.cpp">
       <Filter>Source Files\Systems\Components\AI</Filter>
     </ClCompile>
@@ -221,6 +224,24 @@
     </ClCompile>
     <ClCompile Include="source\ObstacleSpawner.cpp">
       <Filter>Source Files\Systems\Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PrimitiveRenderer.cpp">
+      <Filter>Source Files\Systems\Components\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ObstacleAvoidanceBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CohesionBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours\Flocking</Filter>
+    </ClCompile>
+    <ClCompile Include="source\NavMeshStructures.cpp">
+      <Filter>Source Files\Systems\Solvers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AlignmentBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours\Flocking</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SeparationBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours\Flocking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -364,6 +385,21 @@
     </ClInclude>
     <ClInclude Include="source\ObstacleSpawner.h">
       <Filter>Header Files\Systems\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PrimitiveRenderer.h">
+      <Filter>Header Files\Systems\Components\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ObstacleAvoidanceBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CohesionBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours\Flocking</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AlignmentBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours\Flocking</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SeparationBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours\Flocking</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

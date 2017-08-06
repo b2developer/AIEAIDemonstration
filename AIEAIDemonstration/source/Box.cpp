@@ -23,10 +23,10 @@ Range Box::project(Vector2 normal)
 	Vector2 p4 = Vector2(max.x, min.y);
 
 	//transform the 4 corners
-	p1 = (Vector3)p1 * transMat;
-	p2 = (Vector3)p2 * transMat;
-	p3 = (Vector3)p3 * transMat;
-	p4 = (Vector3)p4 * transMat;
+	p1 = ((Vector3)p1 * transMat);
+	p2 = ((Vector3)p2 * transMat);
+	p3 = ((Vector3)p3 * transMat);
+	p4 = ((Vector3)p4 * transMat);
 
 	//dot product all of the corners
 	std::vector<float> dots = std::vector<float>{ normal.dot(p1), normal.dot(p2), normal.dot(p3), normal.dot(p4) };

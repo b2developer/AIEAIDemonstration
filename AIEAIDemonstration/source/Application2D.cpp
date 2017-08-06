@@ -40,13 +40,15 @@ bool Application2D::startup()
 	testSpawner = new TestSpawner();
 	tradingBotSpawner = new TradingBotSpawner();
 	pathfindingBotSpawner = new PathfindingBotSpawner();
+	obstacleSpawner = new ObstacleSpawner();
 	boidSpawner = new BoidSpawner();
 
-	//link them to each other and the application
+	//link them to the application
 	director->appPtr = this;
 	testSpawner->appPtr = this;
 	tradingBotSpawner->appPtr = this;
 	pathfindingBotSpawner->appPtr = this;
+	obstacleSpawner->appPtr = this;
 	boidSpawner->appPtr = this;
 
 	//create a blackboard that can hold 500 messages
@@ -54,6 +56,10 @@ bool Application2D::startup()
 
 	//create a blackboard that can hold 1000 messages
 	boidBlackboard = new Blackboard(1000);
+
+	//link boid related spawners to the central boid communication object
+	obstacleSpawner->boidBlackboard = boidBlackboard;
+	boidSpawner->boidBlackboard = boidBlackboard;
 
 	//create the navmesh
 	navMesh = new NavMesh();
@@ -84,6 +90,14 @@ bool Application2D::startup()
 	director->employee = pathfindingBotSpawner;
 
 	//spawn 0 pathfinding bots
+	for (int i = 0; i < 20; i++)
+	{
+		gameObjects.push_back(director->createGameObject());
+	}
+
+	director->employee = obstacleSpawner;
+
+	//spawn 0 obstacles
 	for (int i = 0; i < 0; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
@@ -91,13 +105,25 @@ bool Application2D::startup()
 
 	director->employee = boidSpawner;
 	boidSpawner->mode = BoidMode::MOUSE_FOLLOWER;
-	gameObjects.push_back(director->createGameObject());
 
+	for (int i = 0; i < 0; i++)
+	{
+		gameObjects.push_back(director->createGameObject());
+	}
+
+	/*
 	boidSpawner->mode = BoidMode::PURSUER;
 	gameObjects.push_back(director->createGameObject());
 
 	boidSpawner->mode = BoidMode::AVOID_BUT_FOLLOW;
 	gameObjects.push_back(director->createGameObject());
+	*/
+
+	//initialise all game-objects
+	for (size_t i = 0; i < gameObjects.size(); i++)
+	{
+		gameObjects[i]->initialise();
+	}
 
 	return true;
 }
@@ -186,7 +212,7 @@ void Application2D::draw()
 		gameObjects[i]->draw();
 	}
 
-	//navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 5.0f);
+	navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 5.0f);
 
 	m_renderer2D->setRenderColour(0, 1, 0);
 

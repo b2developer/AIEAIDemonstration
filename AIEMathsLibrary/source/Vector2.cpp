@@ -32,14 +32,14 @@ Vector2T<T>::operator T*()
 TEMPLATE
 Vector2T<T>::operator Vector3T<T>()
 {
-	return Vector3T<T>{x, y, 0.0f};
+	return Vector3T<T>{x, y, 1.0f};
 }
 
 //cast to vector4
 TEMPLATE
 Vector2T<T>::operator Vector4T<T>()
 {
-	return Vector4T<T>{x, y, 0.0f, 0.0f};
+	return Vector4T<T>{x, y, 1.0f, 1.0f};
 }
 
 //addition operator

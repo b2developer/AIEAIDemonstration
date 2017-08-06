@@ -23,7 +23,7 @@ bool CollisionEngine::simpleCollisionCheck(Shape * A, Shape * B)
 
 	//combine the arrays
 	std::vector<Vector2> normals = aNormals;
-	aNormals.insert(aNormals.end(), bNormals.begin(), bNormals.end());
+	normals.insert(normals.end(), bNormals.begin(), bNormals.end());
 
 	//iterate through all normals
 	for (size_t i = 0; i < normals.size(); i++)
@@ -53,7 +53,7 @@ AdvancedCollision CollisionEngine::advancedCollisionCheck(Shape * A, Shape * B)
 
 	//combine the arrays
 	std::vector<Vector2> normals = aNormals;
-	aNormals.insert(aNormals.end(), bNormals.begin(), bNormals.end());
+	normals.insert(normals.end(), bNormals.begin(), bNormals.end());
 
 	float bestDistance = MAX;
 	Vector2 bestSeperation = Vector2(0, 0);

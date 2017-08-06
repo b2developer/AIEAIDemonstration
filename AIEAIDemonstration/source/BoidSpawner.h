@@ -1,5 +1,6 @@
 #pragma once
 #include "Spawner.h"
+#include "Blackboard.h"
 
 
 //forward declarations
@@ -13,6 +14,20 @@ enum class BoidMode
 	PURSUER,
 	AVOID_BUT_FOLLOW,
 };
+
+
+/*
+* struct Boid
+*
+* data structure for boids
+*
+* author: Bradley Booth, Academy of Interactive Entertainment, 2017
+*/
+struct Boid
+{
+	SteeringBehaviourManager* sbm = nullptr;
+};
+
 
 /*
 * class BoidSpawner
@@ -28,6 +43,9 @@ public:
 
 	//pointer to the application that is holding this
 	Application2D* appPtr = nullptr;
+
+	//blackboard that tells the boid about obstacles and other boids
+	Blackboard* boidBlackboard = nullptr;
 
 	//modifies the type of boids spawned
 	BoidMode mode = BoidMode::MOUSE_FOLLOWER;

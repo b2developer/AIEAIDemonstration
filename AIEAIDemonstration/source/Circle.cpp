@@ -8,7 +8,7 @@ Range Circle::project(Vector2 normal)
 	Matrix2 scaleMat = Matrix2(transform->scale.x, 0, 0, transform->scale.y);
 
 	//minimum and maximum points on the circle in the given direction
-	Vector2 p1 = transform->translation + (normal * radius) * scaleMat;
+	Vector2 p1 = transform->translation - (normal * radius) * scaleMat;
 	Vector2 p2 = transform->translation + (normal * radius) * scaleMat;
 
 	//the corresponding dot products to the points
