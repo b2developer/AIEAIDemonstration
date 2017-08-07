@@ -171,9 +171,11 @@
     <ClCompile Include="source\ObstacleSpawner.cpp" />
     <ClCompile Include="source\PathfindingAgent.cpp" />
     <ClCompile Include="source\PathfindingBotSpawner.cpp" />
+    <ClCompile Include="source\Planner.cpp" />
     <ClCompile Include="source\Polygon.cpp" />
     <ClCompile Include="source\PrimitiveRenderer.cpp" />
     <ClCompile Include="source\PursueBehaviour.cpp" />
+    <ClCompile Include="source\Puzzle.cpp" />
     <ClCompile Include="source\RangeTransition.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\SearchState.cpp" />
@@ -221,9 +223,11 @@
     <ClInclude Include="source\ObstacleSpawner.h" />
     <ClInclude Include="source\PathfindingAgent.h" />
     <ClInclude Include="source\PathfindingBotSpawner.h" />
+    <ClInclude Include="source\Planner.h" />
     <ClInclude Include="source\Polygon.h" />
     <ClInclude Include="source\PrimitiveRenderer.h" />
     <ClInclude Include="source\PursueBehaviour.h" />
+    <ClInclude Include="source\Puzzle.h" />
     <ClInclude Include="source\RangeTransition.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Script.h" />

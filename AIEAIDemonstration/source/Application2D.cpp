@@ -90,7 +90,7 @@ bool Application2D::startup()
 	director->employee = pathfindingBotSpawner;
 
 	//spawn 0 pathfinding bots
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 0; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
@@ -111,19 +111,21 @@ bool Application2D::startup()
 		gameObjects.push_back(director->createGameObject());
 	}
 
-	/*
-	boidSpawner->mode = BoidMode::PURSUER;
-	gameObjects.push_back(director->createGameObject());
-
-	boidSpawner->mode = BoidMode::AVOID_BUT_FOLLOW;
-	gameObjects.push_back(director->createGameObject());
-	*/
-
 	//initialise all game-objects
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->initialise();
 	}
+
+	Planner* planner = new Planner();
+	Puzzle* goal = new Puzzle(Vector2(2, 2));
+	Puzzle* random = new Puzzle(Vector2(2, 2));
+
+	goal->setGoal();
+	random->setRandom();
+
+	planner->goalState = goal;
+	std::vector<PlannerAction*> actions = planner->solveState(random);
 
 	return true;
 }
@@ -212,7 +214,7 @@ void Application2D::draw()
 		gameObjects[i]->draw();
 	}
 
-	navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 5.0f);
+	//navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 5.0f);
 
 	m_renderer2D->setRenderColour(0, 1, 0);
 

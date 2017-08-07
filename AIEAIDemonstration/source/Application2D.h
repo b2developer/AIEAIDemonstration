@@ -13,9 +13,11 @@
 #include "PathfindingBotSpawner.h"
 #include "ObstacleSpawner.h"
 #include "BoidSpawner.h"
+#include "Puzzle.h"
 
 #include "Blackboard.h"
 #include "NavMesh.h"
+#include "Planner.h"
 
 #include "Input.h"
 #include "Renderer2D.h"

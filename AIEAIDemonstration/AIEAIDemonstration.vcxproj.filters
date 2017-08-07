@@ -109,6 +109,18 @@
     <Filter Include="Source Files\Systems\SteeringBehaviours\Flocking">
       <UniqueIdentifier>{69c888b8-d63e-4a7c-b4ec-c2be726cc603}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\Planner">
+      <UniqueIdentifier>{d4345e52-6532-45ec-b921-2037b401e1fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Planner">
+      <UniqueIdentifier>{e41869d0-97e2-41e4-a23c-7e8881dc17ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Users\PuzzleBot">
+      <UniqueIdentifier>{2a646507-4a1b-49db-8229-82bf5735bbb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Users\PuzzleBot">
+      <UniqueIdentifier>{54a1b42c-a650-48a3-ab31-a250a7fdf9e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\TestSpawner.cpp">
@@ -242,6 +254,12 @@
     </ClCompile>
     <ClCompile Include="source\SeparationBehaviour.cpp">
       <Filter>Source Files\Systems\SteeringBehaviours\Flocking</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Planner.cpp">
+      <Filter>Source Files\Systems\Planner</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Puzzle.cpp">
+      <Filter>Source Files\Users\PuzzleBot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +418,12 @@
     </ClInclude>
     <ClInclude Include="source\SeparationBehaviour.h">
       <Filter>Header Files\Systems\SteeringBehaviours\Flocking</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Planner.h">
+      <Filter>Header Files\Systems\Planner</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Puzzle.h">
+      <Filter>Header Files\Users\PuzzleBot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

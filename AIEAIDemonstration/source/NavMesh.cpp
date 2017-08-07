@@ -391,7 +391,7 @@ std::vector<NavMeshTriangle*> NavMesh::findRawPath(Vertex<NavMeshTriangle*, NavM
 
 	open.push_back(start);
 
-	//while the open list still contains 
+	//while the open list still contains nodes to search
 	while (open.size() > 0)
 	{
 
