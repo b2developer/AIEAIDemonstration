@@ -58,7 +58,7 @@ void BoidSpawner::addComponents(GameObject * creation)
 		WanderBehaviour* wander = new WanderBehaviour();
 		((WanderBehaviour*)wander)->wanderRadius = 15.0f;
 		((WanderBehaviour*)wander)->wanderDistance = 5.0f;
-		((WanderBehaviour*)wander)->jitterAmount = 200.0f;
+		((WanderBehaviour*)wander)->jitterAmount = 50.0f;
 		wander->sbm = sbm;
 
 		ArrivalBehaviour* arrival = new ArrivalBehaviour();
@@ -71,25 +71,25 @@ void BoidSpawner::addComponents(GameObject * creation)
 		avoidance->sbm = sbm;
 
 		SeparationBehaviour* separation = new SeparationBehaviour();
-		((SeparationBehaviour*)separation)->neighbourhoodRadius = 80.0f;
+		((SeparationBehaviour*)separation)->neighbourhoodRadius = 50.0f;
 		separation->sbm = sbm;
 
 		CohesionBehaviour* cohesion = new CohesionBehaviour();
-		((CohesionBehaviour*)cohesion)->neighbourhoodRadius = 100.0f;
+		((CohesionBehaviour*)cohesion)->neighbourhoodRadius = 200.0f;
 		cohesion->sbm = sbm;
 
 		AlignmentBehaviour* align = new AlignmentBehaviour();
-		((AlignmentBehaviour*)align)->neighbourhoodRadius = 200.0f;
+		((AlignmentBehaviour*)align)->neighbourhoodRadius = 100.0f;
 		((AlignmentBehaviour*)align)->neighbourhoodForwardDistance = 50.0f;
 		align->sbm = sbm;
 
-		seek->weight = 1.0f;
+		seek->weight = 5.0f;
 		wander->weight = 0.2f;
 		arrival->weight = 0.0f;
-		separation->weight = 1.0f;
-		cohesion->weight = 0.1f;
-		align->weight = 0.01f;
-		avoidance->weight = 3.0f;
+		separation->weight = 40.0f;
+		cohesion->weight = 0.6f;
+		align->weight = 15.0f;
+		avoidance->weight = 2.0f;
 
 		sbm->behaviours.push_back(seek);
 		sbm->behaviours.push_back(wander);
@@ -130,8 +130,8 @@ void BoidSpawner::addComponents(GameObject * creation)
 		sbm->behaviours.push_back(evade);
 	}
 
-	sbm->maxVelocity = 1300.0f;
-	sbm->maxAcceleration = 1200.0f;
+	sbm->maxVelocity = 200.0f;
+	sbm->maxAcceleration = 200.0f;
 
 	//give the steering behaviour manager a blackboard to communicate with others
 	sbm->enviroment = boidBlackboard;

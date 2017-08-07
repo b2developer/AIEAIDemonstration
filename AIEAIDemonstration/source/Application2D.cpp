@@ -90,7 +90,7 @@ bool Application2D::startup()
 	director->employee = pathfindingBotSpawner;
 
 	//spawn 0 pathfinding bots
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 500; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}

@@ -43,16 +43,8 @@ Vector2 SeparationBehaviour::update()
 		//relative vector to the other boid
 		Vector2 relative = sbm->transform->translation - otherBoid->transform->translation;
 
-		float magnitude = relative.magnitude() / neighbourhoodRadius;
-
-		//clamp the division
-		if (magnitude < 0.01f)
-		{
-			magnitude = 0.01f;
-		}
-
-		repel += relative / magnitude;
+		repel += relative;
 	}
 
-	return repel.normalised() * sbm->maxVelocity - sbm->entity->velocity;
+	return repel.normalised() * sbm->maxVelocity;
 }

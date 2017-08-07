@@ -43,11 +43,5 @@ Vector2 AlignmentBehaviour::update()
 		average += otherBoid->entity->velocity;
 	}
 
-	//don't divide by 0
-	if (neighbours.size() > 0)
-	{
-		average = average / (float)neighbours.size();
-	}
-
-	return average - sbm->entity->velocity;
+	return average.normalised() * sbm->maxVelocity;
 }

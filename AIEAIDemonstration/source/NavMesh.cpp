@@ -875,7 +875,7 @@ void NavMesh::drawMesh(float nodeRadius, float connectionThickness, float r, flo
 		Vector2 A2 = v2 - A;
 		Vector2 A3 = v3 - A;
 
-		float ratio = 0.97f;
+		float ratio = 1.0f;
 
 		//travelling partially back from the average vector to the original vertex position
 		Vector2 va1 = A + A1 * ratio;

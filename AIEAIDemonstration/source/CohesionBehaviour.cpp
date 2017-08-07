@@ -51,7 +51,11 @@ Vector2 CohesionBehaviour::update()
 	{
 		average = average / (float)neighbours.size();
 	}
+	else
+	{
+		return Vector2(0, 0);
+	}
 
 
-	return (average - sbm->transform->translation).normalised() * sbm->maxVelocity - sbm->entity->velocity;
+	return (average - sbm->transform->translation).normalised() * sbm->maxVelocity;
 }
