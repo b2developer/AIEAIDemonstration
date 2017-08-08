@@ -215,6 +215,7 @@ void Puzzle::setHeuristic(PlannerState * goal)
 			piece->distance = manhattanDistance;
 
 			sum += manhattanDistance;
+
 		}
 	}
 

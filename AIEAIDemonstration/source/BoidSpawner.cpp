@@ -88,8 +88,8 @@ void BoidSpawner::addComponents(GameObject * creation)
 		arrival->weight = 0.0f;
 		separation->weight = 40.0f;
 		cohesion->weight = 0.6f;
-		align->weight = 25.0f;
-		avoidance->weight = 2.0f;
+		align->weight = 10.0f;
+		avoidance->weight = 10.0f;
 
 		sbm->behaviours.push_back(seek);
 		sbm->behaviours.push_back(wander);

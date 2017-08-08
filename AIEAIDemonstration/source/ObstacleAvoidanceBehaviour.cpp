@@ -8,23 +8,45 @@
 //called once per frame, gets the force to sum to the boid
 Vector2 ObstacleAvoidanceBehaviour::update()
 {
+	float dynamicAheadDistance = aheadDistance;
+
+	//dynamic look ahead distance based on velocity
+	dynamicAheadDistance *= (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * 0.5f + 0.5f;
+
 	//get the position of the boid
 	Vector2 boidPosition = sbm->transform->translation;
 
 	//get a line that points directly in front of the boid
-	Vector2 forwardLine = sbm->heading * aheadDistance;
+	Vector2 forwardLine = sbm->heading * dynamicAheadDistance;
 
-	//create a polygon to test against the enviroment
-	Shape* aheadPoly = new Polygon();
+	//create two polygons to test against the enviroment
+	Shape* leftPoly = new Polygon();
+	Shape* rightPoly = new Polygon();
 
 	//temporary transforms required by the collision engine
-	Transform* null = new Transform();
+	Transform* null1 = new Transform();
+	Transform* null2 = new Transform();
 
-	aheadPoly->transform = null;
+	leftPoly->transform = null1;
+	rightPoly->transform = null2;
+
+	Matrix2 leftMat = Matrix2();
+	leftMat.identity();
+	leftMat.setRotate(0.4f);
+
+	Matrix2 rightMat = Matrix2();
+	rightMat.identity();
+	rightMat.setRotate(-0.4f);
+
+	bool leftCollides = false;
+	bool rightCollides = false;
 
 	//the polygon is a line
-	((Polygon*)aheadPoly)->points.push_back(boidPosition);
-	((Polygon*)aheadPoly)->points.push_back(boidPosition + forwardLine);
+	((Polygon*)leftPoly)->points.push_back(boidPosition);
+	((Polygon*)leftPoly)->points.push_back(boidPosition + (forwardLine * leftMat));
+
+	((Polygon*)rightPoly)->points.push_back(boidPosition);
+	((Polygon*)rightPoly)->points.push_back(boidPosition + (forwardLine * rightMat));
 
 	//store all colliding shapes
 	std::vector<Shape*> colliders;
@@ -34,44 +56,49 @@ Vector2 ObstacleAvoidanceBehaviour::update()
 	{
 		Shape* other = sbm->obstacles[i].shape;
 
-		//test for a collision between the line and the shape
-		if (COLL_ENGINE->simpleCollisionCheck(aheadPoly, other))
+		//test for a collision between the left line and the shape
+		if (!leftCollides && COLL_ENGINE->simpleCollisionCheck(leftPoly, other))
 		{
-			colliders.push_back(other);
+			leftCollides = true;
+		}
+
+		//test for a collision between the right line and the shape
+		if (!rightCollides && COLL_ENGINE->simpleCollisionCheck(rightPoly, other))
+		{
+			rightCollides = true;
 		}
 	}
 
-	delete aheadPoly;
-	delete null;
+	delete leftPoly;
+	delete null1;
 
-	//early exit if there are no colliders
-	if (colliders.size() == 0)
+	delete rightPoly;
+	delete null2;
+
+	//early exit if there are no collisions
+	if (!leftCollides || !rightCollides)
 	{
 		return Vector2(0, 0);
 	}
 
-	Shape* closestCollider = colliders[0];
-	float closestDistSquared = MAX;
+	Vector2 repel = Vector2(0, 0);
 
-	//iterate through all colliders that hit the 
-	for (size_t i = 1; i < colliders.size(); i++)
+	if (leftCollides && !rightCollides)
 	{
-		//store in a temporary variable, saving performance and readability
-		Shape* collider = colliders[i];
-
-		float distSquared = (collider->transform->translation - (boidPosition + forwardLine)).sqrMagnitude();
-
-		//if the distance to this collider
-		if (distSquared < closestDistSquared)
-		{
-			closestCollider = collider;
-			closestDistSquared = distSquared;
-		}
+		repel = sbm->heading.normal(NormalDirection::LEFT) - sbm->heading;
 	}
 
-	//force away from the closest collider
-	Vector2 force = (boidPosition + forwardLine * 0.5f) - closestCollider->transform->translation;
-	force.normalise();
+	if (!leftCollides && rightCollides)
+	{
+		repel = sbm->heading.normal(NormalDirection::RIGHT) - sbm->heading;;
+	}
 
-	return force * sbm->maxVelocity - sbm->entity->velocity;
+	if (leftCollides && rightCollides)
+	{
+		repel = sbm->heading * -1.0f;
+	}
+
+	sbm->heading.normalise();
+
+	return repel * sbm->maxVelocity;// -sbm->entity->velocity;
 }

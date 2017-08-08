@@ -99,8 +99,8 @@ bool Application2D::startup()
 
 	director->employee = obstacleSpawner;
 
-	//spawn 0 obstacles
-	for (int i = 0; i < 0; i++)
+	//spawn 10 obstacles
+	for (int i = 0; i < 10; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
@@ -108,18 +108,19 @@ bool Application2D::startup()
 	director->employee = boidSpawner;
 	boidSpawner->mode = BoidMode::MOUSE_FOLLOWER;
 
-	for (int i = 0; i < 0; i++)
+	//spawn 20 boids
+	for (int i = 0; i < 1; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
 
 	director->employee = puzzleBotSpawner;
 
-	for (int i = 0; i < 1; i++)
+	//spawn a puzzle bot
+	for (int i = 0; i < 0; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
-
 
 	//initialise all game-objects
 	for (size_t i = 0; i < gameObjects.size(); i++)
