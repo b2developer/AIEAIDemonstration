@@ -51,6 +51,7 @@ Puzzle::Puzzle(Puzzle & other)
 			//copy the values to the new piece
 			copyPiece->correctPosition = piece->correctPosition;
 			copyPiece->currentPosition = piece->currentPosition;
+			copyPiece->renderPosition = piece->renderPosition;
 			copyPiece->distance = piece->distance;
 
 			//add the new piece
@@ -87,6 +88,9 @@ Puzzle::~Puzzle()
 //sets the pieces in the correct positions
 void Puzzle::setGoal()
 {
+	//maximum difference to be considered equal
+	float epsilon = 0.01f;
+
 	//set the bottom left corner as the free position
 	freePosition = dimensions - Vector2(1, 1);
 
@@ -98,7 +102,7 @@ void Puzzle::setGoal()
 			Vector2 target = Vector2((float)j, (float)i);
 
 			//don't add a piece at the free position
-			if (target == freePosition)
+			if ((target - freePosition).sqrMagnitude() <= epsilon)
 			{
 				continue;
 			}
@@ -115,54 +119,72 @@ void Puzzle::setGoal()
 
 
 //sets the pieces in random positions
-void Puzzle::setRandom()
+void Puzzle::setRandom(size_t iterations)
 {
-	//set the free position to a random position
-	freePosition = Vector2((float)(rand() % (size_t)dimensions.x), (float)(rand() % (size_t)dimensions.y));
 
-	//list of positions that haven't been used to be read from randomly
-	std::vector<Vector2> positions;
+	//cache all directions
+	std::vector<Vector2> directions;
 
-	//iterate through the 2D array, giving a pair of coordinates in order
-	for (size_t i = 0; i < dimensions.y; i++)
+	directions.push_back(Vector2(0, 1));
+	directions.push_back(Vector2(0, -1));
+	directions.push_back(Vector2(1, 0));
+	directions.push_back(Vector2(-1, 0));
+
+
+	size_t prevRandNum = 1;
+	size_t prevRandNumOpp = 1;
+
+	//apply 'n' random moves
+	for (size_t i = 0; i < iterations; i++)
 	{
-		for (size_t j = 0; j < dimensions.x; j++)
-		{
-			Vector2 target = Vector2((float)j, (float)i);
+		std::vector<Vector2> directionsCopy = directions;
 
-			if (target != freePosition)
-			{
-				positions.push_back(target);
-			}
+		directionsCopy.erase(directionsCopy.begin() + prevRandNumOpp);
+
+		//create a random move
+		PlannerAction* slide = new Slide();
+
+		//choose a random direction
+		size_t randNum = rand() % directionsCopy.size();
+
+		//initial search direction and position
+		Vector2 offset = directionsCopy[randNum];;
+		Vector2 piecePosition = freePosition + offset;
+
+		//is the tile inside the puzzle's dimensions
+		while (!(piecePosition.x >= 0 && piecePosition.y >= 0 && piecePosition.x <= dimensions.x - 1 && piecePosition.y <= dimensions.y - 1))
+		{
+			randNum = rand() % directionsCopy.size();
+
+			//search direction
+			offset = directionsCopy[randNum];
+
+			//position of the tile to move
+			piecePosition = freePosition + offset;
+
+		} 
+
+		//give the action it's data and then execute it
+		((Slide*)slide)->newPosition = freePosition;
+		((Slide*)slide)->piecePosition = piecePosition;
+
+		((Slide*)slide)->executeDirect(this);
+
+		prevRandNum = randNum;
+
+		//make prevRandNumOpp the inverse of prevRandNum
+		switch (prevRandNum)
+		{
+		case 0: prevRandNumOpp = 1; break;
+		case 1: prevRandNumOpp = 0; break;
+		case 2: prevRandNumOpp = 3; break;
+		case 3: prevRandNumOpp = 2; break;
 		}
+
+
+		delete slide;
 	}
 
-	//iterate through the 2D array, giving the positions and a random target position
-	for (size_t i = 0; i < pieces.size(); i++)
-	{
-		for (size_t j = 0; j < pieces[i].size(); j++)
-		{
-			Vector2 target = Vector2((float)j, (float)i);
-
-			//don't add a piece at the free position
-			if (target == freePosition)
-			{
-				continue;
-			}
-
-			pieces[i][j] = new Piece();
-
-			pieces[i][j]->currentPosition = Vector2((float)j, (float)i);
-
-			//choose a random vector from the list
-			size_t chosenI = rand() % positions.size();
-
-			pieces[i][j]->correctPosition = positions[chosenI];
-
-			//erase the randomly chosen position from the list
-			positions.erase(positions.begin() + chosenI);
-		}
-	}
 }
 
 
@@ -268,4 +290,42 @@ PlannerState* Slide::execute(PlannerState* original)
 	puzzlePtr->pieces[(size_t)newPosition.y][(size_t)newPosition.x]->currentPosition = newPosition;
 
 	return newPuzzle;
+}
+
+
+
+//checks if the given action is the opposite of this action
+bool Slide::isReverse(PlannerAction * other)
+{
+	//maximum difference to be considered equal
+	float epsilon = 0.01f;
+
+	//upcast the other planner action
+	Slide* otherSlide = (Slide*)other;
+
+	//compare the opposite points of the swaps
+	bool c1 = (piecePosition - otherSlide->newPosition).sqrMagnitude() < epsilon;
+	bool c2 = (otherSlide->piecePosition - newPosition).sqrMagnitude() < epsilon;
+
+	//only return true if both tests are successful
+	return c1 && c2;
+}
+
+
+
+//applies the action to the game state without copying it
+void Slide::executeDirect(PlannerState * original)
+{
+	//upcast the puzzle
+	Puzzle* puzzlePtr = (Puzzle*)original;
+
+	//new free position
+	puzzlePtr->freePosition = piecePosition;
+
+	//move the piece from the original position to the new position and set the original piece pointer to nullptr
+	puzzlePtr->pieces[(size_t)newPosition.y][(size_t)newPosition.x] = puzzlePtr->pieces[(size_t)piecePosition.y][(size_t)piecePosition.x];
+	puzzlePtr->pieces[(size_t)piecePosition.y][(size_t)piecePosition.x] = nullptr;
+
+	//set the new position of the piece
+	puzzlePtr->pieces[(size_t)newPosition.y][(size_t)newPosition.x]->currentPosition = newPosition;
 }

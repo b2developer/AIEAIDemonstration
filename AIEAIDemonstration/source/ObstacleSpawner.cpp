@@ -7,7 +7,7 @@
 #include "Polygon.h"
 #include "PrimitiveRenderer.h"
 
-//adds the necessary components for a test object
+//adds the necessary components for a obstacle object
 void ObstacleSpawner::addComponents(GameObject * creation)
 {
 	//add all components

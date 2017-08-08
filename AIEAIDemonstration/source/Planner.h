@@ -174,5 +174,18 @@ public:
 	*/
 	virtual PlannerState* execute(PlannerState* original) = 0;
 
+
+	/*
+	* isReverse
+	* abstract function
+	*
+	* checks if this action applies the opposite
+	* effect of the other action
+	*
+	* @param PlannerAction* other - pointer to the other action
+	* @returns bool - indicates if 'other' is the reverse action
+	*/
+	virtual bool isReverse(PlannerAction* other) = 0;
+
 };
 #pragma endregion

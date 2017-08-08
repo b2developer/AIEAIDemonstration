@@ -1,14 +1,19 @@
 #include "Planner.h"
 
+#include <Windows.h>
+
+
 //destructor, removes the goal state
 Planner::~Planner()
 {
+	delete goalState;
 }
 
 //uses A* to determine a set of actions that turn the orignal state into the goal state
 //T - derived state, U - derived action
 std::vector<PlannerAction*> Planner::solveState(PlannerState * original)
 {
+
 	//lists to remember created objects and remove them at the end of the search
 	std::vector<PlannerState*> createdStates;
 	std::vector<PlannerAction*> createdActions;
@@ -18,18 +23,22 @@ std::vector<PlannerAction*> Planner::solveState(PlannerState * original)
 	std::vector<PlannerState*> closed;
 
 	original->gScore = 0.0f;
+
+	original->setHeuristic(goalState);
 	
 	//add the starting state to the open list
 	open.push_back(original);
 
+	//list of actions to execute
+	std::vector<PlannerAction*> actionList;
+
 	//while the open list still contains states to search
 	while (open.size() > 0)
 	{
+
 		//remember the state with the lowest 'F' score in the open list
 		PlannerState* best = open[0];
 		size_t bestI = 0;
-
-		best->setHeuristic(goalState);
 
 		//iterate through all states, finding the node with the smallest 'F' score
 		for (size_t i = 1; i < open.size(); i++)
@@ -37,11 +46,9 @@ std::vector<PlannerAction*> Planner::solveState(PlannerState * original)
 			//store in a temp variable, saves performance and increases readability
 			PlannerState* state = open[i];
 
-			state->setHeuristic(goalState);
-
 			//calculate the 'F' score of both nodes to compare them
-			float bestF = best->gScore;// + best->hScore;
-			float nodeF = state->gScore;// + state->hScore;
+			float bestF = best->gScore + best->hScore;
+			float nodeF = state->gScore + state->hScore;
 
 			//if the best 'F' score is higher than the current node's 'F' score
 			if (bestF > nodeF)
@@ -55,9 +62,6 @@ std::vector<PlannerAction*> Planner::solveState(PlannerState * original)
 		//the best state is the goal state
 		if (best->hScore == 0.0f)
 		{
-			//list of actions to execute
-			std::vector<PlannerAction*> actionList;
-
 			PlannerState* current = best;
 
 			//back-track to the root, remembering all actions on the way
@@ -65,6 +69,8 @@ std::vector<PlannerAction*> Planner::solveState(PlannerState * original)
 			{
 				//add the action to the front of the list
 				actionList.insert(actionList.begin(), current->previousAction);
+
+				current->previousAction->keep = true;
 
 				//go to the previous state
 				current = current->previous;
@@ -121,6 +127,14 @@ std::vector<PlannerAction*> Planner::solveState(PlannerState * original)
 			//store in a temp variable, saves performance and increases readability
 			PlannerAction* action = actions[i];
 
+			//prevent loops
+			if (best->previousAction != nullptr && action->isReverse(best->previousAction))
+			{
+				//remove the action
+				delete action;
+				continue;
+			}
+
 			createdActions.push_back(action);
 
 			//generate the new state
@@ -134,6 +148,8 @@ std::vector<PlannerAction*> Planner::solveState(PlannerState * original)
 			//give the state information about it's roots
 			state->previous = best;
 			state->previousAction = action;
+
+			state->setHeuristic(goalState);
 
 			//add the state to the open list
 			open.push_back(state);

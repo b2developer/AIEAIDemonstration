@@ -42,6 +42,7 @@ bool Application2D::startup()
 	pathfindingBotSpawner = new PathfindingBotSpawner();
 	obstacleSpawner = new ObstacleSpawner();
 	boidSpawner = new BoidSpawner();
+	puzzleBotSpawner = new PuzzleBotSpawner();
 
 	//link them to the application
 	director->appPtr = this;
@@ -50,6 +51,7 @@ bool Application2D::startup()
 	pathfindingBotSpawner->appPtr = this;
 	obstacleSpawner->appPtr = this;
 	boidSpawner->appPtr = this;
+	puzzleBotSpawner->appPtr = this;
 
 	//create a blackboard that can hold 500 messages
 	tradingBlackboard = new Blackboard(500);
@@ -111,21 +113,19 @@ bool Application2D::startup()
 		gameObjects.push_back(director->createGameObject());
 	}
 
+	director->employee = puzzleBotSpawner;
+
+	for (int i = 0; i < 1; i++)
+	{
+		gameObjects.push_back(director->createGameObject());
+	}
+
+
 	//initialise all game-objects
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->initialise();
 	}
-
-	Planner* planner = new Planner();
-	Puzzle* goal = new Puzzle(Vector2(2, 2));
-	Puzzle* random = new Puzzle(Vector2(2, 2));
-
-	goal->setGoal();
-	random->setRandom();
-
-	planner->goalState = goal;
-	std::vector<PlannerAction*> actions = planner->solveState(random);
 
 	return true;
 }
@@ -137,6 +137,11 @@ void Application2D::shutdown()
 	//delete the director and the spawner/s
 	delete director;
 	delete testSpawner;
+	delete tradingBotSpawner;
+	delete pathfindingBotSpawner;
+	delete obstacleSpawner;
+	delete boidSpawner;
+	delete puzzleBotSpawner;
 
 	delete tradingBlackboard;
 	delete navMesh;
@@ -159,6 +164,12 @@ Vector2 end = Vector2(0, 0);
 void Application2D::update(float deltaTime)
 {
 	m_deltaTime = deltaTime;
+
+	//clamp delta time about 1/30th of a second
+	if (m_deltaTime > 1 / 30.0f)
+	{
+		m_deltaTime = 1 / 30.0f;
+	}
 
 	aie::Input* input = aie::Input::getInstance();
 

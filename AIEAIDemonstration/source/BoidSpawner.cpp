@@ -83,12 +83,12 @@ void BoidSpawner::addComponents(GameObject * creation)
 		((AlignmentBehaviour*)align)->neighbourhoodForwardDistance = 50.0f;
 		align->sbm = sbm;
 
-		seek->weight = 25.0f;
+		seek->weight = 5.0f;
 		wander->weight = 2.0f;
 		arrival->weight = 0.0f;
 		separation->weight = 40.0f;
 		cohesion->weight = 0.6f;
-		align->weight = 15.0f;
+		align->weight = 25.0f;
 		avoidance->weight = 2.0f;
 
 		sbm->behaviours.push_back(seek);

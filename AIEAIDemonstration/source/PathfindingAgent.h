@@ -23,17 +23,17 @@ class PathfindingAgent : public Agent
 {
 public:
 
-	//the half shoulder-width of the agent, used to find parts of the NavMesh that can be travelled through
-	float radius = 0.0f;
-
-	//units that the agent can move per second
-	float agentSpeed = 100.0f;
-
 	//pointer to the mesh to navigate around
 	NavMesh* navMesh = nullptr;
 
 	//list of vectors that make up the path to travel
 	std::vector<Vector2> pathList;
+
+	//the half shoulder-width of the agent, used to find parts of the NavMesh that can be travelled through
+	float radius = 0.0f;
+
+	//units that the agent can move per second
+	float agentSpeed = 100.0f;
 
 	/*
 	* PathfindingAgent()

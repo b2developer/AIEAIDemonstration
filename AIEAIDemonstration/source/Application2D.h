@@ -13,7 +13,7 @@
 #include "PathfindingBotSpawner.h"
 #include "ObstacleSpawner.h"
 #include "BoidSpawner.h"
-#include "Puzzle.h"
+#include "PuzzleBotSpawner.h"
 
 #include "Blackboard.h"
 #include "NavMesh.h"
@@ -49,6 +49,7 @@ public:
 	PathfindingBotSpawner* pathfindingBotSpawner = nullptr; //spawner for pathfinding bot objects
 	ObstacleSpawner* obstacleSpawner = nullptr; //spawner for obstacle objects
 	BoidSpawner* boidSpawner = nullptr; //spawner for boid objects
+	PuzzleBotSpawner* puzzleBotSpawner = nullptr; //spawner for puzzle bot objects
 
 	Blackboard* tradingBlackboard = nullptr; //central communication for trading agents
 	Blackboard* boidBlackboard = nullptr; //communication of boids and the enviroment they are moving around in

@@ -261,6 +261,15 @@
     <ClCompile Include="source\Puzzle.cpp">
       <Filter>Source Files\Users\PuzzleBot</Filter>
     </ClCompile>
+    <ClCompile Include="source\PuzzleAgent.cpp">
+      <Filter>Source Files\Systems\Components\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PuzzleBotSpawner.cpp">
+      <Filter>Source Files\Systems\Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PuzzleRenderer.cpp">
+      <Filter>Source Files\Systems\Components\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Component.h">
@@ -424,6 +433,15 @@
     </ClInclude>
     <ClInclude Include="source\Puzzle.h">
       <Filter>Header Files\Users\PuzzleBot</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PuzzleAgent.h">
+      <Filter>Header Files\Systems\Components\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PuzzleBotSpawner.h">
+      <Filter>Header Files\Systems\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PuzzleRenderer.h">
+      <Filter>Header Files\Systems\Components\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

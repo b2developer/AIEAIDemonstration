@@ -26,6 +26,9 @@ public:
 	//the desired position of the piece
 	Vector2 correctPosition = Vector2(0, 0);
 
+	//position to render at relative to the other pieces, gets interpolated by a renderer
+	Vector2 renderPosition = Vector2(0, 0);
+
 	/*
 	* Piece()
 	* default constructor
@@ -105,9 +108,10 @@ public:
 	* sets the puzzle with pieces that
 	* are placed randomly
 	*
+	* @param size_t iterations - the amount of random moves to attempt
 	* @returns void
 	*/
-	void setRandom();
+	void setRandom(size_t iterations);
 
 
 	/*
@@ -179,6 +183,30 @@ public:
 	* @param PlannerState* - the state to apply the action to
 	* @returns PlannerState* - the new state with the action applied to it
 	*/
-	PlannerState* execute(PlannerState* original);
+	PlannerState* execute(PlannerState* original) override;
+
+
+	/*
+	* isReverse
+	* overrides PlannerAction's isReverse()
+	*
+	* checks if this action applies the opposite
+	* effect of the other action
+	*
+	* @param PlannerAction* other - pointer to the other action
+	* @returns bool - indicates if 'other' is the reverse action
+	*/
+	bool isReverse(PlannerAction* other) override;
+
+
+	/*
+	* executeDirect
+	*
+	* applies the action directly to the state that called it
+	*
+	* @param PlannerState* - the state to apply the action to
+	* @returns void
+	*/
+	void executeDirect(PlannerState* original);
 
 };

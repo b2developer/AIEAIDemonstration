@@ -7,7 +7,7 @@
 #include "Renderer.h"
 #include "PathfindingAgent.h"
 
-//adds the necessary components for a trading bot object
+//adds the necessary components for a pathfinding bot object
 void PathfindingBotSpawner::addComponents(GameObject * creation)
 {
 	//add all components
