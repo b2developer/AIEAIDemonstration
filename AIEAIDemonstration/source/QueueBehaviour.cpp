@@ -31,8 +31,8 @@ Vector2 QueueBehaviour::update()
 		}
 	}
 
-	//average neighbour hood vector to all boids to be attracted to
-	Vector2 average = Vector2(0, 0);
+	Vector2 closestBoid = Vector2(0, 0);
+	float closestSqrMag = INFINITY;
 
 	//iterate through all neighbours
 	for (size_t i = 0; i < neighbours.size(); i++)
@@ -40,28 +40,29 @@ Vector2 QueueBehaviour::update()
 		//store in a temporary value for performance and readability
 		SteeringBehaviourManager* otherBoid = neighbours[i];
 
-		//relative vector to the trailing point of the other boid
-		Vector2 relative = otherBoid->transform->translation + otherBoid->heading * -queueDistance;
+		//position of the following point
+		Vector2 followPoint = otherBoid->transform->translation + otherBoid->heading * -queueDistance;
 
 		Vector2 otherBoidPos = otherBoid->transform->translation - sbm->transform->translation;
 
 		//only follow the boid if it is in front of this one
 		if (sbm->heading.dot(otherBoidPos) > 0)
 		{
-			average += relative;
+			float sqrMag = otherBoidPos.sqrMagnitude();
+
+			if (closestSqrMag > sqrMag)
+			{
+				closestBoid = followPoint;
+				closestSqrMag = sqrMag;
+			}
 		}
 	}
 
-	//don't divide by 0
-	if (neighbours.size() > 0)
-	{
-		average = average / (float)neighbours.size();
-	}
-	else
+	//a suitable neighbouring boid wasn't found
+	if (closestSqrMag == INFINITY)
 	{
 		return Vector2(0, 0);
 	}
 
-
-	return (average - sbm->transform->translation).normalised() * sbm->maxVelocity - sbm->entity->velocity;
+	return (closestBoid - sbm->transform->translation).normalised() * sbm->maxVelocity - sbm->entity->velocity;
 }

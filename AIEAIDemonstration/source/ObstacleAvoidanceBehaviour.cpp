@@ -11,7 +11,7 @@ Vector2 ObstacleAvoidanceBehaviour::update()
 	float dynamicAheadDistance = aheadDistance;
 
 	float dynamicScale = (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * 0.5f + 0.5f;
-	float heavyDynamicScale = (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * 0.8f + 0.2f;
+	float heavyDynamicScale = (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * 0.6f + 0.4f;
 
 	//dynamic look ahead distance based on velocity
 	dynamicAheadDistance *= dynamicScale;
@@ -35,11 +35,11 @@ Vector2 ObstacleAvoidanceBehaviour::update()
 
 	Matrix2 leftMat = Matrix2();
 	leftMat.identity();
-	leftMat.setRotate(0.4f);
+	leftMat.setRotate(feelerAngle * DEG2RAD);
 
 	Matrix2 rightMat = Matrix2();
 	rightMat.identity();
-	rightMat.setRotate(-0.4f);
+	rightMat.setRotate(-feelerAngle  * DEG2RAD);
 
 	bool leftCollides = false;
 	bool rightCollides = false;

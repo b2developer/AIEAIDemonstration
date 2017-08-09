@@ -19,6 +19,9 @@ public:
 	//the distance of the line that is used to detect future collisions
 	float aheadDistance = 10.0f;
 
+	//angle at which the feelers detect future collisions
+	float feelerAngle = 45.0f;
+
 	/*
 	* ObstacleAvoidanceBehaviour()
 	* default constructor
