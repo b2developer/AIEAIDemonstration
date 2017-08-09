@@ -100,7 +100,7 @@ bool Application2D::startup()
 	director->employee = obstacleSpawner;
 
 	//spawn 10 obstacles
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 0; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
@@ -109,7 +109,7 @@ bool Application2D::startup()
 	boidSpawner->mode = BoidMode::MOUSE_FOLLOWER;
 
 	//spawn 20 boids
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
@@ -188,16 +188,16 @@ void Application2D::update(float deltaTime)
 		gameObjects[i]->update();
 	}
 
-	mousePos = Vector2((float)input->getMouseX(), (float)input->getMouseY());
+	mousePos = Vector2((float)input->getMouseX(), (float)input->getMouseY()) + cameraPos;
 
 	if (input->isMouseButtonDown(0))
 	{
-		start = Vector2((float)input->getMouseX(), (float)input->getMouseY());
+		start = Vector2((float)input->getMouseX(), (float)input->getMouseY()) + cameraPos;
 	}
 
 	if (input->isMouseButtonDown(1))
 	{
-		end = Vector2((float)input->getMouseX(), (float)input->getMouseY());
+		end = Vector2((float)input->getMouseX(), (float)input->getMouseY()) + cameraPos;
 	}
 
 	decayTimer -= deltaTime;
@@ -208,6 +208,8 @@ void Application2D::update(float deltaTime)
 
 		//path = navMesh->findPath(start, end, 32.0f);
 	}
+
+	cameraPos.x += 0.0f * deltaTime;
 }
 
 
@@ -217,6 +219,8 @@ void Application2D::draw()
 	clearScreen();
 
 	m_renderer2D->begin();
+
+	m_renderer2D->setCameraPos(cameraPos.x, cameraPos.y);
 
 	m_renderer2D->setRenderColour(1, 1, 1);
 

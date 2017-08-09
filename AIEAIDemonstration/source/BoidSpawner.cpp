@@ -18,6 +18,7 @@
 #include "SeparationBehaviour.h"
 #include "CohesionBehaviour.h"
 #include "AlignmentBehaviour.h"
+#include "QueueBehaviour.h"
 
 //adds the necessary components for a trading bot object
 void BoidSpawner::addComponents(GameObject * creation)
@@ -78,18 +79,25 @@ void BoidSpawner::addComponents(GameObject * creation)
 		((CohesionBehaviour*)cohesion)->neighbourhoodRadius = 200.0f;
 		cohesion->sbm = sbm;
 
+		QueueBehaviour* queue = new QueueBehaviour();
+		((QueueBehaviour*)queue)->neighbourhoodRadius = 100.0f;
+		((QueueBehaviour*)queue)->queueDistance = 100.0f;
+		((QueueBehaviour*)queue)->neighbourhoodForwardDistance = 0.0f;
+		queue->sbm = sbm;
+
 		AlignmentBehaviour* align = new AlignmentBehaviour();
 		((AlignmentBehaviour*)align)->neighbourhoodRadius = 100.0f;
 		((AlignmentBehaviour*)align)->neighbourhoodForwardDistance = 50.0f;
 		align->sbm = sbm;
 
-		seek->weight = 5.0f;
-		wander->weight = 2.0f;
+		seek->weight = 2.0f;
+		wander->weight = 0.2f;
 		arrival->weight = 0.0f;
 		separation->weight = 40.0f;
 		cohesion->weight = 0.6f;
 		align->weight = 10.0f;
-		avoidance->weight = 10.0f;
+		avoidance->weight = 600.0f;
+		queue->weight = 15.0f;
 
 		sbm->behaviours.push_back(seek);
 		sbm->behaviours.push_back(wander);
@@ -97,7 +105,8 @@ void BoidSpawner::addComponents(GameObject * creation)
 		sbm->behaviours.push_back(separation);
 		sbm->behaviours.push_back(cohesion);
 		sbm->behaviours.push_back(align);
-		sbm->behaviours.push_back(avoidance);
+		//sbm->behaviours.push_back(avoidance);
+		sbm->behaviours.push_back(queue);
 	}
 
 	if (mode == BoidMode::PURSUER)
@@ -131,7 +140,9 @@ void BoidSpawner::addComponents(GameObject * creation)
 	}
 
 	sbm->maxVelocity = 200.0f;
-	sbm->maxAcceleration = 200.0f;
+	sbm->minVelocity = 30.0f;
+	sbm->maxAcceleration = 400.0f;
+	sbm->minAcceleration = 50.0f;
 
 	//give the steering behaviour manager a blackboard to communicate with others
 	sbm->enviroment = boidBlackboard;

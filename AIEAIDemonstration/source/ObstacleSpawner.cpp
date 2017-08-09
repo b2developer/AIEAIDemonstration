@@ -51,10 +51,12 @@ void ObstacleSpawner::addComponents(GameObject * creation)
 	transform->scale = Vector2(1.0f, 1.0f);
 	transform->rotation = 0.0f;
 
+	Vector3 rgb = Vector3((rand() % 1000) * 0.001f, (rand() % 1000) * 0.001f, (rand() % 1000) * 0.001f).normalised();
+
 	//assign a random colour to the obstacle
-	((PrimitiveRenderer*)renderer)->r = (rand() % 1000) * 0.001f;
-	((PrimitiveRenderer*)renderer)->b = (rand() % 1000) * 0.001f;
-	((PrimitiveRenderer*)renderer)->g = (rand() % 1000) * 0.001f;
+	((PrimitiveRenderer*)renderer)->r = rgb.x;
+	((PrimitiveRenderer*)renderer)->b = rgb.y;
+	((PrimitiveRenderer*)renderer)->g = rgb.z;
 	((PrimitiveRenderer*)renderer)->depth = 3.0f;
 
 	//linking the components together

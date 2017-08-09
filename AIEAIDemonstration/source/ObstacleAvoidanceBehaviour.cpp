@@ -10,8 +10,11 @@ Vector2 ObstacleAvoidanceBehaviour::update()
 {
 	float dynamicAheadDistance = aheadDistance;
 
+	float dynamicScale = (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * 0.5f + 0.5f;
+	float heavyDynamicScale = (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * 0.8f + 0.2f;
+
 	//dynamic look ahead distance based on velocity
-	dynamicAheadDistance *= (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * 0.5f + 0.5f;
+	dynamicAheadDistance *= dynamicScale;
 
 	//get the position of the boid
 	Vector2 boidPosition = sbm->transform->translation;
@@ -42,10 +45,10 @@ Vector2 ObstacleAvoidanceBehaviour::update()
 	bool rightCollides = false;
 
 	//the polygon is a line
-	((Polygon*)leftPoly)->points.push_back(boidPosition);
+	((Polygon*)leftPoly)->points.push_back(boidPosition + (forwardLine * leftMat).normalised());
 	((Polygon*)leftPoly)->points.push_back(boidPosition + (forwardLine * leftMat));
 
-	((Polygon*)rightPoly)->points.push_back(boidPosition);
+	((Polygon*)rightPoly)->points.push_back(boidPosition + (forwardLine * rightMat).normalised());
 	((Polygon*)rightPoly)->points.push_back(boidPosition + (forwardLine * rightMat));
 
 	//store all colliding shapes
@@ -69,6 +72,7 @@ Vector2 ObstacleAvoidanceBehaviour::update()
 		}
 	}
 
+	//remove the polygons and transforms used for testing
 	delete leftPoly;
 	delete null1;
 
@@ -76,29 +80,30 @@ Vector2 ObstacleAvoidanceBehaviour::update()
 	delete null2;
 
 	//early exit if there are no collisions
-	if (!leftCollides || !rightCollides)
+	if (!leftCollides && !rightCollides)
 	{
 		return Vector2(0, 0);
 	}
 
 	Vector2 repel = Vector2(0, 0);
 
+	//if only the left feeler collided, move to the right
 	if (leftCollides && !rightCollides)
 	{
-		repel = sbm->heading.normal(NormalDirection::LEFT) - sbm->heading;
+		repel = sbm->heading.normal(NormalDirection::RIGHT);
 	}
 
+	//if only the right feeler collided, move to the left
 	if (!leftCollides && rightCollides)
 	{
-		repel = sbm->heading.normal(NormalDirection::RIGHT) - sbm->heading;;
+		repel = sbm->heading.normal(NormalDirection::LEFT);
 	}
 
+	//if both collided, move backwards
 	if (leftCollides && rightCollides)
 	{
 		repel = sbm->heading * -1.0f;
 	}
 
-	sbm->heading.normalise();
-
-	return repel * sbm->maxVelocity;// -sbm->entity->velocity;
+	return repel * sbm->maxVelocity * heavyDynamicScale;
 }

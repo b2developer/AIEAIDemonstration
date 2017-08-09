@@ -40,8 +40,10 @@ public:
 	//directional vector which shows which way the boid is pointing
 	Vector2 heading = Vector2(1.0f, 0);
 
-	//maximum change in position and acceleration
+	//maximum / minimum change in position and acceleration
 	float maxVelocity = 0.0f;
+	float minVelocity = 0.0f;
+	float minAcceleration = 0.0f;
 	float maxAcceleration = 0.0f;
 
 	//pointer to the boid enviroment blackboard

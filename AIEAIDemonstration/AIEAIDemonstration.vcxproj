@@ -179,6 +179,7 @@
     <ClCompile Include="source\PuzzleAgent.cpp" />
     <ClCompile Include="source\PuzzleBotSpawner.cpp" />
     <ClCompile Include="source\PuzzleRenderer.cpp" />
+    <ClCompile Include="source\QueueBehaviour.cpp" />
     <ClCompile Include="source\RangeTransition.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
     <ClCompile Include="source\SearchState.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="source\PuzzleAgent.h" />
     <ClInclude Include="source\PuzzleBotSpawner.h" />
     <ClInclude Include="source\PuzzleRenderer.h" />
+    <ClInclude Include="source\QueueBehaviour.h" />
     <ClInclude Include="source\RangeTransition.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Script.h" />

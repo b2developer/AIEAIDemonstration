@@ -121,6 +121,12 @@
     <Filter Include="Header Files\Users\PuzzleBot">
       <UniqueIdentifier>{54a1b42c-a650-48a3-ab31-a250a7fdf9e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Systems\SteeringBehaviours\Advanced">
+      <UniqueIdentifier>{b2062934-3bce-48c1-9f5c-87b7d75ce4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Systems\SteeringBehaviours\Advanced">
+      <UniqueIdentifier>{d3485090-2480-4c41-a829-c8bb3963bc82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\TestSpawner.cpp">
@@ -269,6 +275,9 @@
     </ClCompile>
     <ClCompile Include="source\PuzzleRenderer.cpp">
       <Filter>Source Files\Systems\Components\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\QueueBehaviour.cpp">
+      <Filter>Source Files\Systems\SteeringBehaviours\Advanced</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -442,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="source\PuzzleRenderer.h">
       <Filter>Header Files\Systems\Components\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="source\QueueBehaviour.h">
+      <Filter>Header Files\Systems\SteeringBehaviours\Advanced</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

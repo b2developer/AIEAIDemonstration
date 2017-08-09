@@ -58,6 +58,7 @@ public:
 	aie::Renderer2D* m_renderer2D; //responsible for draw calls
 
 	Vector2 mousePos = Vector2(0,0);
+	Vector2 cameraPos = Vector2(0, 0);
 
 	/*
 	* Application2D()

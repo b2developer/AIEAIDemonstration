@@ -63,6 +63,12 @@ void SteeringBehaviourManager::update()
 		forceSum = forceSum.normalised() * maxAcceleration;
 	}
 
+	//scale the force vector up if it exceeds the limits of the steering behaviour manager
+	if (forceSum.sqrMagnitude() < minAcceleration * minAcceleration)
+	{
+		forceSum = forceSum.normalised() * minAcceleration;
+	}
+
 	//apply the force
 	entity->velocity += forceSum * appPtr->m_deltaTime;
 
@@ -70,6 +76,12 @@ void SteeringBehaviourManager::update()
 	if (entity->velocity.sqrMagnitude() > maxVelocity * maxVelocity)
 	{
 		entity->velocity = entity->velocity.normalised() * maxVelocity;
+	}
+
+	//scale the velocity vector up if it exeeds the limits
+	if (entity->velocity.sqrMagnitude() < minVelocity * minVelocity)
+	{
+		entity->velocity = entity->velocity.normalised() * minVelocity;
 	}
 
 	//get the heading vector, but don't update it if the velocity vector is null
