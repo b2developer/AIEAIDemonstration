@@ -16,19 +16,29 @@ void PuzzleBotSpawner::addComponents(GameObject * creation)
 	Renderer* puzzleRenderer = new PuzzleRenderer();
 	Agent* puzzleAgent = new PuzzleAgent();
 
-	transform->translation = Vector2(200.0f, 200.0f);
+	transform->translation = Vector2(200.0f + 300.0f * spawnCount, 200.0f);
 	transform->scale = Vector2(1.0f, 1.0f);
 	transform->rotation = 0.0f;
 
 	//construct the box
 	box->min = Vector2(0.0f, 0.0f);
-	box->max = Vector2(500.0f, 500.0f);
+	box->max = Vector2(200.0f, 200.0f);
 
 	char texturePath[FILENAME_MAX];
 
 	//load the navigation bot texture for the renderer
 	strcpy_s(texturePath, appPtr->resourceFolder);
-	strcat_s(texturePath, "textures\\kool-aid-man.png");
+	
+	//load different textures depending on the amount of puzzle bots spawned
+	if (spawnCount == 0)
+	{
+		strcat_s(texturePath, "textures\\kool-aid-man.png");
+	}
+	else if (spawnCount == 1)
+	{
+		strcat_s(texturePath, "textures\\apple.png");
+	}
+
 	puzzleRenderer->load(texturePath);
 
 	((PuzzleRenderer*)puzzleRenderer)->movementSpeed = 12.0f;
@@ -75,4 +85,6 @@ void PuzzleBotSpawner::addComponents(GameObject * creation)
 	creation->components.push_back(puzzleRenderer);
 	creation->components.push_back(puzzleAgent);
 
+	//increment the spawn count
+	spawnCount++;
 }

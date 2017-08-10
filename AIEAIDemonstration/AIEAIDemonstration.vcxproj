@@ -169,10 +169,10 @@
     <ClCompile Include="source\FleeBehaviour.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\GotoState.cpp" />
+    <ClCompile Include="source\Group.cpp" />
     <ClCompile Include="source\Heuristics.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\NavMesh.cpp" />
-    <ClCompile Include="source\NavMeshStructures.cpp" />
     <ClCompile Include="source\ObstacleAvoidanceBehaviour.cpp" />
     <ClCompile Include="source\ObstacleSpawner.cpp" />
     <ClCompile Include="source\PathfindingAgent.cpp" />
@@ -231,6 +231,7 @@
     <ClInclude Include="source\GotoState.h" />
     <ClInclude Include="source\Graph.h" />
     <ClInclude Include="source\BlackboardItem.h" />
+    <ClInclude Include="source\Group.h" />
     <ClInclude Include="source\Heuristics.h" />
     <ClInclude Include="source\MathsLibrary.h" />
     <ClInclude Include="source\ExchangedTransition.h" />

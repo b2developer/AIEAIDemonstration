@@ -258,9 +258,6 @@
     <ClCompile Include="source\CohesionBehaviour.cpp">
       <Filter>Source Files\Systems\SteeringBehaviours\Flocking</Filter>
     </ClCompile>
-    <ClCompile Include="source\NavMeshStructures.cpp">
-      <Filter>Source Files\Systems\Solvers</Filter>
-    </ClCompile>
     <ClCompile Include="source\AlignmentBehaviour.cpp">
       <Filter>Source Files\Systems\SteeringBehaviours\Flocking</Filter>
     </ClCompile>
@@ -302,6 +299,9 @@
     </ClCompile>
     <ClCompile Include="source\BehaviourDecorator.cpp">
       <Filter>Source Files\Systems\BehaviourTree</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Group.cpp">
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -499,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="source\BehaviourTrees.h">
       <Filter>Header Files\Systems\BehaviourTree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Group.h">
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,9 @@ public:
 	//pointer to the application that is holding this
 	Application2D* appPtr = nullptr;
 
+	//the amount of puzzle bots that have been spawned
+	int spawnCount = 0;
+
 	/*
 	* PuzzleBotSpawner()
 	* default constructor

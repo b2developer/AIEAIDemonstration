@@ -8,10 +8,14 @@
 //called once per frame, gets the force to sum to the boid
 Vector2 ObstacleAvoidanceBehaviour::update()
 {
+	//scales will be applied to this distance copy
 	float dynamicAheadDistance = aheadDistance;
 
-	float dynamicScale = (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * 0.5f + 0.5f;
-	float heavyDynamicScale = (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * 0.6f + 0.4f;
+	//scaling applied to the feeler distances
+	float dynamicScale = fminf((sbm->entity->velocity.sqrMagnitude() / sbm->maxVelocity) * dynamicScaling, 1.0f);
+
+	//scaling applied to the force vector
+	float heavyDynamicScale = (sbm->entity->velocity.magnitude() / sbm->maxVelocity) * heavyDynamicScaling + heavyDynamicOffset;
 
 	//dynamic look ahead distance based on velocity
 	dynamicAheadDistance *= dynamicScale;

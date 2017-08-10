@@ -67,7 +67,10 @@ void BoidSpawner::addComponents(GameObject * creation)
 
 	ObstacleAvoidanceBehaviour* avoidance = new ObstacleAvoidanceBehaviour();
 	((ObstacleAvoidanceBehaviour*)avoidance)->aheadDistance = 100.0f;
-	((ObstacleAvoidanceBehaviour*)avoidance)->feelerAngle = 25.0f;
+	((ObstacleAvoidanceBehaviour*)avoidance)->feelerAngle = 15.0f;
+	((ObstacleAvoidanceBehaviour*)avoidance)->dynamicScaling = 0.3f;
+	((ObstacleAvoidanceBehaviour*)avoidance)->heavyDynamicScaling = 0.5f;
+	((ObstacleAvoidanceBehaviour*)avoidance)->heavyDynamicOffset = 0.5f;
 	avoidance->sbm = sbm;
 
 	SeparationBehaviour* separation = new SeparationBehaviour();
@@ -89,14 +92,14 @@ void BoidSpawner::addComponents(GameObject * creation)
 	((AlignmentBehaviour*)align)->neighbourhoodForwardDistance = 50.0f;
 	align->sbm = sbm;
 
-	seek->weight = 2.0f;
-	wander->weight = 0.2f;
-	arrival->weight = 0.0f;
-	separation->weight = 40.0f;
-	cohesion->weight = 0.6f;
-	align->weight = 10.0f;
-	avoidance->weight = 900.0f;
-	queue->weight = 7.0f;
+	seek->weight = 1.0f;
+	wander->weight = 0.3f;
+	arrival->weight = 0.5f;
+	separation->weight = 1.5f;
+	cohesion->weight = 0.05f;
+	align->weight = 0.2f;
+	avoidance->weight = 1000.0f;
+	queue->weight = 0.5f;
 
 	sbm->behaviours.push_back(seek);
 	sbm->behaviours.push_back(wander);
@@ -108,8 +111,8 @@ void BoidSpawner::addComponents(GameObject * creation)
 	sbm->behaviours.push_back(queue);
 
 	sbm->maxVelocity = 300.0f;
-	sbm->minVelocity = 10.0f;
-	sbm->maxAcceleration = 700.0f;
+	sbm->minVelocity = 30.0f;
+	sbm->maxAcceleration = 2000.0f;
 	sbm->minAcceleration = 50.0f;
 
 	//give the steering behaviour manager a blackboard to communicate with others

@@ -38,11 +38,11 @@ void ObstacleSpawner::addComponents(GameObject * creation)
 	{
 		shape = new Polygon();
 
-		((Polygon*)shape)->points.push_back(Vector2(0.0f, 35.0f));
-		((Polygon*)shape)->points.push_back(Vector2(40.0f, 0.0f));
-		((Polygon*)shape)->points.push_back(Vector2(25.0f, -25.0f));
-		((Polygon*)shape)->points.push_back(Vector2(-25.0f, -25.0f));
-		((Polygon*)shape)->points.push_back(Vector2(-40.0f, 0.0f));
+		((Polygon*)shape)->points.push_back(Vector2(0.0f, 70.0f));
+		((Polygon*)shape)->points.push_back(Vector2(80.0f, 0.0f));
+		((Polygon*)shape)->points.push_back(Vector2(50.0f, -50.0f));
+		((Polygon*)shape)->points.push_back(Vector2(-50.0f, -50.0f));
+		((Polygon*)shape)->points.push_back(Vector2(-80.0f, 0.0f));
 		
 	}
 

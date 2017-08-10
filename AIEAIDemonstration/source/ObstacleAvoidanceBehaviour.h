@@ -22,6 +22,13 @@ public:
 	//angle at which the feelers detect future collisions
 	float feelerAngle = 45.0f;
 
+	//scaling feeler distance against velocity
+	float dynamicScaling = 0.1f;
+
+	//scaling acceleration output against velocity
+	float heavyDynamicScaling = 0.5f;
+	float heavyDynamicOffset = 0.5f;
+
 	/*
 	* ObstacleAvoidanceBehaviour()
 	* default constructor

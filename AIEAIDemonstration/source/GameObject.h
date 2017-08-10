@@ -17,6 +17,9 @@ public:
 	//list of components held by this
 	std::vector<Component*> components;
 
+	//counts how many groups this gameobject is in
+	int groups = 0;
+
 	/*
 	* GameObject
 	* default constructor

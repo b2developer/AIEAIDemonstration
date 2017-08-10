@@ -83,49 +83,71 @@ bool Application2D::startup()
 
 	director->employee = tradingBotSpawner;
 
-	//spawn 0 trading bots
+	//spawning code
+	//-------------------------------------------------------------
+
+	//all groups in the application
+	Group tradingGroup = Group();
+	Group pathfindingGroup = Group();
+	Group boidGroup = Group();
+	Group puzzleGroup = Group();
+
+	tradingGroup.enabled = true;
+	pathfindingGroup.enabled = false;
+	boidGroup.enabled = false;
+	puzzleGroup.enabled = false;
+
+	//spawn 20 trading bots
 	for (int i = 0; i < 20; i++)
 	{
-		gameObjects.push_back(director->createGameObject());
+		tradingGroup.addGameObject(director->createGameObject());
 	}
 
 	director->employee = pathfindingBotSpawner;
 
-	//spawn 0 pathfinding bots
+	//spawn 50 pathfinding bots
 	for (int i = 0; i < 50; i++)
 	{
-		gameObjects.push_back(director->createGameObject());
+		pathfindingGroup.addGameObject(director->createGameObject());
 	}
 
 	director->employee = obstacleSpawner;
 
-	//spawn 10 obstacles
-	for (int i = 0; i < 10; i++)
+	//spawn 4 obstacles
+	for (int i = 0; i < 4; i++)
 	{
-		gameObjects.push_back(director->createGameObject());
+		boidGroup.addGameObject(director->createGameObject());
 	}
-
+	
 	director->employee = boidSpawner;
 
 	//spawn 20 boids
 	for (int i = 0; i < 20; i++)
 	{
-		gameObjects.push_back(director->createGameObject());
+		boidGroup.addGameObject(director->createGameObject());
 	}
 
 	director->employee = puzzleBotSpawner;
 
 	//spawn a puzzle bot
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 2; i++)
 	{
-		gameObjects.push_back(director->createGameObject());
+		puzzleGroup.addGameObject(director->createGameObject());
 	}
+
+	//-------------------------------------------------------------
 
 	//initialise all game-objects
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->initialise();
 	}
+
+	//add all groups
+	groups.push_back(tradingGroup);
+	groups.push_back(pathfindingGroup);
+	groups.push_back(boidGroup);
+	groups.push_back(puzzleGroup);
 
 	return true;
 }
@@ -155,12 +177,6 @@ void Application2D::shutdown()
 	}
 }
 
-float decayTimer = 0.0f;
-float decayDuration = 0.0f;
-
-std::vector<Vector2> path;
-Vector2 start = Vector2(0, 0);
-Vector2 end = Vector2(0, 0);
 
 //the game loop
 void Application2D::update(float deltaTime)
@@ -181,34 +197,62 @@ void Application2D::update(float deltaTime)
 		quit();
 	}
 
+	bool groupChanged = false;
+
+	//check if a key that switches groups was pressed
+	if (input->isKeyDown(aie::INPUT_KEY_1))
+	{
+		activeGroup = 0;
+		groupChanged = true;
+	}
+	else if (input->isKeyDown(aie::INPUT_KEY_2))
+	{
+		activeGroup = 1;
+		groupChanged = true;
+	}
+	else if (input->isKeyDown(aie::INPUT_KEY_3))
+	{
+		activeGroup = 2;
+		groupChanged = true;
+	}
+	else if (input->isKeyDown(aie::INPUT_KEY_4))
+	{
+		activeGroup = 3;
+		groupChanged = true;
+	}
+
+	if (groupChanged)
+	{
+		//iterate through all groups, setting their enabled flag to the correct value
+		for (size_t i = 0; i < groups.size(); i++)
+		{
+			groups[i].enabled = (activeGroup == (int)i);
+		}
+	}
+	
+	//update all dynamic blackboards
 	tradingBlackboard->update(deltaTime);
+
+	//update all groups
+	for (size_t i = 0; i < groups.size(); i++)
+	{
+		groups[i].update();
+	}
 
 	//iterate through all gameobjects, updating each one
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
-		gameObjects[i]->update();
+		//store in a temporary value for performance and readability
+		GameObject* gameObject = gameObjects[i];
+
+		//only update the object if no groups are going to
+		if (gameObject->groups == 0)
+		{
+			gameObject->update();
+		}
 	}
 
 	mousePos = Vector2((float)input->getMouseX(), (float)input->getMouseY()) + cameraPos;
-
-	if (input->isMouseButtonDown(0))
-	{
-		start = Vector2((float)input->getMouseX(), (float)input->getMouseY()) + cameraPos;
-	}
-
-	if (input->isMouseButtonDown(1))
-	{
-		end = Vector2((float)input->getMouseX(), (float)input->getMouseY()) + cameraPos;
-	}
-
-	decayTimer -= deltaTime;
-
-	if (decayTimer <= 0.0f)
-	{
-		decayTimer = decayDuration;
-
-		path = navMesh->findPath(start, end, 32.0f);
-	}
 
 }
 
@@ -224,19 +268,29 @@ void Application2D::draw()
 
 	m_renderer2D->setRenderColour(1, 1, 1);
 
+	//draw all groups
+	for (size_t i = 0; i < groups.size(); i++)
+	{
+		groups[i].draw();
+	}
+
 	//iterate through all gameobjects, drawing each one
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
-		gameObjects[i]->draw();
+		//store in a temporary value for performance and readability
+		GameObject* gameObject = gameObjects[i];
+
+		//only draw the object if no groups are going to
+		if (gameObject->groups == 0)
+		{
+			gameObject->draw();
+		}
 	}
 
-	navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 5.0f);
-
-	m_renderer2D->setRenderColour(0, 1, 0);
-
-	for (int i = 0; i < (int)path.size() - 1; i++)
+	//only render the nav-mesh if the pathfinding bots are active
+	if (groups[1].enabled)
 	{
-		m_renderer2D->drawLine(path[i].x, path[i].y, path[i + 1].x, path[i + 1].y, 2.0f, 0.0f);
+		navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 5.0f);
 	}
 
 	m_renderer2D->end();

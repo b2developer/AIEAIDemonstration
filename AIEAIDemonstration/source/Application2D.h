@@ -5,6 +5,7 @@
 
 #include "GameObject.h"
 #include "Component.h"
+#include "Group.h"
 
 #include "Director.h"
 #include "Spawner.h"
@@ -39,6 +40,10 @@ class Application2D : public aie::Application
 public:
 
 	std::vector<GameObject*> gameObjects; //container for all gameobjects in the game
+	std::vector<Group> groups; //container for all groups in the game
+
+	//the group that is active
+	int activeGroup = 0;
 
 	float m_deltaTime = 0.0f; //stores the amount of time passed since the last frame
 	char resourceFolder[FILENAME_MAX]; //c-string that stores the path to the folder that contains all resources
