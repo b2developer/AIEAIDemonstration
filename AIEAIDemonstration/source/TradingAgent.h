@@ -125,7 +125,7 @@ public:
 
 	/*
 	* ~TradingAgent()
-	* destructor, deletes the contained FSM
+	* destructor, deletes the contained FSM and proposed trade
 	*/
 	~TradingAgent();
 

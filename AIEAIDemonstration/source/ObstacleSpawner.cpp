@@ -79,4 +79,8 @@ void ObstacleSpawner::addComponents(GameObject * creation)
 	BlackboardReference* bref = boidBlackboard->registerItemWithReference<Obstacle, Obstacle>(0.0f);
 	((BlackboardData<Obstacle, Obstacle>*)bref->item)->timeLocked = true;
 	((BlackboardData<Obstacle, Obstacle>*)bref->item)->data.shape = shape;
+
+	//remove the reference as it is no longer needed
+	bref->item->references.clear();
+	delete bref;
 }

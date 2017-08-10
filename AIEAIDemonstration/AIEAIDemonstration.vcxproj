@@ -147,6 +147,12 @@
     <ClCompile Include="source\AlignmentBehaviour.cpp" />
     <ClCompile Include="source\Application2D.cpp" />
     <ClCompile Include="source\ArrivalBehaviour.cpp" />
+    <ClCompile Include="source\BehaviourAction.cpp" />
+    <ClCompile Include="source\BehaviourCondition.cpp" />
+    <ClCompile Include="source\BehaviourDecorator.cpp" />
+    <ClCompile Include="source\BehaviourSelector.cpp" />
+    <ClCompile Include="source\BehaviourSequence.cpp" />
+    <ClCompile Include="source\BehaviourTree.cpp" />
     <ClCompile Include="source\Blackboard.cpp" />
     <ClCompile Include="source\BlackboardItem.cpp" />
     <ClCompile Include="source\BoidSpawner.cpp" />
@@ -199,6 +205,13 @@
     <ClInclude Include="source\AlignmentBehaviour.h" />
     <ClInclude Include="source\Application2D.h" />
     <ClInclude Include="source\ArrivalBehaviour.h" />
+    <ClInclude Include="source\BehaviourAction.h" />
+    <ClInclude Include="source\BehaviourCondition.h" />
+    <ClInclude Include="source\BehaviourDecorator.h" />
+    <ClInclude Include="source\BehaviourSelector.h" />
+    <ClInclude Include="source\BehaviourSequence.h" />
+    <ClInclude Include="source\BehaviourTree.h" />
+    <ClInclude Include="source\BehaviourTrees.h" />
     <ClInclude Include="source\Blackboard.h" />
     <ClInclude Include="source\BlackboardData.h" />
     <ClInclude Include="source\BlackboardReference.h" />

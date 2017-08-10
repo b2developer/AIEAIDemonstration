@@ -61,7 +61,7 @@ public:
 
 	/*
 	* ~PuzzleAgent()
-	* destructor, deletes the planner and the current state
+	* destructor, deletes the planner, current state and all planned moves
 	*/
 	~PuzzleAgent();
 

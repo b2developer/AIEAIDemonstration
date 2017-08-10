@@ -1,58 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Shape" Collapsed="true">
-    <Position X="7.5" Y="4.75" Width="1.5" />
+    <Position X="17.25" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAABAAkEAAAAAAAAAAAEAAA=</HashCode>
       <FileName>source\Shape.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Box" Collapsed="true">
-    <Position X="4" Y="6.25" Width="1.5" />
+    <Position X="17.25" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAQAAAAAAAAAAAAAA8AAAAAAAAAAAAEAAA=</HashCode>
       <FileName>source\Box.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Circle" Collapsed="true">
-    <Position X="2.25" Y="6.25" Width="1.5" />
+    <Position X="15" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>source\Circle.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Polygon" Collapsed="true">
-    <Position X="5.75" Y="6.25" Width="1.5" />
+    <Position X="19.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAASAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAEACA=</HashCode>
       <FileName>source\Polygon.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Renderer" Collapsed="true">
-    <Position X="9.25" Y="4.75" Width="1.5" />
+    <Position X="24" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAIAAAAAAAAAAAoAAAAAAAgAAAACAAAAEAAA=</HashCode>
       <FileName>source\Renderer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Transform" Collapsed="true">
-    <Position X="5.75" Y="4.75" Width="1.5" />
+    <Position X="12.75" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAIAACAAAQCAAAAAAAAAAAAAAAEAIA=</HashCode>
       <FileName>source\Transform.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Script" Collapsed="true">
-    <Position X="11" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAEAAAAAAAAAAAlAAA=</HashCode>
-      <FileName>source\Entity.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Component" Collapsed="true">
-    <Position X="8.25" Y="3.25" Width="1.5" />
+    <Position X="15" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAEAAA=</HashCode>
+      <HashCode>BAAgAAAAAAAAAAAAAAEAAAAAAAAAAAAAAABAAAAEAAA=</HashCode>
       <FileName>source\Component.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -60,70 +53,70 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Application2D" Collapsed="true">
-    <Position X="8.25" Y="0.75" Width="1.5" />
+    <Position X="1.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAMACAAAARBAABAAIAQAAgAAAAAAAAAAIAAAAEAAA=</HashCode>
+      <HashCode>AIAAMACAAAARBAABAAIAQAAgBQAAIAAAAAIAAAE0AII=</HashCode>
       <FileName>source\Application2D.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Transition" Collapsed="true">
-    <Position X="17.75" Y="4.5" Width="1.5" />
+    <Position X="27.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAIABAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAIABAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>source\FiniteStateMachine.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="State" Collapsed="true">
-    <Position X="15.75" Y="4.5" Width="1.5" />
+    <Position X="20.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAEAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAABBCEAgA=</HashCode>
       <FileName>source\FiniteStateMachine.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FiniteStateMachine" Collapsed="true">
-    <Position X="16.75" Y="3.75" Width="1.5" />
+    <Position X="24" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAAAAAAAAAAABAAAAAAACAAAAAAAAQAAAEAAA=</HashCode>
+      <HashCode>AAAAAAgAAAAAAQAAAABAAAAAAACAAAAAAAAYAAAEAAA=</HashCode>
       <FileName>source\FiniteStateMachine.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameObject" Collapsed="true">
-    <Position X="8.25" Y="2" Width="1.5" />
+    <Position X="15" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IBAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAAEIEAAA=</HashCode>
+      <HashCode>IBAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAEIEAAA=</HashCode>
       <FileName>source\GameObject.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Edge" Collapsed="true">
-    <Position X="17.75" Y="2.5" Width="1.5" />
+    <Position X="28.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAAAgAAAAAAAAAAAABCAAAAAgAAAAAAA=</HashCode>
       <FileName>source\Graph.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Vertex" Collapsed="true">
-    <Position X="15.75" Y="2.5" Width="1.5" />
+    <Position X="26.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAIABAAAAAAAAEAAQAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>source\Graph.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Graph" Collapsed="true">
-    <Position X="16.75" Y="1.75" Width="1.5" />
+    <Position X="27.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgBAAAAAAAAEAAAAAAAAAAAIAAQAAgAAAAgAAABAAA=</HashCode>
       <FileName>source\Graph.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CollisionEngine" Collapsed="true">
-    <Position X="10.75" Y="0.75" Width="1.5" />
+    <Position X="29.75" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAACAAAAAAAAAAAAAAAAAQAAAAIAAAAAAA=</HashCode>
+      <HashCode>AAAACAAAAAAACAAAAABAABAAAAAAAAQAAAAIAAAAAAA=</HashCode>
       <FileName>source\CollisionEngine.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Director" Collapsed="true">
-    <Position X="13.25" Y="3.25" Width="1.5" />
+    <Position X="6.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAAAAAAAAIAIAAAAAAAAAAAAAAAAgAEAA=</HashCode>
       <FileName>source\Director.h</FileName>
@@ -133,32 +126,452 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Spawner" Collapsed="true">
-    <Position X="13.25" Y="4.5" Width="1.5" />
+    <Position X="6.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAEA=</HashCode>
       <FileName>source\Spawner.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TestSpawner" Collapsed="true">
-    <Position X="13.25" Y="5.5" Width="1.5" />
+    <Position X="12" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAgAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>source\TestSpawner.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="BehaviourAction" Collapsed="true">
+    <Position X="0.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAgAAAAAAAAAAAAAAAABAAAAAECAA=</HashCode>
+      <FileName>source\BehaviourAction.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BehaviourCondition" Collapsed="true">
+    <Position X="2.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAgAAAAAAAAAAAAACAAAAAAAAEAIA=</HashCode>
+      <FileName>source\BehaviourCondition.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BehaviourDecorator" Collapsed="true">
+    <Position X="5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIgAAEgACAAAAAAAAAAAAAAAAAAAAMAAA=</HashCode>
+      <FileName>source\BehaviourDecorator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BehaviourSelector" Collapsed="true">
+    <Position X="7.25" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAQAgAAAAAgAAAAAAAAAAABAAAAEAAA=</HashCode>
+      <FileName>source\BehaviourSelector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BehaviourSequence" Collapsed="true">
+    <Position X="9.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAQAgAAAAAAAAAAAAAAAAABIAAAEAAA=</HashCode>
+      <FileName>source\BehaviourSequence.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Behaviour" Collapsed="true">
+    <Position X="5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAAAEIAA=</HashCode>
+      <FileName>source\BehaviourTree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BehaviourTree" Collapsed="true">
+    <Position X="5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAQAAIAAgAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>source\BehaviourTree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Blackboard" Collapsed="true">
+    <Position X="15" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAARAAAIAAAAAAAgAgAAAAAAAAAAABAAAAAIAAEAAA=</HashCode>
+      <FileName>source\Blackboard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlackboardData" Collapsed="true">
+    <Position X="15" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>source\BlackboardData.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlackboardItem" Collapsed="true">
+    <Position X="15" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAQQAAAAAAEAAAAAAgAgA=</HashCode>
+      <FileName>source\BlackboardItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlackboardReference" Collapsed="true">
+    <Position X="17" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAQAAAAAAIAA=</HashCode>
+      <FileName>source\BlackboardReference.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Agent" Collapsed="true">
+    <Position X="3.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAIAAAAAEAAEAAAAAAAAEAAA=</HashCode>
+      <FileName>source\Agent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PathfindingAgent" Collapsed="true">
+    <Position X="3.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAACAAACAAEIAAAAAAAAAAAAABAIABEAAAAAAAEAAA=</HashCode>
+      <FileName>source\PathfindingAgent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PuzzleAgent" Collapsed="true">
+    <Position X="6" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAQgIgAgAAAgAAAQBAAAAgKAAAEAAA=</HashCode>
+      <FileName>source\PuzzleAgent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SteeringBehaviourManager" Collapsed="true">
+    <Position X="8.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABABAAAAgAAIAQAAAAAIAEAAAUAAAAABEAAAIEgAA=</HashCode>
+      <FileName>source\SteeringBehaviourManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingAgent" Collapsed="true">
+    <Position X="1.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAQEEAAAAAAEQAAAACgAAAAAgEAAAAKACBCABQEAgI=</HashCode>
+      <FileName>source\TradingAgent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimitiveRenderer" Collapsed="true">
+    <Position X="21.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAEAIAIAQABIAAEBAA=</HashCode>
+      <FileName>source\PrimitiveRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PuzzleRenderer" Collapsed="true">
+    <Position X="24" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAEAAAAAAAAAAEAAAIAAAAAAAEAEA=</HashCode>
+      <FileName>source\PuzzleRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingRenderer" Collapsed="true">
+    <Position X="26.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAAAEAAAEAAAAAIAABAAAoCAAAAIAAAAAAAAAQAUCCA=</HashCode>
+      <FileName>source\TradingRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entity" Collapsed="true">
+    <Position X="10.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAIAAACAEAAAAAAQAAAAEAAA=</HashCode>
+      <FileName>source\Entity.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NavMesh" Collapsed="true">
+    <Position X="21.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAIARMAEAAAAAQIMAgAAAAAQAAAAQQAAABAA=</HashCode>
+      <FileName>source\NavMesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NavMeshTriangle" Collapsed="true">
+    <Position X="20.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABAAgAAAIAAAAAAAAMAIAAAAAAQABAAAgAAAAAAAAA=</HashCode>
+      <FileName>source\NavMeshStructures.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NavMeshVertex" Collapsed="true">
+    <Position X="20.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAIAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\NavMeshStructures.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NavMeshTriangleEdge" Collapsed="true">
+    <Position X="23" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAABAQAAAAAQAAAAAAABAAAgAAAAEAEAA=</HashCode>
+      <FileName>source\NavMeshStructures.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NavMeshEdge" Collapsed="true">
+    <Position X="23" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAIAAAAgAAAAAAAAAAAQAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>source\NavMeshStructures.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planner" Collapsed="true">
+    <Position X="28.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAkQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Planner.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlannerState" Collapsed="true">
+    <Position X="29.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAQAAAAAAAEAAAAIAAAAAAAAAAAAAAgQKAAAAAAA=</HashCode>
+      <FileName>source\Planner.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlannerAction" Collapsed="true">
+    <Position X="26.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAEAAAAAAAQAAAAQAAAAAQABAA=</HashCode>
+      <FileName>source\Planner.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoidSpawner" Collapsed="true">
+    <Position X="3" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAgAAAAgAAAAAAIAABAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\BoidSpawner.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObstacleSpawner" Collapsed="true">
+    <Position X="0.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAgAAAAIAABAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\ObstacleSpawner.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PathfindingBotSpawner" Collapsed="true">
+    <Position X="5.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAACAAIAAAAAAMAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\PathfindingBotSpawner.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PuzzleBotSpawner" Collapsed="true">
+    <Position X="7.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACJAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\PuzzleBotSpawner.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingBotSpawner" Collapsed="true">
+    <Position X="9.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACAAAAAAAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\TradingBotSpawner.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QueueBehaviour" Collapsed="true">
+    <Position X="1.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAgAAAAAAAAABAQAAAACAAEAAA=</HashCode>
+      <FileName>source\QueueBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AlignmentBehaviour" Collapsed="true">
+    <Position X="3.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAQAAAAAAQAAAgAAAEAAA=</HashCode>
+      <FileName>source\AlignmentBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CohesionBehaviour" Collapsed="true">
+    <Position X="5.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAABAAAAAAAABAAAAAAEAAA=</HashCode>
+      <FileName>source\CohesionBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeparationBehaviour" Collapsed="true">
+    <Position X="8" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIgAAAAAAAAgAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>source\SeparationBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArrivalBehaviour" Collapsed="true">
+    <Position X="10.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAACAAAAQAAAAAAAAAFAAA=</HashCode>
+      <FileName>source\ArrivalBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvadeBehaviour" Collapsed="true">
+    <Position X="12.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAACAAEAAA=</HashCode>
+      <FileName>source\EvadeBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FleeBehaviour" Collapsed="true">
+    <Position X="14.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIgAAAAAAAAAAAAAAAAAEAAAEAAA=</HashCode>
+      <FileName>source\FleeBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObstacleAvoidanceBehaviour" Collapsed="true">
+    <Position X="17" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABEAAAAAAAAAAAAAAAEAQAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>source\ObstacleAvoidanceBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PursueBehaviour" Collapsed="true">
+    <Position X="19.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAIAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>source\PursueBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeekBehaviour" Collapsed="true">
+    <Position X="21.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAABAIAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>source\SeekBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SteeringBehaviour" Collapsed="true">
+    <Position X="12.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAABCAAEAAAAAAAAAAAAgAAAAAAAEAAA=</HashCode>
+      <FileName>source\SteeringBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WanderBehaviour" Collapsed="true">
+    <Position X="23.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAgAAAAAAACAAAAAAAIAQAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>source\WanderBehaviour.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExchangedTransition" Collapsed="true">
+    <Position X="25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\ExchangedTransition.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExchangeState" Collapsed="true">
+    <Position X="18.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAABAAAAAAAAAAAABAAACEAAA=</HashCode>
+      <FileName>source\ExchangeState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GotoState" Collapsed="true">
+    <Position X="20.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAgAAAAAABAAAAAAAAAAAAAAAACEAAA=</HashCode>
+      <FileName>source\GotoState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RangeTransition" Collapsed="true">
+    <Position X="27.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAEAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>source\RangeTransition.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SearchState" Collapsed="true">
+    <Position X="23" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAABAAAAAAAAAACAAAAAKEAAA=</HashCode>
+      <FileName>source\SearchState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingTransition" Collapsed="true">
+    <Position X="29.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>source\TradingTransition.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Piece" Collapsed="true">
+    <Position X="29.75" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAgAAAAAAAABAAAAACAEAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>source\Puzzle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle" Collapsed="true">
+    <Position X="29.75" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgiAAAAAQAAAAAAgAAAAAAAAAAAQIgAAACAAAAAAA=</HashCode>
+      <FileName>source\Puzzle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Slide" Collapsed="true">
+    <Position X="26.75" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAIAAAAAAEAEAAAAAEAAAAQAAAAAAABAA=</HashCode>
+      <FileName>source\Puzzle.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Struct Name="Range" Collapsed="true">
-    <Position X="13.25" Y="1.5" Width="1.5" />
+    <Position X="29.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>source\Shape.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="AdvancedCollision" Collapsed="true">
-    <Position X="10.75" Y="1.5" Width="1.5" />
+    <Position X="29.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAIAEAAAA=</HashCode>
       <FileName>source\CollisionEngine.h</FileName>
     </TypeIdentifier>
   </Struct>
+  <Struct Name="Trade" Collapsed="true">
+    <Position X="15" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAgAAAA=</HashCode>
+      <FileName>source\TradingAgent.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Boid" Collapsed="true">
+    <Position X="15" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\BoidSpawner.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Obstacle" Collapsed="true">
+    <Position X="15" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>source\ObstacleSpawner.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="BehaviourResponse" Collapsed="true">
+    <Position X="7.25" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAACAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\BehaviourTree.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ObjectType" Collapsed="true">
+    <Position X="17" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\TradingAgent.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ShapeType" Collapsed="true">
+    <Position X="17" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAIAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\ObstacleSpawner.h</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

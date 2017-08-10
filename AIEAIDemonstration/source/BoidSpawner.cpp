@@ -49,96 +49,63 @@ void BoidSpawner::addComponents(GameObject * creation)
 	box->min = box->min * 0.1f;
 	box->max = box->max * 0.1f;
 
-	if (mode == BoidMode::MOUSE_FOLLOWER)
-	{
-		//give the steering behaviour manager all of it's behaviours
-		SteeringBehaviour* seek = new SeekBehaviour();
-		((SeekBehaviour*)seek)->target = &appPtr->mousePos;
-		seek->sbm = sbm;
+	//give the steering behaviour manager all of it's behaviours
+	SteeringBehaviour* seek = new SeekBehaviour();
+	((SeekBehaviour*)seek)->target = &appPtr->mousePos;
+	seek->sbm = sbm;
 
-		WanderBehaviour* wander = new WanderBehaviour();
-		((WanderBehaviour*)wander)->wanderRadius = 15.0f;
-		((WanderBehaviour*)wander)->wanderDistance = 5.0f;
-		((WanderBehaviour*)wander)->jitterAmount = 50.0f;
-		wander->sbm = sbm;
+	WanderBehaviour* wander = new WanderBehaviour();
+	((WanderBehaviour*)wander)->wanderRadius = 15.0f;
+	((WanderBehaviour*)wander)->wanderDistance = 5.0f;
+	((WanderBehaviour*)wander)->jitterAmount = 50.0f;
+	wander->sbm = sbm;
 
-		ArrivalBehaviour* arrival = new ArrivalBehaviour();
-		((ArrivalBehaviour*)arrival)->arrivalRadius = 1.0f;
-		((ArrivalBehaviour*)arrival)->target = &appPtr->mousePos;
-		arrival->sbm = sbm;
+	ArrivalBehaviour* arrival = new ArrivalBehaviour();
+	((ArrivalBehaviour*)arrival)->arrivalRadius = 1.0f;
+	((ArrivalBehaviour*)arrival)->target = &appPtr->mousePos;
+	arrival->sbm = sbm;
 
-		ObstacleAvoidanceBehaviour* avoidance = new ObstacleAvoidanceBehaviour();
-		((ObstacleAvoidanceBehaviour*)avoidance)->aheadDistance = 100.0f;
-		((ObstacleAvoidanceBehaviour*)avoidance)->feelerAngle = 25.0f;
-		avoidance->sbm = sbm;
+	ObstacleAvoidanceBehaviour* avoidance = new ObstacleAvoidanceBehaviour();
+	((ObstacleAvoidanceBehaviour*)avoidance)->aheadDistance = 100.0f;
+	((ObstacleAvoidanceBehaviour*)avoidance)->feelerAngle = 25.0f;
+	avoidance->sbm = sbm;
 
-		SeparationBehaviour* separation = new SeparationBehaviour();
-		((SeparationBehaviour*)separation)->neighbourhoodRadius = 50.0f;
-		separation->sbm = sbm;
+	SeparationBehaviour* separation = new SeparationBehaviour();
+	((SeparationBehaviour*)separation)->neighbourhoodRadius = 50.0f;
+	separation->sbm = sbm;
 
-		CohesionBehaviour* cohesion = new CohesionBehaviour();
-		((CohesionBehaviour*)cohesion)->neighbourhoodRadius = 200.0f;
-		cohesion->sbm = sbm;
+	CohesionBehaviour* cohesion = new CohesionBehaviour();
+	((CohesionBehaviour*)cohesion)->neighbourhoodRadius = 200.0f;
+	cohesion->sbm = sbm;
 
-		QueueBehaviour* queue = new QueueBehaviour();
-		((QueueBehaviour*)queue)->neighbourhoodRadius = 100.0f;
-		((QueueBehaviour*)queue)->queueDistance = 1000.0f;
-		((QueueBehaviour*)queue)->neighbourhoodForwardDistance = 0.0f;
-		queue->sbm = sbm;
+	QueueBehaviour* queue = new QueueBehaviour();
+	((QueueBehaviour*)queue)->neighbourhoodRadius = 100.0f;
+	((QueueBehaviour*)queue)->queueDistance = 1000.0f;
+	((QueueBehaviour*)queue)->neighbourhoodForwardDistance = 0.0f;
+	queue->sbm = sbm;
 
-		AlignmentBehaviour* align = new AlignmentBehaviour();
-		((AlignmentBehaviour*)align)->neighbourhoodRadius = 100.0f;
-		((AlignmentBehaviour*)align)->neighbourhoodForwardDistance = 50.0f;
-		align->sbm = sbm;
+	AlignmentBehaviour* align = new AlignmentBehaviour();
+	((AlignmentBehaviour*)align)->neighbourhoodRadius = 100.0f;
+	((AlignmentBehaviour*)align)->neighbourhoodForwardDistance = 50.0f;
+	align->sbm = sbm;
 
-		seek->weight = 2.0f;
-		wander->weight = 0.2f;
-		arrival->weight = 0.0f;
-		separation->weight = 40.0f;
-		cohesion->weight = 0.6f;
-		align->weight = 10.0f;
-		avoidance->weight = 900.0f;
-		queue->weight = 7.0f;
+	seek->weight = 2.0f;
+	wander->weight = 0.2f;
+	arrival->weight = 0.0f;
+	separation->weight = 40.0f;
+	cohesion->weight = 0.6f;
+	align->weight = 10.0f;
+	avoidance->weight = 900.0f;
+	queue->weight = 7.0f;
 
-		sbm->behaviours.push_back(seek);
-		sbm->behaviours.push_back(wander);
-		sbm->behaviours.push_back(arrival);
-		sbm->behaviours.push_back(separation);
-		sbm->behaviours.push_back(cohesion);
-		sbm->behaviours.push_back(align);
-		sbm->behaviours.push_back(avoidance);
-		sbm->behaviours.push_back(queue);
-	}
-
-	if (mode == BoidMode::PURSUER)
-	{
-		//give the steering behaviour manager all of it's behaviours
-		PursueBehaviour* pursue = new PursueBehaviour();
-		((PursueBehaviour*)pursue)->targetBoid = previousBoid;
-		pursue->sbm = sbm;
-
-		pursue->weight = 1.0f;
-
-		sbm->behaviours.push_back(pursue);
-	}
-
-	if (mode == BoidMode::AVOID_BUT_FOLLOW)
-	{
-		//give the steering behaviour manager all of it's behaviours
-		SteeringBehaviour* seek = new SeekBehaviour();
-		((SeekBehaviour*)seek)->target = &appPtr->mousePos;
-		seek->sbm = sbm;
-
-		EvadeBehaviour* evade = new EvadeBehaviour();
-		((EvadeBehaviour*)evade)->targetBoid = previousBoid;
-		evade->sbm = sbm;
-
-		seek->weight = 1.0f;
-		evade->weight = 0.2f;
-
-		sbm->behaviours.push_back(seek);
-		sbm->behaviours.push_back(evade);
-	}
+	sbm->behaviours.push_back(seek);
+	sbm->behaviours.push_back(wander);
+	sbm->behaviours.push_back(arrival);
+	sbm->behaviours.push_back(separation);
+	sbm->behaviours.push_back(cohesion);
+	sbm->behaviours.push_back(align);
+	sbm->behaviours.push_back(avoidance);
+	sbm->behaviours.push_back(queue);
 
 	sbm->maxVelocity = 300.0f;
 	sbm->minVelocity = 10.0f;
@@ -176,6 +143,10 @@ void BoidSpawner::addComponents(GameObject * creation)
 	BlackboardReference* bref = boidBlackboard->registerItemWithReference<Boid, Boid>(0.0f);
 	((BlackboardData<Boid, Boid>*)bref->item)->timeLocked = true;
 	((BlackboardData<Boid, Boid>*)bref->item)->data.sbm = sbm;
+
+	//remove the reference as it is no longer needed
+	bref->item->references.clear();
+	delete bref;
 
 	previousBoid = sbm;
 

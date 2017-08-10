@@ -2,11 +2,17 @@
 #include "Application2D.h"
 #include "Transform.h"
 
-//destructor, removes the planner and the current state
+//destructor, deletes the planner, current state and all planned moves
 PuzzleAgent::~PuzzleAgent()
 {
 	delete planner;
 	delete current;
+
+	//iterate through all actions, deleting each
+	for (size_t i = 0; i < plannedActions.size(); i++)
+	{
+		delete plannedActions[i];
+	}
 }
 
 
@@ -24,8 +30,7 @@ void PuzzleAgent::update()
 
 	//only attempt to generate a new puzzle / solve an existing one if the presentation timer has run out
 	if (presentationTimer > 0)
-	{
-		
+	{	
 		return;
 	}
 

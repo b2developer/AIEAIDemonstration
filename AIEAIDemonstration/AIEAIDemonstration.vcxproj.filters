@@ -127,6 +127,12 @@
     <Filter Include="Header Files\Systems\SteeringBehaviours\Advanced">
       <UniqueIdentifier>{d3485090-2480-4c41-a829-c8bb3963bc82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\BehaviourTree">
+      <UniqueIdentifier>{7da9ebdd-f1f9-4a77-931b-a281a203c460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\BehaviourTree">
+      <UniqueIdentifier>{7b640d15-aba9-4ebb-98b2-2f06fc6f8591}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\TestSpawner.cpp">
@@ -278,6 +284,24 @@
     </ClCompile>
     <ClCompile Include="source\QueueBehaviour.cpp">
       <Filter>Source Files\Systems\SteeringBehaviours\Advanced</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BehaviourTree.cpp">
+      <Filter>Source Files\Systems\BehaviourTree</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BehaviourCondition.cpp">
+      <Filter>Source Files\Systems\BehaviourTree</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BehaviourAction.cpp">
+      <Filter>Source Files\Systems\BehaviourTree</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BehaviourSelector.cpp">
+      <Filter>Source Files\Systems\BehaviourTree</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BehaviourSequence.cpp">
+      <Filter>Source Files\Systems\BehaviourTree</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BehaviourDecorator.cpp">
+      <Filter>Source Files\Systems\BehaviourTree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -454,6 +478,27 @@
     </ClInclude>
     <ClInclude Include="source\QueueBehaviour.h">
       <Filter>Header Files\Systems\SteeringBehaviours\Advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BehaviourTree.h">
+      <Filter>Header Files\Systems\BehaviourTree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BehaviourCondition.h">
+      <Filter>Header Files\Systems\BehaviourTree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BehaviourAction.h">
+      <Filter>Header Files\Systems\BehaviourTree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BehaviourSelector.h">
+      <Filter>Header Files\Systems\BehaviourTree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BehaviourSequence.h">
+      <Filter>Header Files\Systems\BehaviourTree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BehaviourDecorator.h">
+      <Filter>Header Files\Systems\BehaviourTree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BehaviourTrees.h">
+      <Filter>Header Files\Systems\BehaviourTree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

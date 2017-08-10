@@ -84,7 +84,7 @@ bool Application2D::startup()
 	director->employee = tradingBotSpawner;
 
 	//spawn 0 trading bots
-	for (int i = 0; i < 0; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
@@ -92,7 +92,7 @@ bool Application2D::startup()
 	director->employee = pathfindingBotSpawner;
 
 	//spawn 0 pathfinding bots
-	for (int i = 0; i < 0; i++)
+	for (int i = 0; i < 50; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
@@ -106,10 +106,9 @@ bool Application2D::startup()
 	}
 
 	director->employee = boidSpawner;
-	boidSpawner->mode = BoidMode::MOUSE_FOLLOWER;
 
 	//spawn 20 boids
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
@@ -117,7 +116,7 @@ bool Application2D::startup()
 	director->employee = puzzleBotSpawner;
 
 	//spawn a puzzle bot
-	for (int i = 0; i < 0; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		gameObjects.push_back(director->createGameObject());
 	}
@@ -135,7 +134,7 @@ bool Application2D::startup()
 //runs when the game is exited
 void Application2D::shutdown()
 {
-	//delete the director and the spawner/s
+	//delete the director/s and the spawner/s
 	delete director;
 	delete testSpawner;
 	delete tradingBotSpawner;
@@ -143,8 +142,10 @@ void Application2D::shutdown()
 	delete obstacleSpawner;
 	delete boidSpawner;
 	delete puzzleBotSpawner;
-
+	
+	//delete all AI related objects
 	delete tradingBlackboard;
+	delete boidBlackboard;
 	delete navMesh;
 
 	//iterate through all gameobjects, deleting each one
@@ -206,10 +207,9 @@ void Application2D::update(float deltaTime)
 	{
 		decayTimer = decayDuration;
 
-		//path = navMesh->findPath(start, end, 32.0f);
+		path = navMesh->findPath(start, end, 32.0f);
 	}
 
-	cameraPos.x += 0.0f * deltaTime;
 }
 
 
@@ -230,7 +230,7 @@ void Application2D::draw()
 		gameObjects[i]->draw();
 	}
 
-	//navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 5.0f);
+	navMesh->drawMesh(5.0f, 2.0f, 0.0f, 0.0f, 1.0f, 5.0f);
 
 	m_renderer2D->setRenderColour(0, 1, 0);
 

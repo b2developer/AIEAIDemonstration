@@ -7,14 +7,6 @@
 class Application2D;
 class SteeringBehaviourManager;
 
-//type for boids that can spawn
-enum class BoidMode
-{
-	MOUSE_FOLLOWER,
-	PURSUER,
-	AVOID_BUT_FOLLOW,
-};
-
 
 /*
 * struct Boid
@@ -46,9 +38,6 @@ public:
 
 	//blackboard that tells the boid about obstacles and other boids
 	Blackboard* boidBlackboard = nullptr;
-
-	//modifies the type of boids spawned
-	BoidMode mode = BoidMode::MOUSE_FOLLOWER;
 
 	//pointer to the boid that was created in the last call
 	SteeringBehaviourManager* previousBoid = nullptr;
