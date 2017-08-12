@@ -18,6 +18,5 @@ int main()
 	//run the application
 	app2D->run(APP_NAME, SCREEN_X, SCREEN_Y, false);
 
-
 	return 0;
 }

@@ -29,6 +29,9 @@ public:
 	float heavyDynamicScaling = 0.5f;
 	float heavyDynamicOffset = 0.5f;
 
+	//force multiplier when only one feeler is intersecting
+	float singularMultiplier = 0.05f;
+
 	/*
 	* ObstacleAvoidanceBehaviour()
 	* default constructor

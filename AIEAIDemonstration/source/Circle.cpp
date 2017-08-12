@@ -5,11 +5,9 @@
 //gets the minimum and maximnum dot products of the shape with the normal
 Range Circle::project(Vector2 normal)
 {
-	Matrix2 scaleMat = Matrix2(transform->scale.x, 0, 0, transform->scale.y);
-
 	//minimum and maximum points on the circle in the given direction
-	Vector2 p1 = transform->translation - (normal * radius) * scaleMat;
-	Vector2 p2 = transform->translation + (normal * radius) * scaleMat;
+	Vector2 p1 = transform->translation - (normal * radius);
+	Vector2 p2 = transform->translation + (normal * radius);
 
 	//the corresponding dot products to the points
 	float d1 = normal.dot(p1);
@@ -30,7 +28,13 @@ Range Circle::project(Vector2 normal)
 //gets the normals to use from this shape
 std::vector<Vector2> Circle::getNormals(Shape * other)
 {
-	Vector2 relative = other->transform->translation - transform->translation;
+	//get the average coordinates of both shapes
+	Range x = other->project(Vector2(1, 0));
+	Range y = other->project(Vector2(0, 1));
+
+	Vector2 otherMid = Vector2((x.min + x.max) / 2.0f, (y.min + y.max) / 2.0f);
+
+	Vector2 relative = otherMid - transform->translation;
 
 	//return a list with one normal in it
 	return std::vector<Vector2>{ relative.normalised() };

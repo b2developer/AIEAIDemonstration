@@ -49,11 +49,11 @@ Vector2 ObstacleAvoidanceBehaviour::update()
 	bool rightCollides = false;
 
 	//the polygon is a line
-	((Polygon*)leftPoly)->points.push_back(boidPosition + (forwardLine * leftMat).normalised());
 	((Polygon*)leftPoly)->points.push_back(boidPosition + (forwardLine * leftMat));
+	((Polygon*)leftPoly)->points.push_back(boidPosition);
 
-	((Polygon*)rightPoly)->points.push_back(boidPosition + (forwardLine * rightMat).normalised());
 	((Polygon*)rightPoly)->points.push_back(boidPosition + (forwardLine * rightMat));
+	((Polygon*)rightPoly)->points.push_back(boidPosition);
 
 	//store all colliding shapes
 	std::vector<Shape*> colliders;
@@ -94,13 +94,13 @@ Vector2 ObstacleAvoidanceBehaviour::update()
 	//if only the left feeler collided, move to the right
 	if (leftCollides && !rightCollides)
 	{
-		repel = sbm->heading.normal(NormalDirection::RIGHT);
+		repel = sbm->heading.normal(NormalDirection::RIGHT) * singularMultiplier;
 	}
 
 	//if only the right feeler collided, move to the left
 	if (!leftCollides && rightCollides)
 	{
-		repel = sbm->heading.normal(NormalDirection::LEFT);
+		repel = sbm->heading.normal(NormalDirection::LEFT) * singularMultiplier;
 	}
 
 	//if both collided, move backwards

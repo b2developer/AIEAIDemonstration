@@ -66,11 +66,12 @@ void BoidSpawner::addComponents(GameObject * creation)
 	arrival->sbm = sbm;
 
 	ObstacleAvoidanceBehaviour* avoidance = new ObstacleAvoidanceBehaviour();
-	((ObstacleAvoidanceBehaviour*)avoidance)->aheadDistance = 100.0f;
-	((ObstacleAvoidanceBehaviour*)avoidance)->feelerAngle = 15.0f;
-	((ObstacleAvoidanceBehaviour*)avoidance)->dynamicScaling = 0.3f;
+	((ObstacleAvoidanceBehaviour*)avoidance)->aheadDistance = 200.0f;
+	((ObstacleAvoidanceBehaviour*)avoidance)->feelerAngle = 25.0f;
+	((ObstacleAvoidanceBehaviour*)avoidance)->dynamicScaling = 0.05f;
 	((ObstacleAvoidanceBehaviour*)avoidance)->heavyDynamicScaling = 0.5f;
 	((ObstacleAvoidanceBehaviour*)avoidance)->heavyDynamicOffset = 0.5f;
+	((ObstacleAvoidanceBehaviour*)avoidance)->singularMultiplier = 0.01f;
 	avoidance->sbm = sbm;
 
 	SeparationBehaviour* separation = new SeparationBehaviour();
